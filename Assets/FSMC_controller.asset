@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ece13e57ab2a54e80667f7d20c2544, type: 3}
+  m_Name: FSMC_controller
+  m_EditorClassIdentifier: 
+  StartPosition: {x: 200, y: 200}
+  AnyPosition: {x: 200, y: 400}
+  States:
+  - rid: 3141125944100257792
+  - rid: 3141125944100257997
+  AnyTransitions: []
+  StartingState:
+    rid: 3141125944100257792
+  Parameters: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3141125944100257792
+      type: {class: FSMC_State, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        _behaviours:
+        - rid: 3141125944100257996
+        Position: {x: 719.2, y: 255.20001}
+        _name: TestState
+        TransitionsFrom:
+        - rid: 3141125944100257998
+        TransitionsTo: []
+    - rid: 3141125944100257996
+      type: {class: NewFSMCBehaviour, ns: , asm: Assembly-CSharp}
+      data:
+        enabled: 1
+    - rid: 3141125944100257997
+      type: {class: FSMC_State, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        _behaviours: []
+        Position: {x: 1211.6415, y: 355.60797}
+        _name: State
+        TransitionsFrom: []
+        TransitionsTo:
+        - rid: 3141125944100257998
+    - rid: 3141125944100257998
+      type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        conditions:
+        - conditions: []
+        _originState:
+          rid: 3141125944100257792
+        _destinationState:
+          rid: 3141125944100257997
+        _name: TestState->State
