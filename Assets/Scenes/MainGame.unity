@@ -131,9 +131,10 @@ GameObject:
   - component: {fileID: 1129759973}
   - component: {fileID: 1129759972}
   - component: {fileID: 1129759971}
-  - component: {fileID: 1129759970}
   - component: {fileID: 1129759974}
   - component: {fileID: 1129759975}
+  - component: {fileID: 1129759977}
+  - component: {fileID: 1129759976}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -156,20 +157,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1129759970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129759968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f314797abbe49bc4ea19550cdbd592b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minGestureMoveDistance: 5
-  activationKey: 1
 --- !u!61 &1129759971
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -209,7 +196,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.34, y: 0.57}
-    newSize: {x: 0.2, y: 0.2}
+    newSize: {x: 0.34, y: 0.57}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -228,9 +215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac26a58a147b06b4ca4294edc49c55ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rb: {fileID: 1129759973}
-  cam: {fileID: 1499248013}
 --- !u!50 &1129759973
 Rigidbody2D:
   serializedVersion: 5
@@ -270,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 0797f16dd74b41347af117982f156398, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 5a5e1ad7f846cf84aacf075fe7d2342f, type: 3}
   m_NotificationBehavior: 0
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -331,17 +315,46 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4723107735738678597, guid: 6e62ad2ca81f7ad4fbfbd51cb808f976, type: 3}
+  m_Sprite: {fileID: 4723107735738678597, guid: c17f8ead4ce98b147bd49ba0f67e768e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 0.34, y: 0.57}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1129759976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129759968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c36e29e1b262d6e459eba5eb29e76336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minGestureMoveDistance: 5
+  activationKey: 1
+--- !u!114 &1129759977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129759968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed287d514dcdfac4887c34b6dc74dceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  rb: {fileID: 1129759973}
+  cam: {fileID: 1499248013}
 --- !u!1 &1499248011
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +365,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1499248014}
   - component: {fileID: 1499248013}
-  - component: {fileID: 1499248012}
   - component: {fileID: 1499248015}
   m_Layer: 0
   m_Name: Main Camera
@@ -361,14 +373,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1499248012
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1499248011}
-  m_Enabled: 1
 --- !u!20 &1499248013
 Camera:
   m_ObjectHideFlags: 0
@@ -444,11 +448,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1499248011}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7506358314db70248ae29dab07d40643, type: 3}
+  m_Script: {fileID: 11500000, guid: 18b68883117bca24a95f199e37ff7ff1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1129759969}
-  smoothSpeed: 3
+  smoothSpeed: 2
   offset: {x: 0, y: 0, z: -10}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
