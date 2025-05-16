@@ -484,7 +484,22 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      noBKG_KnightRoll_strip_0: 4506777792419722441
+      noBKG_KnightRoll_strip_1: 8532875479038400191
+      noBKG_KnightRoll_strip_10: -7895171534871642881
+      noBKG_KnightRoll_strip_11: 1764861174618173453
+      noBKG_KnightRoll_strip_12: -7964737926850929391
+      noBKG_KnightRoll_strip_13: 8826923715950256829
+      noBKG_KnightRoll_strip_14: 851722952711724572
+      noBKG_KnightRoll_strip_2: 2981369091936592250
+      noBKG_KnightRoll_strip_3: 3305275379054264596
+      noBKG_KnightRoll_strip_4: 2783815152247798542
+      noBKG_KnightRoll_strip_5: 8152189275207067990
+      noBKG_KnightRoll_strip_6: 3766272383136301110
+      noBKG_KnightRoll_strip_7: 3238478497674993634
+      noBKG_KnightRoll_strip_8: -934129196187992631
+      noBKG_KnightRoll_strip_9: -1373237099614559641
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

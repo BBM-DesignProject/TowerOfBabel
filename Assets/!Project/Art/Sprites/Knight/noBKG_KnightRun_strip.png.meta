@@ -309,7 +309,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      noBKG_KnightRun_strip_0: 4642488333796919354
+      noBKG_KnightRun_strip_1: 495554865105711156
+      noBKG_KnightRun_strip_2: 2538924062860662314
+      noBKG_KnightRun_strip_3: 8279640131836260173
+      noBKG_KnightRun_strip_4: 8690424439161563917
+      noBKG_KnightRun_strip_5: 2414606530831258917
+      noBKG_KnightRun_strip_6: -7988999087367062319
+      noBKG_KnightRun_strip_7: -5332772850423390575
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

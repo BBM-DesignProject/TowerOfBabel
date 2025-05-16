@@ -484,7 +484,22 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      noBKG_KnightDeath_strip_0: -2462726258303309692
+      noBKG_KnightDeath_strip_1: 800447926069038329
+      noBKG_KnightDeath_strip_10: 4431850097328097444
+      noBKG_KnightDeath_strip_11: 4835687150137037479
+      noBKG_KnightDeath_strip_12: -7371909421828567154
+      noBKG_KnightDeath_strip_13: -2056779964345312378
+      noBKG_KnightDeath_strip_14: 9069958394531976135
+      noBKG_KnightDeath_strip_2: -946747365951844226
+      noBKG_KnightDeath_strip_3: -6628401973600079656
+      noBKG_KnightDeath_strip_4: 4434692913647792918
+      noBKG_KnightDeath_strip_5: -2310986920892945031
+      noBKG_KnightDeath_strip_6: -9019668959965462625
+      noBKG_KnightDeath_strip_7: -8498603672155398073
+      noBKG_KnightDeath_strip_8: 4445640418960089077
+      noBKG_KnightDeath_strip_9: -467494461951899089
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

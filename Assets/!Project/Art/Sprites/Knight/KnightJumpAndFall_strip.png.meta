@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      KnightJumpAndFall_strip_0: -8578021242791487037
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
