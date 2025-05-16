@@ -1,8 +1,6 @@
 using FSMC.Runtime;
-using Unity.VisualScripting;
 using UnityEngine;
 
-[IncludeInSettings(true)]
 public class test: FSMC_Behaviour
 {
 
