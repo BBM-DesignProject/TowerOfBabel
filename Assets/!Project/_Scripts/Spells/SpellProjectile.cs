@@ -43,10 +43,9 @@ public class SpellProjectile : MonoBehaviour
             }
             Destroy(gameObject); // Çarpışmadan sonra mermiyi yok et
         }
-        // İsteğe bağlı: Duvarlara veya diğer engellere çarptığında da yok olabilir
-        // else if (other.CompareTag("Wall")) // Duvarların etiketi "Wall" ise
-        // {
-        //     Destroy(gameObject);
-        // }
+        else if (other.CompareTag("Wall")) // Duvarların etiketi "Wall" ise
+        {
+            Destroy(gameObject);
+        }
     }
 }

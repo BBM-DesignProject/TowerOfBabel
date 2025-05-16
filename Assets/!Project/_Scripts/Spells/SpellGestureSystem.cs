@@ -10,6 +10,7 @@ public class SpellGestureSystem : MonoBehaviour
     public GameObject circleSpellProjectilePrefab; // Daire büyüsü için mermi prefab'ı
     public Transform spellSpawnPoint; // Büyünün fırlatılacağı nokta (Oyuncunun alt objesi olabilir)
     public float spellSpawnOffset = 1f; // Oyuncunun merkezinden ne kadar ileride spawn olacağı
+    public float circleSpellCooldown = 2f; // Daire büyüsü için bekleme süresi (saniye)
 
     private bool isDrawingModeActive = false;
     private bool isCurrentlyDrawingGesture = false;
@@ -26,10 +27,19 @@ public class SpellGestureSystem : MonoBehaviour
     private const float MAX_OUTLIER_PERCENT_CIRCLE = 0.35f; // Yarıçap dışı kalan nokta oranı
 
     private PlayerMovement playerMovement; // Oyuncunun baktığı yönü almak için
+    private UIManager uiManager; // Cooldown UI'ını güncellemek için
+    private float nextCircleSpellCastTime = 0f;
 
     void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        // UIManager'ı sahnede bul. Daha büyük projelerde Service Locator veya Singleton pattern daha iyi olabilir.
+        uiManager = FindObjectOfType<UIManager>();
+        if (uiManager == null)
+        {
+            Debug.LogWarning("SpellGestureSystem: UIManager not found in scene. Cooldown UI will not update.");
+        }
+
         if (spellSpawnPoint == null)
         {
             // Eğer spellSpawnPoint atanmamışsa, oyuncunun transformunu kullan ve bir offset uygula
@@ -106,16 +116,34 @@ public class SpellGestureSystem : MonoBehaviour
 
         if (gesturePoints.Count == 0) return;
 
+        if (Time.time < nextCircleSpellCastTime)
+        {
+            Debug.Log($"Circle spell is on cooldown. Wait for {nextCircleSpellCastTime - Time.time:F1}s");
+            gesturePoints.Clear();
+            return;
+        }
+
         if (RecognizeCircle(gesturePoints))
         {
             Debug.Log("SUCCESS: Circle gesture recognized!");
             CastCircleSpell();
+            nextCircleSpellCastTime = Time.time + circleSpellCooldown;
         }
         else
         {
             Debug.Log("FAILURE: Circle gesture NOT recognized.");
         }
         gesturePoints.Clear(); // Her denemeden sonra listeyi temizle
+    }
+
+    void LateUpdate() // Update'den sonra çalışır, UI güncellemeleri için iyi olabilir
+    {
+        // Cooldown UI'ını güncelle
+        if (uiManager != null)
+        {
+            float remainingCooldown = nextCircleSpellCastTime - Time.time;
+            uiManager.UpdateSpellCooldownUI(Mathf.Max(0, remainingCooldown), circleSpellCooldown);
+        }
     }
 
     private bool RecognizeCircle(List<Vector2> points)
