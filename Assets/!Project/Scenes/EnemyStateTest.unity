@@ -674,11 +674,11 @@ GameObject:
   - component: {fileID: 1129759975}
   - component: {fileID: 1129759977}
   - component: {fileID: 1129759976}
-  - component: {fileID: 1129759978}
   - component: {fileID: 1129759979}
+  - component: {fileID: 1129759980}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -869,8 +869,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minGestureMoveDistance: 5
-  circleSpellProjectilePrefab: {fileID: 0}
-  spellSpawnPoint: {fileID: 0}
+  circleSpellProjectilePrefab: {fileID: 7331890612924046490, guid: 87ea05e29cc6cfc4bb4d04fdff3952f7, type: 3}
+  spellSpawnPoint: {fileID: 1129759969}
   spellSpawnOffset: 1
   circleSpellCooldown: 2
 --- !u!114 &1129759977
@@ -888,25 +888,6 @@ MonoBehaviour:
   moveSpeed: 5
   rb: {fileID: 1129759973}
   cam: {fileID: 1499248013}
---- !u!114 &1129759978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129759968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7f4d8633f97ce45bbc75a0d23f36af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  onHealthChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  onPlayerDied:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!95 &1129759979
 Animator:
   serializedVersion: 7
@@ -929,6 +910,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1129759980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129759968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e96b66532b7f94a84f9a858b897960, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerDied:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1129829602
 GameObject:
   m_ObjectHideFlags: 0
