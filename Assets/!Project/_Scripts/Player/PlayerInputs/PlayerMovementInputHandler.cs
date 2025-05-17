@@ -8,13 +8,13 @@ public class PlayerMovementInputHandler : MonoSingleton<PlayerMovementInputHandl
     [SerializeField]
     private FSMC_Executer playerMovementExecuter;
 
-    PlayerInputs inputActions;
+    PlayerInputs.PlayerActions playerActions;
 
-    public override void Init()
+    public void Start()
     {
-        inputActions = new PlayerInputs();
-        inputActions.Player.Enable();
-        inputActions.Player.AddCallbacks(this);
+        playerActions = PlayerInputHandler.Instance.InputActions.Player;
+        playerActions.Enable();
+        playerActions.AddCallbacks(this);
     }
 
     public void OnAttack(InputAction.CallbackContext context)

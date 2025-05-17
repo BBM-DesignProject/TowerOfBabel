@@ -855,6 +855,74 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "DrawingSystem",
+            "id": "efc05a21-4a11-49c8-b5af-852c9266d4f2",
+            "actions": [
+                {
+                    "name": "Activate",
+                    "type": "Button",
+                    "id": "8bd75c94-c889-4b9d-af49-fa6cfa57045a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Consume",
+                    "type": "Button",
+                    "id": "8518a96e-d7da-49ef-84fb-22d8eacb5b7b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "9fdeff1a-2d6b-4f8a-a7ff-b85c8bdfb6fa",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "14bbd7c7-2e0f-4205-aa42-0057b11f899d",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Activate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b95103b6-5f0d-4850-a366-876651e0da02",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Consume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1603e5d3-c69b-447a-9cf5-d862501303f8",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "MultiTap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
