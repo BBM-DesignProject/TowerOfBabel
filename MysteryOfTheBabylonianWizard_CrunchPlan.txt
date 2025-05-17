@@ -5,6 +5,7 @@ https://oco.itch.io/medieval-fantasy-character-pack
 https://pixelfrog-assets.itch.io/tiny-swords
 https://atomicrealm.itch.io/mini-dungeon-tileset
 
+
 # Mystery of the Babylonian Wizard - 4 Günlük Acil Geliştirme Planı (Crunch Mode)
 
 **Genel Not:** Bu plan, 4 günlük yoğun bir çalışma temposu için tasarlanmıştır. Her adımda "minimumda uygulanabilir ürün" (MVP) ve "basitlik" prensiplerine odaklanılacaktır. Özellikler mümkün olan en temel şekilde uygulanacak ve hazır varlıklar (asset) verimli kullanılacaktır. Jest tanıma için "basit şablon eşleştirme" (template matching) yaklaşımı benimsenecektir.
