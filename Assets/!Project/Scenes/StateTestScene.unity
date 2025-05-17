@@ -678,7 +678,7 @@ GameObject:
   - component: {fileID: 1129759979}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -869,7 +869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minGestureMoveDistance: 5
-  circleSpellProjectilePrefab: {fileID: 7331890612924046490, guid: 87ea05e29cc6cfc4bb4d04fdff3952f7, type: 3}
+  circleSpellProjectilePrefab: {fileID: 0}
   spellSpawnPoint: {fileID: 0}
   spellSpawnOffset: 1
   circleSpellCooldown: 2
@@ -897,7 +897,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1129759968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05e96b66532b7f94a84f9a858b897960, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d7f4d8633f97ce45bbc75a0d23f36af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
@@ -1492,7 +1492,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 10000
+  far clip plane: 1000
   field of view: 60
   orthographic: 1
   orthographic size: 30
