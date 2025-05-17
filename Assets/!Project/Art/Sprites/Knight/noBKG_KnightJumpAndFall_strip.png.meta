@@ -459,7 +459,21 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      noBKG_KnightJumpAndFall_strip_0: 2165001038142686867
+      noBKG_KnightJumpAndFall_strip_1: -3323219810877477076
+      noBKG_KnightJumpAndFall_strip_10: 6344160088250257502
+      noBKG_KnightJumpAndFall_strip_11: 1235375693083715329
+      noBKG_KnightJumpAndFall_strip_12: 2282646019303360540
+      noBKG_KnightJumpAndFall_strip_13: 3917879321971269832
+      noBKG_KnightJumpAndFall_strip_2: -1275732480562838495
+      noBKG_KnightJumpAndFall_strip_3: -6974088986635383677
+      noBKG_KnightJumpAndFall_strip_4: 7819318548096920562
+      noBKG_KnightJumpAndFall_strip_5: 1949507891400082561
+      noBKG_KnightJumpAndFall_strip_6: 2511048077603649539
+      noBKG_KnightJumpAndFall_strip_7: 513507753970481495
+      noBKG_KnightJumpAndFall_strip_8: 8278566502845999923
+      noBKG_KnightJumpAndFall_strip_9: -7022734580619261874
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

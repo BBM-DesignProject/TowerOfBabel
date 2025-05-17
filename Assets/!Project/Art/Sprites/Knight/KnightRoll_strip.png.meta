@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      KnightRoll_strip_0: -3432433942094752130
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

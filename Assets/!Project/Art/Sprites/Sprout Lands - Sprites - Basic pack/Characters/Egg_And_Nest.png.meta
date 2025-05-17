@@ -209,7 +209,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Egg_And_Nest_0: 6373942132520359487
+      Egg_And_Nest_1: 765105606590446433
+      Egg_And_Nest_2: 4338608209347774417
+      Egg_And_Nest_3: -744197992327247199
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
