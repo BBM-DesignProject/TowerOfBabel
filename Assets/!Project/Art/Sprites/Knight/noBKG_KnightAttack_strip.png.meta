@@ -659,7 +659,29 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      noBKG_KnightAttack_strip_0: -5381185698364048818
+      noBKG_KnightAttack_strip_1: -965597167978221739
+      noBKG_KnightAttack_strip_10: -929618521593421475
+      noBKG_KnightAttack_strip_11: 8653731138667395602
+      noBKG_KnightAttack_strip_12: 4271437787165959228
+      noBKG_KnightAttack_strip_13: 4491015213611792361
+      noBKG_KnightAttack_strip_14: 8802670899565179918
+      noBKG_KnightAttack_strip_15: 9105042247985506767
+      noBKG_KnightAttack_strip_16: -1007734104045187293
+      noBKG_KnightAttack_strip_17: -5738732351321630392
+      noBKG_KnightAttack_strip_18: -7385383936912414730
+      noBKG_KnightAttack_strip_19: -6809855809462306521
+      noBKG_KnightAttack_strip_2: 3677309656472779560
+      noBKG_KnightAttack_strip_20: 3764243156535926766
+      noBKG_KnightAttack_strip_21: 3216345194512978731
+      noBKG_KnightAttack_strip_3: 5535098253766989748
+      noBKG_KnightAttack_strip_4: -1114361952848332187
+      noBKG_KnightAttack_strip_5: -179205153412916004
+      noBKG_KnightAttack_strip_6: 581458955971611472
+      noBKG_KnightAttack_strip_7: 6966399872453029562
+      noBKG_KnightAttack_strip_8: -4170038434227489042
+      noBKG_KnightAttack_strip_9: 8614604880703192744
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -284,7 +284,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      noBKG_KnightShield_strip_0: -6324355165507055617
+      noBKG_KnightShield_strip_1: 5087255962602976411
+      noBKG_KnightShield_strip_2: -2965027034253015942
+      noBKG_KnightShield_strip_3: -8013928443498110186
+      noBKG_KnightShield_strip_4: 4569066965244418331
+      noBKG_KnightShield_strip_5: -3293585557555654072
+      noBKG_KnightShield_strip_6: -6514837133666252962
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
