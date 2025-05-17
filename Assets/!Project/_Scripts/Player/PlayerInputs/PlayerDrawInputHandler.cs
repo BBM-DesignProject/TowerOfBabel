@@ -1,10 +1,11 @@
+using FSMC.Runtime;
 using TowerOfBabel.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerDrawInputHandler : MonoSingleton<PlayerDrawInputHandler>, PlayerInputs.IDrawingSystemActions, IInputActionHandler<PlayerInputs.DrawingSystemActions>
 {
-
+    public FSMC_Executer executer;
     public PlayerInputs.DrawingSystemActions ActionMap { get; private set; }
 
     private void Start()
