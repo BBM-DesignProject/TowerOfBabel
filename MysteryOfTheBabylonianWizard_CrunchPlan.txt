@@ -1,0 +1,111 @@
+References:
+https://luizmelo.itch.io/evil-wizard
+https://ppeldo.itch.io/2d-pixel-art-game-spellmagic-fx
+https://oco.itch.io/medieval-fantasy-character-pack
+https://pixelfrog-assets.itch.io/tiny-swords
+https://atomicrealm.itch.io/mini-dungeon-tileset
+
+# Mystery of the Babylonian Wizard - 4 Günlük Acil Geliştirme Planı (Crunch Mode)
+
+**Genel Not:** Bu plan, 4 günlük yoğun bir çalışma temposu için tasarlanmıştır. Her adımda "minimumda uygulanabilir ürün" (MVP) ve "basitlik" prensiplerine odaklanılacaktır. Özellikler mümkün olan en temel şekilde uygulanacak ve hazır varlıklar (asset) verimli kullanılacaktır. Jest tanıma için "basit şablon eşleştirme" (template matching) yaklaşımı benimsenecektir.
+
+---
+
+## 🟩 Gün 1: Temel Mekanikler
+
+**Hedefler:**
+1.  **Proje Kurulumu:**
+    *   Yeni Unity projesi oluşturma (2D URP veya uygun bir şablon).
+    *   Gerekli paketlerin kurulumu (örn: Input System).
+    *   Temel klasör yapısının oluşturulması.
+2.  **Sahne Düzeni:**
+    *   Basit bir ana oyun sahnesi oluşturma.
+3.  **Oyuncu Hareket Sistemi:**
+    *   `Rigidbody2D` ve C# script ile WASD tuşlarıyla top-down hareket.
+    *   Farenin imleç pozisyonuna doğru karakterin yönelmesi (nişan alma).
+4.  **Kamera Takibi:**
+    *   Oyuncuyu takip eden basit bir kamera script'i (örn: `Cinemachine` veya özel script).
+5.  **Büyü Girdi Sistemi (Temel Jest Tanıma):**
+    *   Fare sol tuşu basılıyken fare pozisyonlarının bir listesini kaydetme.
+    *   Belirli bir klavye tuşu (örn: Sağ Fare Tuşu) ile büyü yapma modunu aktif etme.
+    *   **İlk Büyü (Örnek Jest - Daire):**
+        *   Kaydedilen fare pozisyonlarını, önceden tanımlanmış basit bir "daire" şablonuyla karşılaştırma (basit template matching).
+        *   Karşılaştırma algoritması: Belirli sayıda kilit noktadan geçiş, toplam dönme açısı gibi basit metrikler kullanılacak. Tanıma toleransı yüksek tutulacak.
+        *   Başarılı jest durumunda konsola bir mesaj yazdırma veya basit bir görsel geri bildirim.
+
+**Gün 1 için Önemli Notlar:**
+*   Jest tanıma günün en kritik ve zaman alıcı kısmı olacaktır. Algoritma çok basit tutulmalıdır.
+*   Görsel varlıklar için Unity'nin temel geometrik şekilleri (küp, küre vb.) veya basit sprite'lar kullanılacaktır.
+
+---
+
+## 🟩 Gün 2: Düşman Sistemi ve Büyü Etkileşimi
+
+**Hedefler:**
+1.  **Basit Düşman Prefab'ı:**
+    *   Temel bir geometrik şekil (örn: küp, kapsül) veya basit bir sprite kullanarak düşman prefab'ı oluşturma.
+    *   `Rigidbody2D` ve `Collider2D` ekleme.
+2.  **Düşman Hareketi:**
+    *   Oyuncuya doğru basit hareket (`Vector2.MoveTowards` veya benzeri basit bir yaklaşımla). NavMesh bu aşamada kullanılmayacaktır.
+3.  **Büyü Etkisi (İlk Büyü için):**
+    *   Başarılı jest sonrası oyuncunun baktığı yöne doğru basit bir "büyü mermisi" (yine temel bir obje) fırlatma.
+    *   Büyü mermisinin düşmanla çarpışma tespiti (`OnTriggerEnter2D` veya `OnCollisionEnter2D`).
+    *   Çarpışma durumunda düşmanı yok etme (`Destroy(gameObject)`).
+4.  **Temel Sağlık Sistemi:**
+    *   Oyuncu için basit bir can değişkeni (float).
+    *   Düşman için basit bir can değişkeni (float).
+    *   Düşmanın oyuncuya teması durumunda oyuncunun canını azaltan basit bir mekanizma.
+    *   Büyünün düşmana isabet etmesi durumunda düşmanın canını azaltan (veya direkt yok eden) mekanizma.
+
+**Gün 2 için Önemli Notlar:**
+*   Düşman yapay zekası sadece "oyuncuya yürü ve temas et" ile sınırlı olacaktır.
+*   Çarpışma ve hasar mantığı olabildiğince basit tutulacaktır.
+
+---
+
+## 🟩 Gün 3: Tutorial & UI
+
+**Hedefler:**
+1.  **Basit Tutorial Metni:**
+    *   Ekranın sol üst köşesinde `UI.Text` veya `TextMeshPro` kullanarak büyü yapma mekaniğini açıklayan kısa bir metin (örn: "Sağ tık basılıyken daire çizerek ateş topu yap!").
+2.  **Temel UI Göstergeleri:**
+    *   Oyuncu canını gösteren basit bir bar (`UI.Slider` veya `UI.Image` fill amount ile).
+    *   (Opsiyonel, zaman kalırsa) Büyü için bir kaynak (mana) göstergesi veya cooldown göstergesi.
+3.  **Büyü Cooldown veya Mana Maliyeti (Basit):**
+    *   İlk büyü için basit bir bekleme süresi (cooldown) mekanizması.
+    *   Veya, eğer mana sistemi eklenirse, büyü yapıldığında manadan düşme. Mana yenilenmesi çok basit olacak veya sadece başlangıç manası verilecektir.
+4.  **Basit Seviye Tasarımı:**
+    *   Düz bir zemin (arena).
+    *   Arenanın etrafını çevreleyen basit duvarlar (Unity küpleri kullanılarak).
+
+**Gün 3 için Önemli Notlar:**
+*   UI elemanları işlevsel olacak, estetik kaygılar minimumda tutulacaktır.
+*   Cooldown/mana sistemi, oyun döngüsünü test etmek için temel düzeyde olacaktır.
+
+---
+
+## 🟩 Gün 4: Son Rötuş & Build
+
+**Hedefler:**
+1.  **Temel Görsel Efektler (Zaman Kalırsa):**
+    *   Büyü mermisi için basit bir particle efekti (Unity'nin standart varlıklarından veya ücretsiz bir paketten).
+    *   Düşman yok olduğunda basit bir efekt (örn: küçülerek kaybolma veya basit bir patlama particle'ı).
+2.  **Temel Ses Efektleri (Zaman Kalırsa ve Varlık Varsa):**
+    *   Büyü yapma/fırlatma sesi.
+    *   Düşman hasar alma/yok olma sesi.
+    *   Basit bir arka plan müziği (varsa).
+3.  **UI Yazılarının Hizalanması ve Kontrolü:**
+    *   Ekrandaki UI elemanlarının son bir kez gözden geçirilmesi.
+4.  **Çok Basit Ana Menü:**
+    *   Yeni bir sahne oluşturarak "Oyunu Başlat" ve "Oyundan Çık" butonları içeren bir ana menü.
+5.  **Windows .exe Build Alma:**
+    *   Projenin Windows platformu için çalıştırılabilir bir .exe dosyası olarak build edilmesi.
+6.  **(Opsiyonel, Zaman Kalırsa) Oynanış Videosu Çekimi:**
+    *   OBS veya benzeri bir programla 30-60 saniyelik kısa bir oynanış videosu kaydı.
+
+**Gün 4 için Önemli Notlar:**
+*   Bu gündeki "rötuşlar" (görsel/ses efektleri) zaman kalmaması durumunda ilk kesilecek özelliklerdir.
+*   Öncelik, çalışan ve test edilebilir bir build almak olacaktır.
+*   Menü çok temel işlevselliğe sahip olacaktır.
+
+---
