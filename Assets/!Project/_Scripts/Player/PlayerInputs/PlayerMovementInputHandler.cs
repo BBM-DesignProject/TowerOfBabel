@@ -24,6 +24,7 @@ public class PlayerMovementInputHandler : MonoSingleton<PlayerMovementInputHandl
 
     public void OnInteract(InputAction.CallbackContext context)
     {
+
     }
 
     public void OnLook(InputAction.CallbackContext context)
@@ -34,8 +35,8 @@ public class PlayerMovementInputHandler : MonoSingleton<PlayerMovementInputHandl
     {
         if (context.started)
         {
-            playerMovementExecuter.SetTrigger("MoveStartTrigger");
-            playerMovementExecuter.GetCurrentState();
+            //playerMovementExecuter.SetTrigger("MoveStartTrigger");
+            //playerMovementExecuter.GetCurrentState();
         }
     }
 

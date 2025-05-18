@@ -910,6 +910,24 @@ namespace TowerOfBabel.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""35d3e080-ce80-4821-a358-014d22bc3be0"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Draw"",
+                    ""type"": ""Button"",
+                    ""id"": ""8129f2cb-9716-438e-b96b-08ed99ebfd01"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -917,7 +935,7 @@ namespace TowerOfBabel.Input
                     ""name"": """",
                     ""id"": ""14bbd7c7-2e0f-4205-aa42-0057b11f899d"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Tap"",
+                    ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Activate"",
@@ -928,7 +946,7 @@ namespace TowerOfBabel.Input
                     ""name"": """",
                     ""id"": ""b95103b6-5f0d-4850-a366-876651e0da02"",
                     ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Consume"",
@@ -943,6 +961,28 @@ namespace TowerOfBabel.Input
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55e33cec-4264-4c8a-9336-709db303b3b2"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c8cb9f6-bb18-4250-813b-a62e82d1df1b"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Draw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1036,6 +1076,8 @@ namespace TowerOfBabel.Input
             m_DrawingSystem_Activate = m_DrawingSystem.FindAction("Activate", throwIfNotFound: true);
             m_DrawingSystem_Consume = m_DrawingSystem.FindAction("Consume", throwIfNotFound: true);
             m_DrawingSystem_Cancel = m_DrawingSystem.FindAction("Cancel", throwIfNotFound: true);
+            m_DrawingSystem_MousePosition = m_DrawingSystem.FindAction("MousePosition", throwIfNotFound: true);
+            m_DrawingSystem_Draw = m_DrawingSystem.FindAction("Draw", throwIfNotFound: true);
         }
 
         ~@PlayerInputs()
@@ -1303,6 +1345,8 @@ namespace TowerOfBabel.Input
         private readonly InputAction m_DrawingSystem_Activate;
         private readonly InputAction m_DrawingSystem_Consume;
         private readonly InputAction m_DrawingSystem_Cancel;
+        private readonly InputAction m_DrawingSystem_MousePosition;
+        private readonly InputAction m_DrawingSystem_Draw;
         public struct DrawingSystemActions
         {
             private @PlayerInputs m_Wrapper;
@@ -1310,6 +1354,8 @@ namespace TowerOfBabel.Input
             public InputAction @Activate => m_Wrapper.m_DrawingSystem_Activate;
             public InputAction @Consume => m_Wrapper.m_DrawingSystem_Consume;
             public InputAction @Cancel => m_Wrapper.m_DrawingSystem_Cancel;
+            public InputAction @MousePosition => m_Wrapper.m_DrawingSystem_MousePosition;
+            public InputAction @Draw => m_Wrapper.m_DrawingSystem_Draw;
             public InputActionMap Get() { return m_Wrapper.m_DrawingSystem; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1328,6 +1374,12 @@ namespace TowerOfBabel.Input
                 @Cancel.started += instance.OnCancel;
                 @Cancel.performed += instance.OnCancel;
                 @Cancel.canceled += instance.OnCancel;
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
+                @Draw.started += instance.OnDraw;
+                @Draw.performed += instance.OnDraw;
+                @Draw.canceled += instance.OnDraw;
             }
 
             private void UnregisterCallbacks(IDrawingSystemActions instance)
@@ -1341,6 +1393,12 @@ namespace TowerOfBabel.Input
                 @Cancel.started -= instance.OnCancel;
                 @Cancel.performed -= instance.OnCancel;
                 @Cancel.canceled -= instance.OnCancel;
+                @MousePosition.started -= instance.OnMousePosition;
+                @MousePosition.performed -= instance.OnMousePosition;
+                @MousePosition.canceled -= instance.OnMousePosition;
+                @Draw.started -= instance.OnDraw;
+                @Draw.performed -= instance.OnDraw;
+                @Draw.canceled -= instance.OnDraw;
             }
 
             public void RemoveCallbacks(IDrawingSystemActions instance)
@@ -1429,6 +1487,8 @@ namespace TowerOfBabel.Input
             void OnActivate(InputAction.CallbackContext context);
             void OnConsume(InputAction.CallbackContext context);
             void OnCancel(InputAction.CallbackContext context);
+            void OnMousePosition(InputAction.CallbackContext context);
+            void OnDraw(InputAction.CallbackContext context);
         }
     }
 }

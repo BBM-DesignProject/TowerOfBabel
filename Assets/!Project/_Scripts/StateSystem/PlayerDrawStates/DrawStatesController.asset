@@ -18,6 +18,7 @@ MonoBehaviour:
   - rid: 2134675837747986479
   - rid: 2134675837747986480
   - rid: 2134675837747986481
+  - rid: 2134675853860143247
   AnyTransitions: []
   StartingState:
     rid: 2134675837747986479
@@ -26,6 +27,8 @@ MonoBehaviour:
   - rid: 2134675837747986487
   - rid: 2134675837747986488
   - rid: 2134675837747986492
+  - rid: 2134675853860143252
+  - rid: 2134675853860143270
   references:
     version: 2
     RefIds:
@@ -37,42 +40,36 @@ MonoBehaviour:
         Position: {x: 654.4, y: 200}
         _name: Idle
         TransitionsFrom:
-        - rid: 2134675837747986482
+        - rid: 2134675853860143309
         TransitionsTo:
         - rid: 2134675837747986483
         - rid: 2134675837747986485
+        - rid: 2134675853860143250
     - rid: 2134675837747986480
       type: {class: FSMC_State, ns: FSMC.Runtime, asm: FSMC.Runtime}
       data:
-        _behaviours: []
-        Position: {x: 916.8, y: 400}
+        _behaviours:
+        - rid: 2134675853860143199
+        Position: {x: 1044, y: 372.8}
         _name: Drawing
         TransitionsFrom:
         - rid: 2134675837747986483
         - rid: 2134675837747986484
+        - rid: 2134675853860143248
         TransitionsTo:
-        - rid: 2134675837747986482
+        - rid: 2134675853860143249
     - rid: 2134675837747986481
       type: {class: FSMC_State, ns: FSMC.Runtime, asm: FSMC.Runtime}
       data:
-        _behaviours: []
+        _behaviours:
+        - rid: 2134675853860143257
         Position: {x: 1193.6, y: 200}
         _name: Consume
         TransitionsFrom:
         - rid: 2134675837747986485
         TransitionsTo:
         - rid: 2134675837747986484
-    - rid: 2134675837747986482
-      type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
-      data:
-        conditions:
-        - conditions:
-          - rid: 2134675837747986489
-        _originState:
-          rid: 2134675837747986479
-        _destinationState:
-          rid: 2134675837747986480
-        _name: Idle->Drawing
+        - rid: 2134675853860143325
     - rid: 2134675837747986483
       type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
       data:
@@ -124,13 +121,6 @@ MonoBehaviour:
         _type: 3
         _name: WantToConsume
         _value: 0
-    - rid: 2134675837747986489
-      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
-      data:
-        comparison: 0
-        parameter:
-          rid: 2134675837747986486
-        Value: 1
     - rid: 2134675837747986490
       type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
       data:
@@ -162,3 +152,131 @@ MonoBehaviour:
       type: {class: DrawIdleBehaviour, ns: , asm: Assembly-CSharp}
       data:
         enabled: 1
+    - rid: 2134675853860143199
+      type: {class: DrawingBehaviour, ns: , asm: Assembly-CSharp}
+      data:
+        enabled: 1
+    - rid: 2134675853860143247
+      type: {class: FSMC_State, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        _behaviours:
+        - rid: 2134675853860143258
+        Position: {x: 1146.3999, y: 658.4}
+        _name: NotDrawing
+        TransitionsFrom:
+        - rid: 2134675853860143249
+        - rid: 2134675853860143250
+        - rid: 2134675853860143325
+        TransitionsTo:
+        - rid: 2134675853860143248
+        - rid: 2134675853860143309
+    - rid: 2134675853860143248
+      type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        conditions:
+        - conditions:
+          - rid: 2134675853860143254
+        _originState:
+          rid: 2134675837747986480
+        _destinationState:
+          rid: 2134675853860143247
+        _name: Drawing->NotDrawing
+    - rid: 2134675853860143249
+      type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        conditions:
+        - conditions:
+          - rid: 2134675853860143271
+        _originState:
+          rid: 2134675853860143247
+        _destinationState:
+          rid: 2134675837747986480
+        _name: NotDrawing->Drawing
+    - rid: 2134675853860143250
+      type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        conditions:
+        - conditions:
+          - rid: 2134675853860143251
+        _originState:
+          rid: 2134675853860143247
+        _destinationState:
+          rid: 2134675837747986479
+        _name: NotDrawing->Idle
+    - rid: 2134675853860143251
+      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        comparison: 0
+        parameter:
+          rid: 2134675837747986487
+        Value: 1
+    - rid: 2134675853860143252
+      type: {class: FSMC_BoolParameter, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        _type: 3
+        _name: NotDrawing
+        _value: 0
+    - rid: 2134675853860143254
+      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        comparison: 0
+        parameter:
+          rid: 2134675853860143252
+        Value: 1
+    - rid: 2134675853860143257
+      type: {class: ConsumeBehaviour, ns: , asm: Assembly-CSharp}
+      data:
+        enabled: 1
+    - rid: 2134675853860143258
+      type: {class: NotDrawBehaviour, ns: , asm: Assembly-CSharp}
+      data:
+        enabled: 1
+    - rid: 2134675853860143270
+      type: {class: FSMC_BoolParameter, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        _type: 3
+        _name: ReturnedDrawing
+        _value: 0
+    - rid: 2134675853860143271
+      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        comparison: 0
+        parameter:
+          rid: 2134675853860143270
+        Value: 1
+    - rid: 2134675853860143309
+      type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        conditions:
+        - conditions:
+          - rid: 2134675853860143310
+        _originState:
+          rid: 2134675837747986479
+        _destinationState:
+          rid: 2134675853860143247
+        _name: Idle->NotDrawing
+    - rid: 2134675853860143310
+      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        comparison: 0
+        parameter:
+          rid: 2134675837747986486
+        Value: 1
+    - rid: 2134675853860143325
+      type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        conditions:
+        - conditions:
+          - rid: 2134675853860143326
+        _originState:
+          rid: 2134675853860143247
+        _destinationState:
+          rid: 2134675837747986481
+        _name: StoppedDrawing->Consume
+    - rid: 2134675853860143326
+      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        comparison: 0
+        parameter:
+          rid: 2134675837747986488
+        Value: 1
