@@ -26,9 +26,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Bu metod PlayerInput component'ı tarafından "Move" action'ı için çağrılır.
-    public void OnMove(InputValue value)
+    public void OnMove(Vector2 direction)
     {
-        moveInput = value.Get<Vector2>();
+        moveInput = direction;
     }
 
     // Bu metod PlayerInput component'ı tarafından "Look" action'ı için çağrılır (fare pozisyonu).
@@ -39,20 +39,20 @@ public class PlayerMovement : MonoBehaviour
     //     mousePosition = value.Get<Vector2>();
     // }
 
-    void Update()
+    public void ReadMousePosition(Vector2 currMousePos)
     {
-        // Fare pozisyonunu her frame oku
-        if (Mouse.current != null)
-        {
-            mousePosition = Mouse.current.position.ReadValue();
-        }
+        mousePosition = currMousePos;
+        
     }
 
-    void FixedUpdate()
+    public void MoveToDirection()
     {
         // Hareket
-        rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + moveInput * moveSpeed * Time.deltaTime);
+    }
 
+    public void LookToDireciton()
+    {
         // Döndürme (Nişan Alma)
         if (cam != null)
         {
@@ -65,4 +65,6 @@ public class PlayerMovement : MonoBehaviour
             rb.rotation = angle;
         }
     }
+
+    
 }

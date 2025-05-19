@@ -84,7 +84,7 @@ namespace PDollarGestureRecognizer
 						gestureLinesRenderer.Clear();
 					}
 
-					++strokeId;
+					Debug.Log(++strokeId);
 
 					Transform tmpGesture = Instantiate(gestureOnScreenPrefab, transform.position, transform.rotation) as Transform;
 					currentGestureLineRenderer = tmpGesture.GetComponent<LineRenderer>();

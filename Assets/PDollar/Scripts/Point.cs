@@ -58,6 +58,7 @@
  * SUCH DAMAGE.
 **/
 using System;
+using UnityEngine;
 
 namespace PDollarGestureRecognizer
 {
@@ -75,6 +76,13 @@ namespace PDollarGestureRecognizer
             this.X = x;
             this.Y = y;
             this.StrokeID = strokeId;
+        }
+
+        public Point(Vector2 pointVector, int strokeId)
+        {
+            X = pointVector.x;
+            Y = pointVector.y;
+            StrokeID = strokeId;
         }
     }
 }
