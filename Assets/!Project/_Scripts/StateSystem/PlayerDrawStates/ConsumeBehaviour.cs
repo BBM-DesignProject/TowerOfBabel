@@ -18,7 +18,7 @@ public class ConsumeBehaviour : FSMC_Behaviour
     {
         Debug.Log("Consume");
         result = drawHandler.RecognizePointCloud(drawHandler.DrawedPoints);
-        SpellHandler.Instance.ConsumeIfResultMatch(result);
+        drawHandler.playerAttack.WantToAttackWithResult(result);
         stateMachine.SetTrigger("Consumed");
 
     }

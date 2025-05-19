@@ -4,6 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using FSMC.Runtime;
 public class DrawHandler : MonoBehaviour
 {
     private Vector2 currMousePosition;
@@ -24,8 +25,10 @@ public class DrawHandler : MonoBehaviour
     private List<LineRenderer> gestureLinesRenderer = new List<LineRenderer>();
     private LineRenderer currentGestureLineRenderer;
     private int vertexCount = 0;
-    public Transform gestureOnScreenPrefab;
 
+
+    public Transform gestureOnScreenPrefab;
+    public PlayerAttack playerAttack;
 
     public int StrokeId { get; set; }
     public List<Point> DrawedPoints { get; set; } = new List<Point>();

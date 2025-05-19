@@ -7,7 +7,7 @@ public class SpellHandler : MonoSingleton<SpellHandler>
     public SpellSO[] registeredSpells = new SpellSO[8];
     private int index = 0;
 
-    public void ConsumeIfResultMatch(Result result)
+    public bool ConsumeIfResultMatch(Result result)
     {
         foreach (var item in registeredSpells)
         {
@@ -15,9 +15,10 @@ public class SpellHandler : MonoSingleton<SpellHandler>
             if (item!=null && item.IsGestureAccomplished(result))
             {
                 item.Consume();
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     public void RegisterSpell(SpellSO spell)
