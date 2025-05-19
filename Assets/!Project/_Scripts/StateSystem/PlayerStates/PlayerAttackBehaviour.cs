@@ -14,8 +14,6 @@ public class PlayerAttackBehaviour : FSMC_Behaviour
     }
     public override void OnStateEnter(FSMC_Controller stateMachine, FSMC_Executer executer)
     {
-        bool isAttackAccomplished = playerAttack.Attack();
-        Debug.Log(isAttackAccomplished);
         stateMachine.SetTrigger("AttackFinishedTrigger");
     }
 

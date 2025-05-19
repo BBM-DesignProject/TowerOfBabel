@@ -4,9 +4,14 @@ using UnityEngine;
 public abstract class SpellBehaviour: ScriptableObject
 {
     [SerializeField]
-    protected float minimumRecognisionScore = 0.9f;
+    protected float minimumRecognisionScore = 0.8f;
     [SerializeField]
     protected string gestureClass;
+
+    // in seconds
+    [SerializeField]
+    protected float timeToCharge = 1f;
+
 
     protected Result compareResult;
 

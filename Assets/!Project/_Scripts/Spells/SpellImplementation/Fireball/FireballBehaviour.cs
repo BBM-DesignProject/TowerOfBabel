@@ -1,4 +1,5 @@
 using PDollarGestureRecognizer;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "FireballBehaviour", menuName = "SpellSystem/Spells/Fireball")]
@@ -12,10 +13,18 @@ public class FireballBehaviour : SpellBehaviour
 
     public override void Consume()
     {
-        spawnPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-        direction = GameObject.FindGameObjectWithTag("Player").transform.right;
+        LineRenderer renderer = GameObject.FindGameObjectWithTag("Drawing").GetComponent<LineRenderer>();
 
-        Instantiate(fireballProjectile, spawnPosition, Quaternion.FromToRotation(Vector3.right, direction));
+        Vector3[] positions = new Vector3[renderer.positionCount];
+        Vector2 center = Vector2.zero;
+        renderer.GetPositions(positions);
+        foreach (var item in positions)
+        {
+            center = center + (Vector2)item;
+        }
+        spawnPosition = center / renderer.positionCount;
+        Debug.Log(spawnPosition);
+        Instantiate(fireballProjectile, spawnPosition, Quaternion.Euler(new Vector3(0,0,0)));
     }
 
     

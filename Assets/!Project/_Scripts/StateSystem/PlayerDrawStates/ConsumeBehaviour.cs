@@ -16,11 +16,10 @@ public class ConsumeBehaviour : FSMC_Behaviour
     }
     public override void OnStateEnter(FSMC_Controller stateMachine, FSMC_Executer executer)
     {
-        Debug.Log("Consume");
         result = drawHandler.RecognizePointCloud(drawHandler.DrawedPoints);
-        drawHandler.playerAttack.WantToAttackWithResult(result);
+        bool isSuccesfull = SpellHandler.Instance.ConsumeIfResultMatch(result);
+        drawHandler.playerAttack.Attack(isSuccesfull);
         stateMachine.SetTrigger("Consumed");
-
     }
     public override void OnStateUpdate(FSMC_Controller stateMachine, FSMC_Executer executer)
     {

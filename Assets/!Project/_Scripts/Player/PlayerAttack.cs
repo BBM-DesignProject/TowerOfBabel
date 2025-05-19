@@ -6,32 +6,24 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField]
     private FSMC_Executer playerExecuter;
-    private Result consumeResult;
 
-    private bool isConsumed;
-    Result ConsumeResult { 
+    private bool consumeResult;
+    bool ConsumeResult { 
         get 
         {
-            if (!isConsumed)
-            {
-                isConsumed = true;
-                return consumeResult;
-            }
-            else return new Result() { GestureClass = "null", Score = 0f };
+            bool returnValue = consumeResult;
+            consumeResult = false;
+            return returnValue;
         } 
         set 
         {
             consumeResult = value;
-            isConsumed = false;
         } 
     }
-    public void WantToAttackWithResult(Result result)
+    public void Attack(bool isSuccessfull)
     {
-        ConsumeResult = result;
+        ConsumeResult = isSuccessfull;
         playerExecuter.SetTrigger("AttackStartTrigger");
-    }
-    public bool Attack()
-    {
-        return SpellHandler.Instance.ConsumeIfResultMatch(ConsumeResult);
+        
     }
 }
