@@ -1,0 +1,257 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ece13e57ab2a54e80667f7d20c2544, type: 3}
+  m_Name: EnemyFSMC
+  m_EditorClassIdentifier: 
+  StartPosition: {x: 457.3333, y: 90.666664}
+  AnyPosition: {x: 457.3333, y: 465.33334}
+  States:
+  - rid: 6821766382762590260
+  - rid: 6821766382762590261
+  - rid: 6821766382762590264
+  AnyTransitions: []
+  StartingState:
+    rid: 6821766382762590260
+  Parameters:
+  - rid: 6821766381461045304
+  - rid: 6821766381461045305
+  - rid: 6821766382762590272
+  - rid: 6821766381461045306
+  references:
+    version: 2
+    RefIds:
+    - rid: 6821766381461045304
+      type: {class: FSMC_BoolParameter, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        _type: 2
+        _name: TargetFound
+        _value: 0
+    - rid: 6821766381461045305
+      type: {class: FSMC_BoolParameter, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        _type: 2
+        _name: IsTargetInAttackRange
+        _value: 0
+    - rid: 6821766381461045306
+      type: {class: FSMC_BoolParameter, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        _type: 2
+        _name: ActionFinished
+        _value: 0
+    - rid: 6821766382762590260
+      type: {class: FSMC_State, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        _behaviours:
+        - rid: 6821766385576443904
+        Position: {x: 457.3333, y: 206.66667}
+        _name: Idle
+        TransitionsFrom:
+        - rid: 6821766382762590262
+        - rid: 6821766382762590265
+        TransitionsTo:
+        - rid: 6821766382762590268
+        - rid: 6821766382762590269
+    - rid: 6821766382762590261
+      type: {class: FSMC_State, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        _behaviours:
+        - rid: 6821766385576443972
+        Position: {x: 790, y: 206.66667}
+        _name: Follow
+        TransitionsFrom:
+        - rid: 6821766382762590266
+        - rid: 6821766382762590269
+        TransitionsTo:
+        - rid: 6821766382762590262
+    - rid: 6821766382762590262
+      type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        conditions:
+        - conditions:
+          - rid: 6821766382762590270
+          - rid: 6821766382762590274
+          - rid: 6821766385576443964
+        _originState:
+          rid: 6821766382762590260
+        _destinationState:
+          rid: 6821766382762590261
+        _name: Idle->Follow
+    - rid: 6821766382762590264
+      type: {class: FSMC_State, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        _behaviours:
+        - rid: 6821766385576443987
+        Position: {x: 457.3333, y: 328.66666}
+        _name: Action
+        TransitionsFrom:
+        - rid: 6821766382762590268
+        TransitionsTo:
+        - rid: 6821766382762590265
+        - rid: 6821766382762590266
+    - rid: 6821766382762590265
+      type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        conditions:
+        - conditions:
+          - rid: 6821766382762590275
+          - rid: 6821766382762590276
+        _originState:
+          rid: 6821766382762590260
+        _destinationState:
+          rid: 6821766382762590264
+        _name: Idle->Action
+    - rid: 6821766382762590266
+      type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        conditions:
+        - conditions:
+          - rid: 6821766385576443975
+        _originState:
+          rid: 6821766382762590261
+        _destinationState:
+          rid: 6821766382762590264
+        _name: Follow->Action
+    - rid: 6821766382762590268
+      type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        conditions:
+        - conditions:
+          - rid: 6821766385576443988
+        _originState:
+          rid: 6821766382762590264
+        _destinationState:
+          rid: 6821766382762590260
+        _name: Action->Idle
+    - rid: 6821766382762590269
+      type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        conditions:
+        - conditions:
+          - rid: 6821766385576443974
+        _originState:
+          rid: 6821766382762590261
+        _destinationState:
+          rid: 6821766382762590260
+        _name: Follow->Idle
+    - rid: 6821766382762590270
+      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        comparison: 0
+        parameter:
+          rid: 6821766381461045304
+        Value: 1
+    - rid: 6821766382762590272
+      type: {class: FSMC_BoolParameter, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        _type: 2
+        _name: IsTargetInChaseRange
+        _value: 0
+    - rid: 6821766382762590274
+      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        comparison: 0
+        parameter:
+          rid: 6821766382762590272
+        Value: 1
+    - rid: 6821766382762590275
+      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        comparison: 0
+        parameter:
+          rid: 6821766381461045304
+        Value: 1
+    - rid: 6821766382762590276
+      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        comparison: 0
+        parameter:
+          rid: 6821766381461045305
+        Value: 1
+    - rid: 6821766385576443904
+      type: {class: EnemyIdle, ns: , asm: Assembly-CSharp}
+      data:
+        enabled: 1
+        idleAnimationName: Idle
+        scanInterval: 1
+        detectionRadius: 10
+        attackRange: 2
+        targetLayer:
+          serializedVersion: 2
+          m_Bits: 1
+        playerTag: Player
+        targetFoundParameter: TargetFound
+        targetInAttackRangeParameter: IsTargetInAttackRange
+        targetInChaseRangeParameter: IsTargetInChaseRange
+    - rid: 6821766385576443964
+      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        comparison: 0
+        parameter:
+          rid: 6821766381461045305
+        Value: 0
+    - rid: 6821766385576443972
+      type: {class: EnemyFollow, ns: , asm: Assembly-CSharp}
+      data:
+        enabled: 1
+        moveSpeed: 3
+        stoppingDistance: 5
+        loseTargetDistance: 12
+        moveAnimationName: Move
+        targetInAttackRangeParameter: IsTargetInAttackRange
+        targetFoundFSMParameter: TargetFound
+    - rid: 6821766385576443974
+      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        comparison: 0
+        parameter:
+          rid: 6821766381461045304
+        Value: 0
+    - rid: 6821766385576443975
+      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        comparison: 0
+        parameter:
+          rid: 6821766381461045305
+        Value: 1
+    - rid: 6821766385576443987
+      type: {class: EnemyAction, ns: , asm: Assembly-CSharp}
+      data:
+        enabled: 1
+        actionType: 0
+        actionAnimationName: Attack
+        actionDuration: 1
+        meleeDamage: 10
+        meleeHitRange: 3
+        meleeAttackOffset: {x: 0, y: 1}
+        meleeAttackBoxSize: {x: 1, y: 1}
+        playerLayerMask:
+          serializedVersion: 2
+          m_Bits: 1
+        projectilePrefab: {fileID: 7331890612924046490, guid: 87ea05e29cc6cfc4bb4d04fdff3952f7, type: 3}
+        projectileDamage: 10
+        projectileSpawnPoint: {fileID: 0}
+        projectileSpawnOffsetForward: 1
+        healAmount: 20
+        healAnimationName: Heal
+        targetTransformParameter: DetectedTarget
+        actionCompleteParameter: ActionFinished
+        targetInAttackRangeParameter: IsTargetInAttackRange
+        targetFoundParameter: TargetFound
+        currentHealthParameter: CurrentHealth
+        maxHealthParameter: MaxHealth
+    - rid: 6821766385576443988
+      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
+      data:
+        comparison: 0
+        parameter:
+          rid: 6821766381461045306
+        Value: 1

@@ -2,62 +2,28 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float moveSpeed = 2f;
+    [Header("Stats")]
     public float maxHealth = 30f;
-    public int damageOnTouch = 10;
+    [HideInInspector] public float currentHealth; // FSM veya UI tarafından okunabilir ama Inspector'da direkt değiştirilmesin
 
-    private float currentHealth;
-    private Transform playerTransform;
-    private bool isPlayerFound = false;
+    [Header("Combat")]
+    public int damageOnTouch = 10; // Temas hasarı
+    
+    [Header("FSM Interaction")]
+    [Tooltip("This will be set by FSM Behaviours (e.g., EnemyIdle) when a target is detected.")]
+    public Transform detectedTarget; // FSM Behaviours (EnemyIdle) bu alanı set edecek
+
+    // FSMC_Executer referansı (opsiyonel, eğer FSM parametrelerini buradan güncellemek isterseniz)
+    // private FSMC.Runtime.FSMC_Executer fsmcExecuter;
 
     void Awake()
     {
         currentHealth = maxHealth;
+        // fsmcExecuter = GetComponent<FSMC.Runtime.FSMC_Executer>();
     }
 
-    void Start()
-    {
-        // Oyuncuyu etiketiyle bul. Start içinde çağırarak diğer objelerin Awake'inin bitmesini bekleyebiliriz.
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        if (playerObject != null)
-        {
-            playerTransform = playerObject.transform;
-            isPlayerFound = true;
-        }
-        else
-        {
-            Debug.LogError("Enemy could not find GameObject with tag 'Player'. Make sure your player has the 'Player' tag.");
-            // Oyuncu bulunamazsa bu düşmanı devre dışı bırakabilir veya bir uyarı durumu ayarlayabiliriz.
-            // enabled = false; 
-        }
-    }
-
-    void Update()
-    {
-        if (isPlayerFound && playerTransform != null)
-        {
-            // Oyuncuya doğru hareket et
-            Vector2 direction = (playerTransform.position - transform.position).normalized;
-            // Rigidbody2D kullanmak daha iyi çarpışma tespiti ve fizik etkileşimleri sağlar.
-            // Eğer Rigidbody2D varsa:
-            // Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            // if (rb != null)
-            // {
-            //     rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
-            // }
-            // else
-            // {
-                   transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, moveSpeed * Time.deltaTime);
-            // }
-
-            // (Opsiyonel) Düşmanın oyuncuya doğru dönmesi (sprite'a göre ayarlanmalı)
-            // if (direction != Vector2.zero)
-            // {
-            //     float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f; // Sprite'ın üstü ileri bakıyorsa
-            //     transform.rotation = Quaternion.Euler(0, 0, angle);
-            // }
-        }
-    }
+    // Start ve Update metodları artık FSM tarafından yönetileceği için kaldırıldı.
+    // Hareket ve hedefleme mantığı FSM Behaviour'larında (EnemyIdle, EnemyFollow, EnemyAction).
 
     public void TakeDamage(float amount)
     {
@@ -77,24 +43,29 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject); 
     }
 
-    // Oyuncuya temas ettiğinde hasar verme
+    // Oyuncuya temas ettiğinde hasar verme (Bu mantık kalabilir)
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (damageOnTouch <= 0) return; // Temas hasarı yoksa bir şey yapma
+
         if (collision.gameObject.CompareTag("Player"))
         {
+            // PlayerHealth script'inin oyuncuda olduğunu varsayıyoruz.
+            // Projenizdeki oyuncu can script'inin adıyla değiştirin.
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(damageOnTouch);
-                Debug.Log("Enemy damaged player (" + collision.gameObject.name + ") on touch for " + damageOnTouch + " damage.");
+                Debug.Log(gameObject.name + " damaged " + collision.gameObject.name + " on touch for " + damageOnTouch + " damage.");
             }
-            // İsteğe bağlı: Temas sonrası düşmanın kendini yok etmesi veya geri sekmesi
-            // Die(); 
         }
     }
     
-    // Eğer trigger collider kullanılıyorsa (örn: büyü mermisi için):
-    // void OnTriggerEnter2D(Collider2D other)
+    // Büyü mermisiyle hasar alma gibi şeyler için OnTriggerEnter2D kalabilir,
+    // ancak merminin kendisi Enemy'deki TakeDamage'ı çağırabilir.
+    // Bu yüzden bu kısım şimdilik yoruma alınabilir veya mermi tasarımına göre düzenlenebilir.
+    /*
+    void OnTriggerEnter2D(Collider2D other)
     // {
     //     if (other.CompareTag("PlayerSpell")) // Büyü mermilerinin etiketi "PlayerSpell" ise
     //     {
@@ -106,4 +77,5 @@ public class Enemy : MonoBehaviour
     //         // Destroy(other.gameObject); // Büyü mermisini yok et
     //     }
     // }
+    */
 }
