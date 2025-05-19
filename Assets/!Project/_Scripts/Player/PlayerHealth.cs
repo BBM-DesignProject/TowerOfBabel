@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
     private float currentHealth;
+    public float CurrentHealth => currentHealth; // Dışarıdan okunabilir property
 
     // Oyuncu canı değiştiğinde tetiklenecek event (UI güncellemesi için)
     // Parametreler: currentHealth, maxHealth
@@ -63,7 +64,7 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(float amount)
     {
         if (currentHealth <= 0) return; // Ölmüşse iyileşemez
-        if (currentHealth == maxHealth) return; // Zaten tam can ise iyileşemez
+        if (currentHealth == maxHealth) return; // Zaten canı tam ise iyileşemez
 
         currentHealth += amount;
         currentHealth = Mathf.Min(currentHealth, maxHealth); // Canın maksimumun üzerine çıkmasını engelle
