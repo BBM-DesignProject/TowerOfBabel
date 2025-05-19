@@ -16,14 +16,12 @@ MonoBehaviour:
   AnyPosition: {x: 200, y: 400}
   States:
   - rid: 2134675813816598760
-  - rid: 2134675813816598762
   - rid: 2134675813816598763
   AnyTransitions: []
   StartingState:
     rid: 2134675813816598760
   Parameters:
   - rid: 2134675813816598772
-  - rid: 2134675813816598775
   - rid: 2134675813816598778
   - rid: 2134675813816598779
   references:
@@ -37,23 +35,9 @@ MonoBehaviour:
         Position: {x: 624, y: 200}
         _name: Idle
         TransitionsFrom:
-        - rid: 2134675813816598764
         - rid: 2134675813816598766
         TransitionsTo:
-        - rid: 2134675813816598765
         - rid: 2134675813816598768
-    - rid: 2134675813816598762
-      type: {class: FSMC_State, ns: FSMC.Runtime, asm: FSMC.Runtime}
-      data:
-        _behaviours:
-        - rid: 2134675876389847116
-        Position: {x: 1002.39996, y: 200.8}
-        _name: Attack
-        TransitionsFrom:
-        - rid: 2134675813816598765
-        TransitionsTo:
-        - rid: 2134675813816598764
-        - rid: 2134675813816598767
     - rid: 2134675813816598763
       type: {class: FSMC_State, ns: FSMC.Runtime, asm: FSMC.Runtime}
       data:
@@ -62,32 +46,9 @@ MonoBehaviour:
         Position: {x: 814.4, y: 372.8}
         _name: Move
         TransitionsFrom:
-        - rid: 2134675813816598767
         - rid: 2134675813816598768
         TransitionsTo:
         - rid: 2134675813816598766
-    - rid: 2134675813816598764
-      type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
-      data:
-        conditions:
-        - conditions:
-          - rid: 2134675813816598773
-        _originState:
-          rid: 2134675813816598760
-        _destinationState:
-          rid: 2134675813816598762
-        _name: Idle->Attack
-    - rid: 2134675813816598765
-      type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
-      data:
-        conditions:
-        - conditions:
-          - rid: 2134675813816598776
-        _originState:
-          rid: 2134675813816598762
-        _destinationState:
-          rid: 2134675813816598760
-        _name: Attack->Idle
     - rid: 2134675813816598766
       type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
       data:
@@ -99,17 +60,6 @@ MonoBehaviour:
         _destinationState:
           rid: 2134675813816598763
         _name: Idle->Move
-    - rid: 2134675813816598767
-      type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
-      data:
-        conditions:
-        - conditions:
-          - rid: 2134675813816598777
-        _originState:
-          rid: 2134675813816598763
-        _destinationState:
-          rid: 2134675813816598762
-        _name: Move->Attack
     - rid: 2134675813816598768
       type: {class: FSMC_Transition, ns: FSMC.Runtime, asm: FSMC.Runtime}
       data:
@@ -131,33 +81,6 @@ MonoBehaviour:
         _type: 3
         _name: AttackStartTrigger
         _value: 0
-    - rid: 2134675813816598773
-      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
-      data:
-        comparison: 0
-        parameter:
-          rid: 2134675813816598772
-        Value: 1
-    - rid: 2134675813816598775
-      type: {class: FSMC_BoolParameter, ns: FSMC.Runtime, asm: FSMC.Runtime}
-      data:
-        _type: 3
-        _name: AttackFinishedTrigger
-        _value: 0
-    - rid: 2134675813816598776
-      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
-      data:
-        comparison: 0
-        parameter:
-          rid: 2134675813816598775
-        Value: 1
-    - rid: 2134675813816598777
-      type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
-      data:
-        comparison: 0
-        parameter:
-          rid: 2134675813816598772
-        Value: 1
     - rid: 2134675813816598778
       type: {class: FSMC_BoolParameter, ns: FSMC.Runtime, asm: FSMC.Runtime}
       data:
@@ -186,9 +109,5 @@ MonoBehaviour:
         Value: 1
     - rid: 2134675813816598838
       type: {class: PlayerMoveBehaviour, ns: , asm: Assembly-CSharp}
-      data:
-        enabled: 1
-    - rid: 2134675876389847116
-      type: {class: PlayerAttackBehaviour, ns: , asm: Assembly-CSharp}
       data:
         enabled: 1

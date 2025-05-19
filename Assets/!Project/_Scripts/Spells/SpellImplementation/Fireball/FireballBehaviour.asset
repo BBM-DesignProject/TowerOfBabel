@@ -15,6 +15,6 @@ MonoBehaviour:
   minimumRecognisionScore: 0.8
   gestureClass: line
   timeToCharge: 1
-  fireballProjectile: {fileID: 8378648546881499446, guid: 7e8cd9e0de02b4746a758370aaca2e7d, type: 3}
+  fireballProjectile: {fileID: 7518098580590812317, guid: bc67cde43ec17ce42a5df57745531ef3, type: 3}
   direction: {x: 0.36507738, y: -0.9309772, z: 0}
-  spawnPosition: {x: 37.552113, y: -6.0888257, z: 0}
+  spawnPosition: {x: 28.194065, y: 16.172049, z: 0}

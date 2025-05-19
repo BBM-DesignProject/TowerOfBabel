@@ -20,7 +20,7 @@ public class PlayerDrawInputHandler : MonoSingleton<PlayerDrawInputHandler>, Pla
     }
     public void OnActivate(InputAction.CallbackContext context)
     {
-        if(!context.performed)
+        if(context.performed)
             executer.SetTrigger("StartedDrawing");
     }
 

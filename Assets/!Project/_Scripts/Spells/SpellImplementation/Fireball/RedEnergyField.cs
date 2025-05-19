@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RedEnergyField : SpellProjectile
 {
     public ParticleSystem particleOfField;
     public float timeElapsed;
+
+    private List<Transform> allreadyCollidedObjects = new();
 
     public override void CastSpell()
     {
@@ -12,7 +15,7 @@ public class RedEnergyField : SpellProjectile
         main.loop = false;
         main.prewarm = false; // Make sure prewarm is off
 
-        main.stopAction = ParticleSystemStopAction.Destroy;
+        main.stopAction = ParticleSystemStopAction.None;
 
         // Get all particle systems in this hierarchy (including children)
         ParticleSystem[] allParticleSystems = GetComponentsInChildren<ParticleSystem>(true);
@@ -36,17 +39,30 @@ public class RedEnergyField : SpellProjectile
 
     private void Start()
     {
-        particleOfField = GetComponent<ParticleSystem>();
-
         CastSpell();
-        timeElapsed = 0;
     }
 
     private void Update()
     {
-        //timeElapsed += Time.deltaTime;
-        //if (timeElapsed >= particleOfField.main.duration) particleOfField.Stop();
+        if (particleOfField.isStopped) Destroy(gameObject);
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // Düþmana çarpýp çarpmadýðýný kontrol et
+        if (other.CompareTag(enemyTag) && allreadyCollidedObjects.Exists(p => p.Equals(other.transform)))
+        {
+            allreadyCollidedObjects.Add((other.transform));
+            Enemy enemy = other.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damageAmount);
+                Debug.Log("Spell projectile hit " + other.name + " for " + damageAmount + " damage.");
+            }
+        }
+    }
+
+
 
 }
 

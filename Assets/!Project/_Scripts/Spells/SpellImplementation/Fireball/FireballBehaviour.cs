@@ -24,7 +24,7 @@ public class FireballBehaviour : SpellBehaviour
         }
         spawnPosition = center / renderer.positionCount;
         Debug.Log(spawnPosition);
-        Instantiate(fireballProjectile, spawnPosition, Quaternion.Euler(new Vector3(60,0,0)));
+        Instantiate(fireballProjectile, spawnPosition, Quaternion.Euler(new Vector3(0,0,0)));
     }
 
     

@@ -913,7 +913,7 @@ namespace TowerOfBabel.Input
                     ""name"": """",
                     ""id"": ""14bbd7c7-2e0f-4205-aa42-0057b11f899d"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Activate"",
