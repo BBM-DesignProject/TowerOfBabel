@@ -2,112 +2,66 @@ using UnityEngine;
 using FSMC.Runtime;
 using System;
 
-// Aksiyon tipini belirlemek i�in bir enum
-public enum EnemyActionType
-{
-    MeleeAttack,
-    ProjectileAttack,
-    HealSelf, // �rnek ba�ka bir aksiyon
-    CustomAction // Di�er �zel aksiyonlar i�in
-}
-
 [Serializable]
-// [CreateAssetMenu(fileName = "EnemyActionBehaviour", menuName = "FSMC/Enemy Behaviours/Action")]
+// [CreateAssetMenu(fileName = "EnemyActionStateBehaviour", menuName = "FSMC/Enemy Behaviours/Action")]
 public class EnemyAction : FSMC_Behaviour
 {
-    [Header("General Action Settings")]
-    public EnemyActionType actionType = EnemyActionType.MeleeAttack;
-    [Tooltip("Animation to play for this action. Can be different for each action type if needed by using multiple behaviours or conditional logic.")]
-    public string actionAnimationName = "Attack"; // Varsay�lan sald�r� animasyonu
-    [Tooltip("Duration of the action. FSM should transition after this duration.")]
-    public float actionDuration = 1.0f;
+    [Header("Action State Settings")]
+    [Tooltip("Base duration for this action state if the specific handler doesn't provide one. The handler's ActionDuration will override this if greater than 0.")]
+    public float actionStateBaseDuration = 1.0f; 
+    [Tooltip("FSM Boolean parameter to signal action completion and readiness to transition.")]
+    public string actionCompleteFSMParameter = "ActionFinished";
 
-    [Header("Melee Attack Specifics")]
-    [Tooltip("Damage for melee attack.")]
-    public float meleeDamage = 10f;
-    [Tooltip("Range within which melee attack can hit.")]
-    public float meleeHitRange = 1.5f;
-    [Tooltip("Offset from the enemy's pivot to the center of the melee attack area.")]
-    public Vector2 meleeAttackOffset = Vector2.up;
-    [Tooltip("Size of the OverlapBox for melee hit detection.")]
-    public Vector2 meleeAttackBoxSize = new Vector2(1f, 1f);
-    public LayerMask playerLayerMask;
-
-    [Header("Projectile Attack Specifics")]
-    public GameObject projectilePrefab;
-    [Tooltip("Damage for projectile attack (if projectile doesn't handle its own damage).")]
-    public float projectileDamage = 10f;
-    [Tooltip("Optional: Transform point from which projectiles are spawned.")]
-    public Transform projectileSpawnPoint;
-    public float projectileSpawnOffsetForward = 1f;
-
-    [Header("Heal Self Specifics")]
-    [Tooltip("Amount to heal when HealSelf action is performed.")]
-    public float healAmount = 20f;
-    public string healAnimationName = "Heal"; // Opsiyonel, iyile�me i�in ayr� animasyon
-
-    // FSMC Parametre �simleri
-    [Tooltip("Transform FSM parameter for the target of the action (if applicable).")]
-    public string targetTransformParameter = "DetectedTarget"; // Art�k Enemy.cs'den al�nacak
-    [Tooltip("Boolean FSM parameter to signal action completion.")]
-    public string actionCompleteParameter = "ActionFinished";
-
-    // Di�er state'lerle tutarl�l�k i�in FSM parametre isimleri (Bu script'te aktif kullan�lm�yor ama tan�ml�)
-    [Tooltip("Boolean FSM parameter indicating if the target is within attack range (set to false if target moves out).")]
-    public string targetInAttackRangeParameter = "IsTargetInAttackRange";
-    [Tooltip("Boolean FSM parameter indicating if a valid target is still present (set to false if target is lost).")]
-    public string targetFoundParameter = "TargetFound";
-
-    [Tooltip("Float FSM parameter for the enemy's current health (for HealSelf).")]
-    public string currentHealthParameter = "CurrentHealth";
-    [Tooltip("Float FSM parameter for the enemy's max health (for HealSelf).")]
-    public string maxHealthParameter = "MaxHealth";
-
-    private Animator animator;
     private FSMC_Executer fsmcExecuterComponent;
-    private Transform currentTarget; // Enemy.cs'den al�nacak
-    private float actionStateEndTime;
-    private bool actionLogicPerformedThisState;
-    private Enemy enemyScript; // Ana d��man script'ine referans
+    private Enemy enemyScript; 
+    private EnemyActionHandlerBase currentActionHandler; 
+    private Transform currentTarget;
 
+    private float actionStateEndTime;
+    private bool actionExecutionLogicCalled; 
 
     public override void StateInit(FSMC_Controller stateMachine, FSMC_Executer executer)
     {
         base.StateInit(stateMachine, executer);
         fsmcExecuterComponent = executer;
-        animator = executer.GetComponent<Animator>();
-        enemyScript = executer.GetComponent<Enemy>(); // Enemy.cs oldu�unu varsay�yoruz
+        enemyScript = executer.GetComponent<Enemy>();
+        // GetComponentInChildren, Handler'ın Enemy objesinin bir alt objesinde olmasına da izin verir.
+        // Eğer Handler her zaman Enemy objesinin kendisindeyse GetComponent de yeterli.
+        currentActionHandler = executer.GetComponentInChildren<EnemyActionHandlerBase>(); 
 
-
-        if (animator == null)
-            Debug.LogWarning($"EnemyAction ({GetType().Name}): Animator not found on '{executer.gameObject.name}'.");
         if (enemyScript == null)
-            Debug.LogError($"EnemyAction ({GetType().Name}): Enemy script not found on '{executer.gameObject.name}'. This behaviour requires it to get the target.");
-        if (actionType == EnemyActionType.ProjectileAttack && projectilePrefab == null)
-        {
-            Debug.LogError($"EnemyAction ({GetType().Name}): Projectile Attack type selected but projectilePrefab is not assigned!");
-        }
+            Debug.LogError($"EnemyAction ({GetType().Name}): Enemy script not found on '{executer.gameObject.name}'. This is required to get the target.");
+        if (currentActionHandler == null)
+            Debug.LogError($"EnemyAction ({GetType().Name}): No EnemyActionHandlerBase component found on '{executer.gameObject.name}' or its children. An action handler is required for this state.");
     }
 
     public override void OnStateEnter(FSMC_Controller stateMachine, FSMC_Executer executer)
     {
-        // Debug.Log("ActionEntered");
         base.OnStateEnter(stateMachine, executer);
-        actionLogicPerformedThisState = false;
+        actionExecutionLogicCalled = false;
+        // Debug.Log($"[{Time.frameCount}] EnemyAction: OnStateEnter. Handler: {(currentActionHandler != null ? currentActionHandler.GetType().Name : "NULL")}");
 
         if (enemyScript != null)
         {
-            currentTarget = enemyScript.detectedTarget;
+            currentTarget = enemyScript.detectedTarget; 
         }
-
-        if ((actionType == EnemyActionType.MeleeAttack || actionType == EnemyActionType.ProjectileAttack) && currentTarget == null)
+        else 
         {
-            Debug.LogWarning($"EnemyAction ({GetType().Name}): Target-based action '{actionType}' selected but target is null on Enemy script. Action cannot proceed.");
-            if (!string.IsNullOrEmpty(actionCompleteParameter))
-                stateMachine.SetBool(actionCompleteParameter, true);
+            Debug.LogError($"EnemyAction ({GetType().Name}): Enemy script is null in OnStateEnter. Cannot get target.");
+            if (!string.IsNullOrEmpty(actionCompleteFSMParameter))
+                stateMachine.SetBool(actionCompleteFSMParameter, true); 
             return;
         }
-
+        
+        if (currentActionHandler == null)
+        {
+            Debug.LogError($"EnemyAction ({GetType().Name}): currentActionHandler is null in OnStateEnter. Cannot proceed.");
+            if (!string.IsNullOrEmpty(actionCompleteFSMParameter))
+                stateMachine.SetBool(actionCompleteFSMParameter, true); 
+            return;
+        }
+        
+        // Hedefe dönme (Handler'ın sorumluluğunda olabilir veya burada kalabilir)
         if (currentTarget != null)
         {
             Vector2 directionToTarget = (currentTarget.position - fsmcExecuterComponent.transform.position).normalized;
@@ -117,129 +71,72 @@ public class EnemyAction : FSMC_Behaviour
                 fsmcExecuterComponent.transform.rotation = Quaternion.Euler(0, 0, angle);
             }
         }
+        
+        currentActionHandler.OnActionEnter(currentTarget); 
+        
+        float duration = currentActionHandler.ActionDuration > 0.001f ? currentActionHandler.ActionDuration : actionStateBaseDuration;
+        actionStateEndTime = Time.time + duration; 
 
-        string animToPlay = actionAnimationName;
-        if (actionType == EnemyActionType.HealSelf && !string.IsNullOrEmpty(healAnimationName))
-        {
-            animToPlay = healAnimationName;
-        }
-
-        if (animator != null && !string.IsNullOrEmpty(animToPlay))
-        {
-            animator.Play(animToPlay, 0, 0f);
-        }
-
-        actionStateEndTime = Time.time + actionDuration;
-        if (!string.IsNullOrEmpty(actionCompleteParameter))
-            stateMachine.SetBool(actionCompleteParameter, false);
+        if (!string.IsNullOrEmpty(actionCompleteFSMParameter))
+            stateMachine.SetBool(actionCompleteFSMParameter, false); 
     }
 
     public override void OnStateUpdate(FSMC_Controller stateMachine, FSMC_Executer executer)
     {
         base.OnStateUpdate(stateMachine, executer);
 
-        if (Time.time >= actionStateEndTime)
+        if (currentActionHandler == null) 
         {
-            if (!string.IsNullOrEmpty(actionCompleteParameter))
-                stateMachine.SetBool(actionCompleteParameter, true);
+            if (!string.IsNullOrEmpty(actionCompleteFSMParameter)) stateMachine.SetBool(actionCompleteFSMParameter, true);
             return;
         }
-
-        // Hedefin null olup olmad���n� tekrar kontrol etmeye gerek yok ��nk� Idle karar verecek.
-        // Sadece aksiyon mant���n� tetikle.
-
-        float actionTriggerTimePoint = actionStateEndTime - (actionDuration * 0.5f);
-
-        if (!actionLogicPerformedThisState && Time.time >= actionTriggerTimePoint)
-        {
-            PerformSelectedAction(stateMachine);
-            actionLogicPerformedThisState = true;
-        }
-    }
-
-    private void PerformSelectedAction(FSMC_Controller stateMachine)
-    {
-        // currentTarget null kontrol� burada da yap�lmal�, OnEnter'da null de�ilken buraya gelindi�inde null olabilir.
-        if ((actionType == EnemyActionType.MeleeAttack || actionType == EnemyActionType.ProjectileAttack) &&
-            (enemyScript == null || enemyScript.detectedTarget == null))
-        {
-            Debug.LogWarning($"EnemyAction ({GetType().Name}): Target became null before PerformSelectedAction for a target-based action.");
-            return;
-        }
-        // currentTarget'� tekrar alal�m, ��nk� arada de�i�mi� olabilir (�ok olas� de�il ama g�venli)
+        
         if (enemyScript != null) currentTarget = enemyScript.detectedTarget;
 
+        float currentHandlerDuration = currentActionHandler.ActionDuration > 0.001f ? currentActionHandler.ActionDuration : actionStateBaseDuration;
+        // Aksiyonun "etki noktası"nı belirler (0.0: hemen, 0.5: ortasında, 1.0: bitmeden hemen önce)
+        // Bu değer, Handler'ın kendi iç mantığına veya animasyon event'lerine göre daha esnek yönetilebilir.
+        // Şimdilik, sürenin ortasında bir kez tetikleme mantığını koruyalım.
+        float triggerTimeRatio = 0.5f; 
+        float actionTriggerTimePoint = (actionStateEndTime - currentHandlerDuration) + (currentHandlerDuration * triggerTimeRatio);
 
-        switch (actionType)
+        if (!actionExecutionLogicCalled && Time.time >= actionTriggerTimePoint && Time.time < actionStateEndTime)
         {
-            case EnemyActionType.MeleeAttack:
-                PerformMeleeAttack();
-                break;
-            case EnemyActionType.ProjectileAttack:
-                PerformProjectileAttack();
-                break;
-            case EnemyActionType.HealSelf:
-                PerformHealSelf(stateMachine);
-                break;
-            case EnemyActionType.CustomAction:
-                Debug.Log($"EnemyAction ({GetType().Name}): Performing CustomAction.");
-                break;
-        }
-    }
-
-    private void PerformMeleeAttack()
-    {
-        if (currentTarget == null) return; // currentTarget burada enemyScript.detectedTarget'tan al�nmal�yd�.
-                                           // �stteki PerformSelectedAction i�inde zaten bu kontrol var.
-        Vector2 attackDirection = fsmcExecuterComponent.transform.up;
-        Vector2 attackCenter = (Vector2)fsmcExecuterComponent.transform.position + (attackDirection * meleeAttackOffset.y) + ((Vector2)fsmcExecuterComponent.transform.right * meleeAttackOffset.x);
-
-        Collider2D[] hitPlayers = Physics2D.OverlapBoxAll(attackCenter, meleeAttackBoxSize, fsmcExecuterComponent.transform.eulerAngles.z, playerLayerMask);
-
-        foreach (Collider2D playerCollider in hitPlayers)
-        {
-            PlayerHealth playerHealth = playerCollider.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
+            if (currentActionHandler.CanExecuteAction(currentTarget)) 
             {
-                playerHealth.TakeDamage(meleeDamage);
-                Debug.Log($"{fsmcExecuterComponent.name} meleed {playerCollider.name} for {meleeDamage} damage.");
+                // Debug.Log($"[{Time.frameCount}] EnemyAction: Calling ExecuteAction on {currentActionHandler.GetType().Name}");
+                currentActionHandler.ExecuteAction(currentTarget);
+                actionExecutionLogicCalled = true;
             }
         }
-    }
+        
+        currentActionHandler.OnActionUpdate(currentTarget); 
 
-    private void PerformProjectileAttack()
-    {
-        if (projectilePrefab == null) return;
-        // currentTarget null kontrol� PerformSelectedAction'da yap�ld�.
-        // if (currentTarget == null) return; 
-
-        Transform spawnPointToUse = projectileSpawnPoint != null ? projectileSpawnPoint : fsmcExecuterComponent.transform;
-        Vector3 spawnPos;
-        Quaternion spawnRot = spawnPointToUse.rotation;
-
-        if (projectileSpawnPoint != null)
+        if (Time.time >= actionStateEndTime)
         {
-            spawnPos = projectileSpawnPoint.position;
+            // Debug.Log($"[{Time.frameCount}] EnemyAction: Action state duration ended. Setting '{actionCompleteFSMParameter}' to true.");
+            if (!string.IsNullOrEmpty(actionCompleteFSMParameter))
+                stateMachine.SetBool(actionCompleteFSMParameter, true); 
         }
-        else
-        {
-            spawnPos = fsmcExecuterComponent.transform.position + (fsmcExecuterComponent.transform.up * projectileSpawnOffsetForward);
-        }
-
-        GameObject projectileGO = UnityEngine.Object.Instantiate(projectilePrefab, spawnPos, spawnRot);
-        Debug.Log($"{fsmcExecuterComponent.name} fired a projectile.");
     }
-
-    private void PerformHealSelf(FSMC_Controller stateMachine)
-    {
-        Debug.Log($"{fsmcExecuterComponent.name} performed HealSelf for {healAmount} (simulated).");
-    }
-
+    
     public override void OnStateExit(FSMC_Controller stateMachine, FSMC_Executer executer)
     {
-        Debug.Log("ActionExited");
         base.OnStateExit(stateMachine, executer);
-        if (!string.IsNullOrEmpty(actionCompleteParameter))
-            stateMachine.SetBool(actionCompleteParameter, true);
+        // Debug.Log($"[{Time.frameCount}] EnemyAction: OnStateExit. Handler: {(currentActionHandler != null ? currentActionHandler.GetType().Name : "NULL")}");
+        if (currentActionHandler != null)
+        {
+            currentActionHandler.OnActionExit(); 
+        }
+
+        if (!string.IsNullOrEmpty(actionCompleteFSMParameter))
+        {
+            // Emin olmak için, eğer bir şekilde true set edilmemişse burada set et.
+            if (stateMachine.GetBool(actionCompleteFSMParameter) == false) 
+            {
+                // Debug.LogWarning($"[{Time.frameCount}] EnemyAction: Forcing '{actionCompleteFSMParameter}' to true on exit.");
+                stateMachine.SetBool(actionCompleteFSMParameter, true);
+            }
+        }
     }
 }

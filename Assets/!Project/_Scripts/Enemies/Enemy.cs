@@ -4,16 +4,22 @@ public class Enemy : MonoBehaviour
 {
     [Header("Stats")]
     public float maxHealth = 30f;
-    [HideInInspector] public float currentHealth; // FSM veya UI tarafından okunabilir ama Inspector'da direkt değiştirilmesin
+    [HideInInspector] public float currentHealth;
 
-    [Header("Combat")]
-    public int damageOnTouch = 10; // Temas hasarı
-    
+    [Header("Combat Stats & Ranges")]
+    public int damageOnTouch = 10;
+    [Tooltip("Maximum distance at which this enemy can initially detect a target.")]
+    public float detectionRadius = 10f;
+    [Tooltip("The range within which this enemy will attempt to perform its action (e.g., attack).")]
+    public float actionRange = 2f; // Bu, hem Idle'daki attackRange hem de Follow'daki stoppingDistance yerine geçecek
+    [Tooltip("If a target moves beyond this distance while being followed, the enemy will lose the target.")]
+    public float loseTargetDistance = 12f;
+
     [Header("FSM Interaction")]
     [Tooltip("This will be set by FSM Behaviours (e.g., EnemyIdle) when a target is detected.")]
-    public Transform detectedTarget; // FSM Behaviours (EnemyIdle) bu alanı set edecek
+    public Transform detectedTarget;
 
-    // FSMC_Executer referansı (opsiyonel, eğer FSM parametrelerini buradan güncellemek isterseniz)
+    // FSMC_Executer referansı (opsiyonel)
     // private FSMC.Runtime.FSMC_Executer fsmcExecuter;
 
     void Awake()

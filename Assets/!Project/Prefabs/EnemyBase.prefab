@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 194685356021385920}
   - component: {fileID: 7530306927487773267}
   - component: {fileID: 7918527236039343500}
+  - component: {fileID: 6384881750457150444}
+  - component: {fileID: 2575531361438722869}
   - component: {fileID: 5066874424766411868}
   - component: {fileID: 232297061130675295}
-  - component: {fileID: 6384881750457150444}
   - component: {fileID: 1853149193690408545}
   m_Layer: 0
   m_Name: EnemyBase
@@ -105,6 +106,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controller: {fileID: 11400000, guid: 942b572754620f1459a63a164ebb399a, type: 2}
+--- !u!114 &6384881750457150444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8425542016888539304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c75f8e7a88514f4daeca85083252f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 30
+  currentHealth: 0
+  damageOnTouch: 10
+  detectionRadius: 10
+  actionRange: 2
+  loseTargetDistance: 12
+  detectedTarget: {fileID: 0}
+--- !u!114 &2575531361438722869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8425542016888539304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c32fdf05c8fa6f945bb37d1257fca523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeDamage: 10
+  attackOffset: {x: 0, y: 1}
+  attackBoxSize: {x: 1, y: 1}
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  currentTarget: {fileID: 0}
 --- !u!50 &5066874424766411868
 Rigidbody2D:
   serializedVersion: 5
@@ -178,22 +217,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.26, y: 0.32}
   m_EdgeRadius: 0
---- !u!114 &6384881750457150444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8425542016888539304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c75f8e7a88514f4daeca85083252f4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 30
-  currentHealth: 0
-  damageOnTouch: 10
-  detectedTarget: {fileID: 0}
 --- !u!95 &1853149193690408545
 Animator:
   serializedVersion: 7

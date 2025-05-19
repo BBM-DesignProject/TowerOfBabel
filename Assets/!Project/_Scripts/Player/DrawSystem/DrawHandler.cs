@@ -80,6 +80,8 @@ public class DrawHandler : MonoBehaviour
 
         Transform tmpGesture = Instantiate(gestureOnScreenPrefab, transform.position, transform.rotation);
         currentGestureLineRenderer = tmpGesture.GetComponent<LineRenderer>();
+        currentGestureLineRenderer.sortingLayerName = "Default";
+        currentGestureLineRenderer.sortingOrder = 2;
 
         gestureLinesRenderer.Add(currentGestureLineRenderer);
 

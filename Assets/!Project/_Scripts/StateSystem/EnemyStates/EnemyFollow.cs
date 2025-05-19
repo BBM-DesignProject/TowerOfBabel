@@ -8,9 +8,9 @@ public class EnemyFollow : FSMC_Behaviour
 {
     [Header("Movement")]
     public float moveSpeed = 3f;
-    public float stoppingDistance = 1.5f; // Hedefe ne kadar yaklaşınca duracağı (saldırı menzili)
-    [Tooltip("If the target moves beyond this distance while following, it will be considered lost.")]
-    public float loseTargetDistance = 12f; // EnemyIdle'daki detectionRadius'tan biraz büyük olabilir veya ona eşit.
+    // stoppingDistance ve loseTargetDistance artık Enemy.cs'den okunacak. Bu public alanlar kaldırılıyor.
+    // public float stoppingDistance = 1.5f;
+    // public float loseTargetDistance = 12f;
 
     [Header("Animation")]
     public string moveAnimationName = "Move";
@@ -109,28 +109,38 @@ public class EnemyFollow : FSMC_Behaviour
             // Eğer buradaysak ve currentTargetTransform null değilse, TargetFound'un true olması beklenir (Idle tarafından set edilmiş olmalı).        // }
 
 
+        // }
+
+        if (enemyScript == null)
+        {
+            // Debug.LogError($"[{Time.frameCount}] EnemyFollow: enemyScript is null, cannot get range values for distance checks.");
+            return;
+        }
+
+        // Menzilleri Enemy script'inden oku
+        float currentActionRange = enemyScript.actionRange; // Bu, stoppingDistance yerine geçecek
+        float currentLoseTargetDistance = enemyScript.loseTargetDistance;
+
         float distanceToTarget = Vector2.Distance(fsmcExecuterComponent.transform.position, currentTargetTransform.position);
+        // Debug.Log($"[{Time.frameCount}] EnemyFollow: Distance to '{currentTargetTransform.name}' is {distanceToTarget}. ActionRange (Stopping): {currentActionRange}, LoseTargetDistance: {currentLoseTargetDistance}");
 
         // Hedefi kaybetme kontrolü (mesafeye göre)
-        if (distanceToTarget > loseTargetDistance)
+        if (distanceToTarget > currentLoseTargetDistance)
         {
-            // Debug.Log($"[{Time.frameCount}] EnemyFollow: Target '{currentTargetTransform.name}' is beyond loseTargetDistance ({distanceToTarget} > {loseTargetDistance}). Setting '{targetFoundFSMParameter}' to false.");
+            // Debug.Log($"[{Time.frameCount}] EnemyFollow: Target '{currentTargetTransform.name}' is beyond loseTargetDistance ({distanceToTarget} > {currentLoseTargetDistance}). Setting '{targetFoundFSMParameter}' to false.");
             if (!string.IsNullOrEmpty(targetFoundFSMParameter))
             {
                 stateMachine.SetBool(targetFoundFSMParameter, false);
             }
-            if (enemyScript != null) // Enemy script'indeki hedefi de temizle
-            {
-                enemyScript.detectedTarget = null;
-            }
+            enemyScript.detectedTarget = null; // Enemy script'indeki hedefi de temizle
             if (rb != null) rb.linearVelocity = Vector2.zero;
             return; // Idle'a dönmeli
         }
 
         // Saldırı menzili kontrolü
-        if (distanceToTarget <= stoppingDistance)
+        if (distanceToTarget <= currentActionRange) // currentActionRange kullanıldı
         {
-            // Debug.Log($"[{Time.frameCount}] EnemyFollow: Target '{currentTargetTransform.name}' IN ATTACK RANGE. Setting '{targetInAttackRangeParameter}' to true.");
+            // Debug.Log($"[{Time.frameCount}] EnemyFollow: Target '{currentTargetTransform.name}' IN ACTION RANGE. Setting '{targetInAttackRangeParameter}' to true.");
             if (!string.IsNullOrEmpty(targetInAttackRangeParameter))
                 stateMachine.SetBool(targetInAttackRangeParameter, true);
             if (rb != null) rb.linearVelocity = Vector2.zero;
@@ -138,7 +148,7 @@ public class EnemyFollow : FSMC_Behaviour
         }
         else
         {
-            // Debug.Log($"[{Time.frameCount}] EnemyFollow: Target '{currentTargetTransform.name}' NOT in attack range. Setting '{targetInAttackRangeParameter}' to false.");
+            // Debug.Log($"[{Time.frameCount}] EnemyFollow: Target '{currentTargetTransform.name}' NOT in action range. Setting '{targetInAttackRangeParameter}' to false.");
             if (!string.IsNullOrEmpty(targetInAttackRangeParameter))
                 stateMachine.SetBool(targetInAttackRangeParameter, false);
         }

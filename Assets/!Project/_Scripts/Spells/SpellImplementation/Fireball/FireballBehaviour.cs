@@ -6,9 +6,9 @@ public class FireballBehaviour : SpellBehaviour
 {
     public GameObject fireballProjectile;
 
-    public Vector3 direction;
+    private Vector3 direction;
 
-    public Vector3 spawnPosition;
+    private Vector3 spawnPosition;
 
     public override void Consume()
     {

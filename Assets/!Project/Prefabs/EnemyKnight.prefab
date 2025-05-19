@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8831320428938981658}
   - component: {fileID: 9150240520228183349}
   - component: {fileID: 7684136141856613236}
+  - component: {fileID: -6881282571958747383}
   - component: {fileID: 5369197395834170181}
   - component: {fileID: 7293653795932298667}
   m_Layer: 0
@@ -87,7 +88,7 @@ SpriteRenderer:
   m_Size: {x: 0.26, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7684136141856613236
@@ -102,9 +103,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c75f8e7a88514f4daeca85083252f4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
   maxHealth: 30
+  currentHealth: 0
   damageOnTouch: 10
+  detectionRadius: 10
+  actionRange: 2
+  loseTargetDistance: 12
+  detectedTarget: {fileID: 0}
+--- !u!114 &-6881282571958747383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6997164240032934143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c32fdf05c8fa6f945bb37d1257fca523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeDamage: 10
+  attackOffset: {x: 0, y: 1}
+  attackBoxSize: {x: 1, y: 1}
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  currentTarget: {fileID: 0}
 --- !u!61 &5369197395834170181
 BoxCollider2D:
   m_ObjectHideFlags: 0

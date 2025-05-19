@@ -13,12 +13,6 @@ public class EnemyIdle : FSMC_Behaviour
 
     [Header("Target Scanning")]
     public float scanInterval = 1.0f; // Saniye cinsinden tarama aralığı
-    public float detectionRadius = 1f; // Hedef tespit yarıçapı
-    [Tooltip("Effective range for an attack. If target is within this, IsTargetInAttackRange will be true.")]
-    public float attackRange = 2f;
-    // chaseRangeThreshold detectionRadius'tan büyük olamaz, genellikle detectionRadius'a eşittir
-    // veya detectionRadius içindeki bir "ilgi" eşiğidir.
-    // Şimdilik, detectionRadius içinde ama attackRange dışında ise chaseRange'de kabul edelim.
     public LayerMask targetLayer; // Hangi katmandaki hedeflerin taranacağı
     public string playerTag = "Player"; // Oyuncunun etiketi
 
@@ -34,16 +28,24 @@ public class EnemyIdle : FSMC_Behaviour
 
 
     private float lastScanTime;
-    private FSMC_Executer fsmcExecuterComponent; // To avoid confusion with the parameter name
+    private FSMC_Executer fsmcExecuterComponent;
+    private Enemy enemyScriptInstance; // Merkezi menzil değerlerini okumak ve detectedTarget'ı set etmek için
 
     public override void StateInit(FSMC_Controller stateMachine, FSMC_Executer executer)
     {
         base.StateInit(stateMachine, executer);
         fsmcExecuterComponent = executer;
         animator = executer.GetComponent<Animator>();
+        // Enemy script'ine referans alalım, StateInit'te bir kez yapmak daha iyi.
+        enemyScriptInstance = executer.GetComponent<Enemy>();
+
         if (animator == null)
         {
             Debug.LogWarning($"EnemyIdle ({GetType().Name}): Animator not found on FSMC_Executer's GameObject '{executer.gameObject.name}'.");
+        }
+        if (enemyScriptInstance == null)
+        {
+            Debug.LogError($"EnemyIdle ({GetType().Name}): Enemy script not found on FSMC_Executer's GameObject '{executer.gameObject.name}'. This behaviour needs it for range values.");
         }
     }
 
@@ -62,10 +64,9 @@ public class EnemyIdle : FSMC_Behaviour
             stateMachine.SetBool(targetFoundParameter, false);
         
         // Enemy script'indeki detectedTarget'ı temizle
-        var enemyScript = executer.GetComponent<Enemy>(); // Enemy.cs olduğunu varsayıyoruz
-        if (enemyScript != null)
+        if (enemyScriptInstance != null)
         {
-            enemyScript.detectedTarget = null;
+            enemyScriptInstance.detectedTarget = null;
         }
 
         if (!string.IsNullOrEmpty(targetInAttackRangeParameter))
@@ -87,23 +88,20 @@ public class EnemyIdle : FSMC_Behaviour
     private void ScanForTargets(FSMC_Controller stateMachine)
     {
         // Debug.Log($"[{Time.frameCount}] EnemyIdle: ScanForTargets called.");
-        if (fsmcExecuterComponent == null)
+        if (fsmcExecuterComponent == null || enemyScriptInstance == null)
         {
-            Debug.LogError($"EnemyIdle ({GetType().Name}): fsmcExecuterComponent is null in ScanForTargets.");
+            Debug.LogError($"EnemyIdle ({GetType().Name}): fsmcExecuterComponent or enemyScriptInstance is null in ScanForTargets.");
             return;
         }
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(fsmcExecuterComponent.transform.position, detectionRadius, targetLayer);
+        // Menzilleri Enemy script'inden oku
+        float currentDetectionRadius = enemyScriptInstance.detectionRadius;
+        float currentActionRange = enemyScriptInstance.actionRange; // Enemy.cs'deki actionRange'i kullan
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(fsmcExecuterComponent.transform.position, currentDetectionRadius, targetLayer);
         Transform foundTarget = null;
-        var enemyScript = fsmcExecuterComponent.GetComponent<Enemy>();
-
-        if (enemyScript == null)
-        {
-            Debug.LogError($"EnemyIdle ({GetType().Name}): Enemy script not found on FSMC_Executer's GameObject '{fsmcExecuterComponent.gameObject.name}'. Cannot set detectedTarget.");
-            return;
-        }
-
-        // Debug.Log($"[{Time.frameCount}] EnemyIdle: OverlapCircle found {hits.Length} colliders. Player tag to check: '{playerTag}'");
+        
+        // Debug.Log($"[{Time.frameCount}] EnemyIdle: OverlapCircle ({currentDetectionRadius}) found {hits.Length} colliders. Player tag to check: '{playerTag}'");
         foreach (Collider2D hit in hits)
         {
             // Debug.Log($"[{Time.frameCount}] EnemyIdle: Checking hit '{hit.gameObject.name}' with tag '{hit.tag}'");
@@ -115,11 +113,11 @@ public class EnemyIdle : FSMC_Behaviour
             }
         }
 
-        if (enemyScript.detectedTarget != foundTarget)
+        if (enemyScriptInstance.detectedTarget != foundTarget) // enemyScriptInstance kullanılmalı
         {
-           // Debug.Log($"[{Time.frameCount}] EnemyIdle: detectedTarget changing from '{(enemyScript.detectedTarget == null ? "NULL" : enemyScript.detectedTarget.name)}' to '{(foundTarget == null ? "NULL" : foundTarget.name)}'");
+           // Debug.Log($"[{Time.frameCount}] EnemyIdle: detectedTarget changing from '{(enemyScriptInstance.detectedTarget == null ? "NULL" : enemyScriptInstance.detectedTarget.name)}' to '{(foundTarget == null ? "NULL" : foundTarget.name)}'");
         }
-        enemyScript.detectedTarget = foundTarget;
+        enemyScriptInstance.detectedTarget = foundTarget; // enemyScriptInstance kullanılmalı
 
         if (foundTarget != null)
         {
@@ -129,14 +127,14 @@ public class EnemyIdle : FSMC_Behaviour
 
             float distanceToTarget = Vector2.Distance(fsmcExecuterComponent.transform.position, foundTarget.position);
 
-            if (distanceToTarget <= attackRange)
+            if (distanceToTarget <= currentActionRange) // currentActionRange kullanıldı
             {
                 if (!string.IsNullOrEmpty(targetInAttackRangeParameter))
                     stateMachine.SetBool(targetInAttackRangeParameter, true);
                 if (!string.IsNullOrEmpty(targetInChaseRangeParameter))
                     stateMachine.SetBool(targetInChaseRangeParameter, false);
             }
-            else
+            else // Hedef actionRange dışında ama currentDetectionRadius içinde
             {
                 if (!string.IsNullOrEmpty(targetInAttackRangeParameter))
                     stateMachine.SetBool(targetInAttackRangeParameter, false);
@@ -156,7 +154,7 @@ public class EnemyIdle : FSMC_Behaviour
             if (!string.IsNullOrEmpty(targetInChaseRangeParameter))
                 stateMachine.SetBool(targetInChaseRangeParameter, false);
         }
-        // Debug.Log($"[{Time.frameCount}] EnemyIdle: ScanForTargets complete. Enemy.detectedTarget is '{(enemyScript.detectedTarget == null ? "NULL" : enemyScript.detectedTarget.name)}'. TargetFound FSM: {stateMachine.GetBool(targetFoundParameter)}");
+        // Debug.Log($"[{Time.frameCount}] EnemyIdle: ScanForTargets complete. Enemy.detectedTarget is '{(enemyScriptInstance.detectedTarget == null ? "NULL" : enemyScriptInstance.detectedTarget.name)}'. TargetFound FSM: {stateMachine.GetBool(targetFoundParameter)}");
     }
 
     public override void OnStateExit(FSMC_Controller stateMachine, FSMC_Executer executer)
