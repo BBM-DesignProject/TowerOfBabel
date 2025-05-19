@@ -61,18 +61,13 @@ public class EnemyAction : FSMC_Behaviour
             return;
         }
         
-        // Hedefe dönme (Handler'ın sorumluluğunda olabilir veya burada kalabilir)
-        if (currentTarget != null)
+        // Hedefe dönme (Enemy.cs'deki FaceTarget metodu ile)
+        if (enemyScript != null && currentTarget != null)
         {
-            Vector2 directionToTarget = (currentTarget.position - fsmcExecuterComponent.transform.position).normalized;
-            if (directionToTarget != Vector2.zero)
-            {
-                float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg - 90f;
-                fsmcExecuterComponent.transform.rotation = Quaternion.Euler(0, 0, angle);
-            }
+            enemyScript.FaceTarget(currentTarget);
         }
         
-        currentActionHandler.OnActionEnter(currentTarget); 
+        currentActionHandler.OnActionEnter(currentTarget);
         
         float duration = currentActionHandler.ActionDuration > 0.001f ? currentActionHandler.ActionDuration : actionStateBaseDuration;
         actionStateEndTime = Time.time + duration; 

@@ -263,6 +263,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8425542016888539304, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
   m_PrefabInstance: {fileID: 280669375}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &227079254 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 194685356021385920, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
+  m_PrefabInstance: {fileID: 280669375}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &227079255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,15 +277,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 227079247}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c32fdf05c8fa6f945bb37d1257fca523, type: 3}
+  m_Script: {fileID: 11500000, guid: 950239c4fc54e2440a697d40daac459a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeDamage: 10
-  attackOffset: {x: 0, y: 1}
-  attackBoxSize: {x: 1, y: 1}
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
+  actionAnimationTrigger: AttackTrigger
+  baseActionDuration: 1
+  projectilePrefab: {fileID: 2821083163933954531, guid: 6b6ece04c29f6bb40873192cb2a8e586, type: 3}
+  projectileSpawnPoint: {fileID: 227079254}
+  projectileSpawnOffsetForward: 1
+  projectileSpeed: 10
+  projectileDamage: 5
 --- !u!1 &243697024
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 194685356021385920, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 194685356021385920, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
       propertyPath: m_LocalRotation.x
@@ -445,7 +451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 194685356021385920, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 194685356021385920, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
       propertyPath: m_LocalRotation.z
@@ -457,7 +463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 194685356021385920, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 194685356021385920, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -507,13 +513,37 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1853149193690408545, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 98e109c28c5fa9f4aa06e51ffd0d1a26, type: 2}
+    - target: {fileID: 5066874424766411868, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066874424766411868, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
+      propertyPath: m_LinearDamping
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066874424766411868, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
+      propertyPath: m_AngularDamping
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066874424766411868, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6384881750457150444, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
       propertyPath: maxHealth
-      value: 15
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6384881750457150444, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
+      propertyPath: actionRange
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6384881750457150444, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
       propertyPath: damageOnTouch
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7530306927487773267, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
       propertyPath: m_Size.x
@@ -539,12 +569,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyWizard
       objectReference: {fileID: 0}
+    - target: {fileID: 8425542016888539304, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8425542016888539304, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
-      insertIndex: -1
+      insertIndex: 4
       addedObject: {fileID: 227079255}
   m_SourcePrefab: {fileID: 100100000, guid: 1bf30c44c4bbab34da468451c9876b73, type: 3}
 --- !u!1 &499285767
@@ -970,7 +1004,7 @@ PrefabInstance:
       objectReference: {fileID: 1499248013}
     - target: {fileID: 3056854054847848458, guid: db611eccb88b8bf44942ff810deead44, type: 3}
       propertyPath: moveSpeed
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4867395365091527318, guid: db611eccb88b8bf44942ff810deead44, type: 3}
       propertyPath: m_Name
@@ -1014,6 +1048,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5844359915225166806, guid: db611eccb88b8bf44942ff810deead44, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7933436419315314764, guid: db611eccb88b8bf44942ff810deead44, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7933436419315314764, guid: db611eccb88b8bf44942ff810deead44, type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7933436419315314764, guid: db611eccb88b8bf44942ff810deead44, type: 3}
+      propertyPath: m_LinearDamping
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7933436419315314764, guid: db611eccb88b8bf44942ff810deead44, type: 3}
+      propertyPath: m_CollisionDetection
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1503,7 +1553,7 @@ Animator:
   m_GameObject: {fileID: 1475659515}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 609dda02fc1f4594e9e8ea60e1395b51, type: 2}
+  m_Controller: {fileID: 9100000, guid: d401cc99dd62b464ab03540af3868215, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2062,7 +2112,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.20125782, g: 0.20099722, b: 0.19682762, a: 1}
+  m_Color: {r: 0.72955966, g: 0.72955966, b: 0.4978441, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2135,6 +2185,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 7293653795932298667, guid: 3d001a99a52aca9458b2dc00aa59791a, type: 3}
+      propertyPath: m_LinearDamping
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293653795932298667, guid: 3d001a99a52aca9458b2dc00aa59791a, type: 3}
+      propertyPath: m_AngularDamping
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293653795932298667, guid: 3d001a99a52aca9458b2dc00aa59791a, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7684136141856613236, guid: 3d001a99a52aca9458b2dc00aa59791a, type: 3}
       propertyPath: moveSpeed
       value: 0.5
@@ -2144,12 +2206,16 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7684136141856613236, guid: 3d001a99a52aca9458b2dc00aa59791a, type: 3}
+      propertyPath: damageOnTouch
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684136141856613236, guid: 3d001a99a52aca9458b2dc00aa59791a, type: 3}
       propertyPath: detectionRadius
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7684136141856613236, guid: 3d001a99a52aca9458b2dc00aa59791a, type: 3}
       propertyPath: loseTargetDistance
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8831320428938981658, guid: 3d001a99a52aca9458b2dc00aa59791a, type: 3}
       propertyPath: m_LocalScale.x

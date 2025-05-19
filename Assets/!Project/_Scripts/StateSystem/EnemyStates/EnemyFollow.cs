@@ -13,7 +13,9 @@ public class EnemyFollow : FSMC_Behaviour
     // public float loseTargetDistance = 12f;
 
     [Header("Animation")]
-    public string moveAnimationName = "Move";
+    [Tooltip("Name of the Boolean parameter in the Animator Controller that triggers movement animation (e.g., IsMoving).")]
+    public string animatorMoveBoolParameterName = "IsMoving";
+    // public string moveAnimationName = "Move"; // Bu satır artık kullanılmayacak, SetBool kullanılacak.
     private Animator animator;
 
     [Tooltip("Boolean FSM parameter indicating if the target is now within attack range.")]
@@ -44,10 +46,14 @@ public class EnemyFollow : FSMC_Behaviour
     {
         // Debug.Log("FollowEntered");
         base.OnStateEnter(stateMachine, executer);
-        if (animator != null && !string.IsNullOrEmpty(moveAnimationName))
+        if (animator != null && !string.IsNullOrEmpty(animatorMoveBoolParameterName))
         {
-            animator.Play(moveAnimationName);
+            animator.SetBool(animatorMoveBoolParameterName, true);
         }
+        // else if (animator != null && !string.IsNullOrEmpty(moveAnimationName)) // Eski direkt oynatma
+        // {
+        //    animator.Play(moveAnimationName);
+        // }
 
         if (enemyScript != null)
         {
@@ -165,10 +171,10 @@ public class EnemyFollow : FSMC_Behaviour
             fsmcExecuterComponent.transform.position = Vector2.MoveTowards(fsmcExecuterComponent.transform.position, currentTargetTransform.position, moveSpeed * Time.deltaTime);
         }
 
-        if (direction != Vector2.zero)
+        // Yönü Enemy.cs'deki FaceTarget metodu ile ayarla
+        if (enemyScript != null && currentTargetTransform != null)
         {
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f; 
-            fsmcExecuterComponent.transform.rotation = Quaternion.Slerp(fsmcExecuterComponent.transform.rotation, Quaternion.Euler(0, 0, angle), Time.deltaTime * 10f);
+            enemyScript.FaceTarget(currentTargetTransform);
         }
     }
 
@@ -176,9 +182,13 @@ public class EnemyFollow : FSMC_Behaviour
     {
         // Debug.Log("FollowExited");
         base.OnStateExit(stateMachine, executer);
+        if (animator != null && !string.IsNullOrEmpty(animatorMoveBoolParameterName))
+        {
+            animator.SetBool(animatorMoveBoolParameterName, false);
+        }
         if (rb != null)
         {
-            rb.linearVelocity = Vector2.zero; 
+            rb.linearVelocity = Vector2.zero;
         }
     }
 }

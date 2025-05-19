@@ -4,14 +4,21 @@ using UnityEngine;
 public abstract class EnemyActionHandlerBase : MonoBehaviour
 {
     [Header("Base Action Settings")]
-    [Tooltip("Default animation name for this action. Can be overridden by specific handlers.")]
-    public virtual string ActionAnimationName => "Attack"; // Varsayılan, alt sınıflar override edebilir
+    [Tooltip("Name of the Animator trigger parameter to play the action animation.")]
+    public string actionAnimationTrigger = "AttackTrigger"; // Varsayılan trigger adı
 
-    [Tooltip("Default duration for this action. Can be overridden by specific handlers.")]
-    public virtual float ActionDuration => 1.0f; // Varsayılan, alt sınıflar override edebilir
+    [Tooltip("Default duration for this action. Specific handlers can override this via their ActionDuration property.")]
+    public float baseActionDuration = 1.0f;
+
+    // ActionAnimationName özelliği artık doğrudan kullanılmayacak, trigger tercih edilecek.
+    // İstenirse bir fallback olarak kalabilir veya kaldırılabilir.
+    // public virtual string ActionAnimationName => "Attack";
+
+    // ActionDuration özelliği, baseActionDuration'ı veya alt sınıfın override'ını kullanacak.
+    public virtual float ActionDuration => baseActionDuration;
 
     protected Animator animator;
-    protected Enemy enemyScript; // Ana Enemy script'ine erişim için
+    protected Enemy enemyScript;
     protected FSMC_Executer fsmcExecuter; // FSMC_Executer'a erişim için (opsiyonel)
 
     protected virtual void Awake()
@@ -54,10 +61,19 @@ public abstract class EnemyActionHandlerBase : MonoBehaviour
     /// </summary>
     public virtual void OnActionEnter(Transform target)
     {
-        // Varsayılan olarak animasyonu oynat
-        if (animator != null && !string.IsNullOrEmpty(ActionAnimationName))
+        // Varsayılan olarak trigger'ı kullanarak animasyonu tetikle
+        if (animator != null && !string.IsNullOrEmpty(actionAnimationTrigger))
         {
-            animator.Play(ActionAnimationName, 0, 0f);
+            animator.SetTrigger(actionAnimationTrigger);
+            // Debug.Log($"{GetType().Name} on {gameObject.name}: Triggering '{actionAnimationTrigger}'");
+        }
+        else if (animator == null)
+        {
+            Debug.LogWarning($"{GetType().Name} on {gameObject.name}: Animator is null. Cannot trigger animation.");
+        }
+        else
+        {
+            Debug.LogWarning($"{GetType().Name} on {gameObject.name}: actionAnimationTrigger is not set. Cannot trigger animation.");
         }
     }
 

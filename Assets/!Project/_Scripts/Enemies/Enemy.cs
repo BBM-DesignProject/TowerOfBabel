@@ -84,4 +84,32 @@ public class Enemy : MonoBehaviour
     //     }
     // }
     */
+
+    public void FaceTarget(Transform target)
+    {
+        if (target == null) return;
+
+        Vector2 directionToTarget = (target.position - transform.position);
+        Vector3 localScale = transform.localScale;
+
+        if (directionToTarget.x > 0.01f) // Hedef sağda
+        {
+            // Varsayılan olarak sprite'ın sağa baktığını ve localScale.x = 1 olduğunu varsayıyoruz.
+            // Eğer sprite'ınız varsayılan olarak sola bakıyorsa, bu koşulları ve çarpmaları tersine çevirin.
+            if (localScale.x < 0)
+            {
+                localScale.x *= -1;
+                transform.localScale = localScale;
+            }
+        }
+        else if (directionToTarget.x < -0.01f) // Hedef solda
+        {
+            if (localScale.x > 0)
+            {
+                localScale.x *= -1;
+                transform.localScale = localScale;
+            }
+        }
+        // Eğer directionToTarget.x çok küçükse (tam üstünde/altında), mevcut yönde kalır.
+    }
 }
