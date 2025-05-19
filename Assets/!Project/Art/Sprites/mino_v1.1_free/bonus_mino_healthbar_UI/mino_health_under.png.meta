@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ff29330f4ca6e1240a5fa6d69503985b
+guid: de32e32732ee5504a8877e92713f52ca
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3743957659742367504
-    second: Move_0
+      213: 4621588508393641237
+    second: mino_health_under_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,45 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Move_0
+      name: mino_health_under_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 24
-        height: 5
+        x: 5
+        y: 25
+        width: 150
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: ffdfa6b730ed5274294ddf7dd0e1b7fe
-      internalID: 205954487
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Move_1
-      rect:
-        serializedVersion: 2
-        x: 24
-        y: 0
-        width: 24
-        height: 5
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c94b9c2753f63274c86f04beed643de5
-      internalID: 1977923371
+      spriteID: 51594dc134e232040800000000000000
+      internalID: 4621588508393641237
       vertices: []
       indices: 
       edges: []
@@ -147,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0a1b9795cf9e84b41aa8a081698b1b01
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -156,9 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Move_0: 205954487
-      Move_1: 1977923371
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

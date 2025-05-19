@@ -1,37 +1,46 @@
 fileFormatVersion: 2
-guid: 8860c5eb30447394f8700f2c22f05244
+guid: 2e3c7b2bbec474d4f840bef9247f5a48
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4723107735738678597
-    second: Idle_0
+      213: -6051900934413649582
+    second: B_witch_charge_0
   - first:
-      213: -7385789195546760866
-    second: Idle_1
+      213: -8699970382033142276
+    second: B_witch_charge_1
   - first:
-      213: 3234629978573100161
-    second: Idle_2
+      213: -4661947401955712466
+    second: B_witch_charge_2
   - first:
-      213: 6373048116405451881
-    second: Idle_3
+      213: -8150979072369005061
+    second: B_witch_charge_3
   - first:
-      213: 7264182050183361747
-    second: Idle_4
+      213: 9102356174468631350
+    second: B_witch_charge_4
   - first:
-      213: -2834552850196481573
-    second: Idle_5
+      213: -5154235312219339718
+    second: B_witch_charge_5
   - first:
-      213: 3278449094680734212
-    second: Idle_6
+      213: 2792587887544213240
+    second: B_witch_charge_6
   - first:
-      213: 3384493420599841878
-    second: Idle_7
+      213: -3840996947518145699
+    second: B_witch_charge_7
   - first:
-      213: -2331352242086191015
-    second: Idle_8
+      213: -2299175191877236700
+    second: B_witch_charge_8
   - first:
-      213: -3914248031228685145
-    second: Idle_9
+      213: -8110604173583913133
+    second: B_witch_charge_9
+  - first:
+      213: -3757569096154584718
+    second: B_witch_charge_10
+  - first:
+      213: 5909739891886410493
+    second: B_witch_charge_11
+  - first:
+      213: 2926091904789295261
+    second: B_witch_charge_12
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -127,221 +136,287 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idle_0
+      name: B_witch_charge_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 100
-        height: 100
+        x: 4
+        y: 138
+        width: 34
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 7e6a58107bd7884408dafab48444f762
-      internalID: -1276797788
+      spriteID: 2597b6c1a24530ca0800000000000000
+      internalID: -6051900934413649582
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_1
+      name: B_witch_charge_1
       rect:
         serializedVersion: 2
-        x: 100
-        y: 0
-        width: 100
-        height: 100
+        x: 7
+        y: 187
+        width: 36
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 513314940dd9c5041a7cd2d2b0e96bcc
-      internalID: 1887070839
+      spriteID: cfdbe7e280f734780800000000000000
+      internalID: -8699970382033142276
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_2
+      name: B_witch_charge_2
       rect:
         serializedVersion: 2
-        x: 200
-        y: 0
-        width: 100
-        height: 100
+        x: 37
+        y: 165
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 4151f85a6fa01114996a1036e93258f4
-      internalID: -1017583191
+      spriteID: e22efd8b98f6d4fb0800000000000000
+      internalID: -4661947401955712466
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_3
+      name: B_witch_charge_3
       rect:
         serializedVersion: 2
-        x: 300
-        y: 0
-        width: 100
-        height: 100
+        x: 3
+        y: 96
+        width: 35
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 965b15e8f5a76734bb46882f5aa56c43
-      internalID: 1522940736
+      spriteID: bfd6dcb28b7e1ee80800000000000000
+      internalID: -8150979072369005061
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_4
+      name: B_witch_charge_4
       rect:
         serializedVersion: 2
-        x: 400
-        y: 0
-        width: 100
-        height: 100
+        x: 5
+        y: 129
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 6f72850ff4548064a8cc8321ea2c3218
-      internalID: 292586021
+      spriteID: 63b494ed6b0125e70800000000000000
+      internalID: 9102356174468631350
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_5
+      name: B_witch_charge_5
       rect:
         serializedVersion: 2
-        x: 500
-        y: 0
-        width: 100
-        height: 100
+        x: 28
+        y: 134
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 935983ad198e95242ade14dd5d755bff
-      internalID: -153697573
+      spriteID: a344466ba4a7878b0800000000000000
+      internalID: -5154235312219339718
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_6
+      name: B_witch_charge_6
       rect:
         serializedVersion: 2
-        x: 600
-        y: 0
-        width: 100
-        height: 100
+        x: 36
+        y: 117
+        width: 7
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 6d0f5dcc80f61bf4a8c0818909f03a1d
-      internalID: -1671665964
+      spriteID: 8fe912153e341c620800000000000000
+      internalID: 2792587887544213240
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_7
+      name: B_witch_charge_7
       rect:
         serializedVersion: 2
-        x: 700
-        y: 0
-        width: 100
-        height: 100
+        x: 16
+        y: 90
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: a455c96b77de3ff4b98d441a7398dbd1
-      internalID: 674067989
+      spriteID: d5b32df60a902bac0800000000000000
+      internalID: -3840996947518145699
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_8
+      name: B_witch_charge_8
       rect:
         serializedVersion: 2
-        x: 800
-        y: 0
-        width: 100
-        height: 100
+        x: 28
+        y: 86
+        width: 7
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f6de96b910bd974489cb563a7b7b81ba
-      internalID: -1817377523
+      spriteID: 42844c33850b710e0800000000000000
+      internalID: -2299175191877236700
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_9
+      name: B_witch_charge_9
       rect:
         serializedVersion: 2
-        x: 900
-        y: 0
-        width: 100
-        height: 100
+        x: 5
+        y: 80
+        width: 7
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: c2083268fba8ff343915c79717cbc8d6
-      internalID: 413129557
+      spriteID: 35feab7d978517f80800000000000000
+      internalID: -8110604173583913133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: B_witch_charge_10
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 38
+        width: 32
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27968b4c0de6adbc0800000000000000
+      internalID: -3757569096154584718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: B_witch_charge_11
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 65
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfa48dade1d930250800000000000000
+      internalID: 5909739891886410493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: B_witch_charge_12
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 0
+        width: 39
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d90bc1595119b9820800000000000000
+      internalID: 2926091904789295261
       vertices: []
       indices: 
       edges: []
@@ -350,7 +425,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a800f7ff60b51204fa03daa682b31f10
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -359,17 +434,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Idle_0: -1276797788
-      Idle_1: 1887070839
-      Idle_2: -1017583191
-      Idle_3: 1522940736
-      Idle_4: 292586021
-      Idle_5: -153697573
-      Idle_6: -1671665964
-      Idle_7: 674067989
-      Idle_8: -1817377523
-      Idle_9: 413129557
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
