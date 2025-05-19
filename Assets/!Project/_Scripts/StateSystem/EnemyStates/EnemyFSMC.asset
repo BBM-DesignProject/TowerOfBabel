@@ -182,8 +182,6 @@ MonoBehaviour:
         enabled: 1
         idleAnimationName: Idle
         scanInterval: 1
-        detectionRadius: 10
-        attackRange: 4
         targetLayer:
           serializedVersion: 2
           m_Bits: 1
@@ -203,9 +201,7 @@ MonoBehaviour:
       data:
         enabled: 1
         moveSpeed: 3
-        stoppingDistance: 4
-        loseTargetDistance: 12
-        moveAnimationName: Move
+        animatorMoveBoolParameterName: IsMoving
         targetInAttackRangeParameter: IsTargetInAttackRange
         targetFoundFSMParameter: TargetFound
     - rid: 6821766385576443974
@@ -226,28 +222,8 @@ MonoBehaviour:
       type: {class: EnemyAction, ns: , asm: Assembly-CSharp}
       data:
         enabled: 1
-        actionType: 0
-        actionAnimationName: Attack
-        actionDuration: 1
-        meleeDamage: 10
-        meleeHitRange: 3
-        meleeAttackOffset: {x: 0, y: 1}
-        meleeAttackBoxSize: {x: 1, y: 1}
-        playerLayerMask:
-          serializedVersion: 2
-          m_Bits: 1
-        projectilePrefab: {fileID: 7331890612924046490, guid: 87ea05e29cc6cfc4bb4d04fdff3952f7, type: 3}
-        projectileDamage: 10
-        projectileSpawnPoint: {fileID: 0}
-        projectileSpawnOffsetForward: 1
-        healAmount: 20
-        healAnimationName: Heal
-        targetTransformParameter: DetectedTarget
-        actionCompleteParameter: ActionFinished
-        targetInAttackRangeParameter: IsTargetInAttackRange
-        targetFoundParameter: TargetFound
-        currentHealthParameter: CurrentHealth
-        maxHealthParameter: MaxHealth
+        actionStateBaseDuration: 1
+        actionCompleteFSMParameter: ActionFinished
     - rid: 6821766385576443988
       type: {class: FSMC_BoolCondition, ns: FSMC.Runtime, asm: FSMC.Runtime}
       data:

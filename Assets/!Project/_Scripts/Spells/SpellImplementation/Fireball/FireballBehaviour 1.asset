@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8546d22d21cb1443a305ac953e35dc8, type: 3}
-  m_Name: FireballObject
+  m_Script: {fileID: 11500000, guid: 5d7d1db220caf8d40b6255d916eeea06, type: 3}
+  m_Name: FireballBehaviour 1
   m_EditorClassIdentifier: 
-  spellBehaviour: {fileID: 11400000, guid: af64e69207f182f49a2fc05fb8630326, type: 2}
+  minimumRecognisionScore: 0.8
+  gestureClass: line
+  timeToCharge: 1
+  fireballProjectile: {fileID: 7331890612924046490, guid: 87ea05e29cc6cfc4bb4d04fdff3952f7, type: 3}
