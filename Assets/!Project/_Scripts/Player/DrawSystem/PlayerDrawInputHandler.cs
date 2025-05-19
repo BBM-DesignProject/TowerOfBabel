@@ -51,7 +51,6 @@ public class PlayerDrawInputHandler : MonoSingleton<PlayerDrawInputHandler>, Pla
 
     public void OnDraw(InputAction.CallbackContext context)
     {
-        Debug.Log(context.phase);
         if (context.performed)
         {
             executer.SetTrigger("ReturnedDrawing");

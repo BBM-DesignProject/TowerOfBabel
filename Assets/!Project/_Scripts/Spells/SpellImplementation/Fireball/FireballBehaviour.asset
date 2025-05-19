@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7d1db220caf8d40b6255d916eeea06, type: 3}
   m_Name: FireballBehaviour
   m_EditorClassIdentifier: 
-  minimumRecognisionScore: 0.9
+  minimumRecognisionScore: 0.8
   gestureClass: line
-  fireballProjectile: {fileID: 7331890612924046490, guid: 87ea05e29cc6cfc4bb4d04fdff3952f7, type: 3}
-  direction: {x: 0, y: 0, z: 0}
-  spawnPosition: {x: 0, y: 0, z: 0}
+  timeToCharge: 1
+  fireballProjectile: {fileID: 8378648546881499446, guid: 7e8cd9e0de02b4746a758370aaca2e7d, type: 3}
+  direction: {x: 0.36507738, y: -0.9309772, z: 0}
+  spawnPosition: {x: 37.552113, y: -6.0888257, z: 0}

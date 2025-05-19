@@ -251,7 +251,7 @@ public class SpellGestureSystem : MonoBehaviour
 
 
         GameObject projectileInstance = Instantiate(circleSpellProjectilePrefab, spawnPos, spawnRot);
-        SpellProjectile spellProjectile = projectileInstance.GetComponent<SpellProjectile>();
+        FireballProjectile spellProjectile = projectileInstance.GetComponent<FireballProjectile>();
 
         if (spellProjectile != null)
         {

@@ -6,7 +6,6 @@ public class SpellSO : ScriptableObject
 {
     public SpellBehaviour spellBehaviour;
 
-
     public void Consume()
     {
         spellBehaviour.Consume();
