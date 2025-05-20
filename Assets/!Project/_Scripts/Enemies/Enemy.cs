@@ -33,7 +33,8 @@ public class Enemy : MonoBehaviour
     private Color originalColor;
     private Coroutine flashCoroutine;
     private Animator animator;
-    private HealthBar healthBar; // Düşmanın kendi can barı için referans
+    private HealthBar healthBar;
+    private EnemySpawner spawnerReference; // EnemySpawner'a referans
 
     // FSMC_Executer referansı (opsiyonel)
     // private FSMC.Runtime.FSMC_Executer fsmcExecuter;
@@ -62,8 +63,14 @@ public class Enemy : MonoBehaviour
         else
         {
             // Bu bir hata değil, her düşmanın can barı olmak zorunda değil.
-            // Debug.Log($"Enemy {gameObject.name}: Awake - HealthBar component not found in children.");
         }
+
+        // EnemySpawner'ı sahnede bul. Genellikle sahnede tek bir Spawner olur.
+        spawnerReference = FindObjectOfType<EnemySpawner>();
+        // if (spawnerReference == null)
+        // {
+        //     Debug.LogWarning($"Enemy {gameObject.name}: Could not find EnemySpawner in the scene.");
+        // }
     }
 
     public void TakeDamage(float amount)
@@ -106,13 +113,15 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         Debug.Log(gameObject.name + " died.");
+        
+        // Spawner'a ölümünü bildir
+        if (spawnerReference != null)
+        {
+            spawnerReference.ReportEnemyDeath(gameObject);
+        }
+
         // Ölüm efektleri, skor vb.
-        // Can barını da gizleyebilir veya yok edebiliriz (opsiyonel, düşmanla birlikte yok olacaksa gerek yok)
-        // if (healthBar != null && healthBar.gameObject != null)
-        // {
-        //     Destroy(healthBar.gameObject);
-        // }
-        Destroy(gameObject); 
+        Destroy(gameObject);
     }
 
     void OnCollisionEnter2D(Collision2D collision)

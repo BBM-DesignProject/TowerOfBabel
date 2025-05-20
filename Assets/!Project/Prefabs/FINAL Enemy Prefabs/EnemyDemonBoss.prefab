@@ -123,9 +123,9 @@ MonoBehaviour:
   currentHealth: 0
   moveSpeed: 2
   damageOnTouch: 20
-  detectionRadius: 8
+  detectionRadius: Infinity
   actionRange: 5
-  loseTargetDistance: 10
+  loseTargetDistance: Infinity
   detectedTarget: {fileID: 0}
   flashColor: {r: 0.46666667, g: 0, b: 0.06666667, a: 1}
   flashDuration: 1

@@ -119,13 +119,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c75f8e7a88514f4daeca85083252f4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 25
   currentHealth: 0
   moveSpeed: 5
   damageOnTouch: 0
-  detectionRadius: 15
-  actionRange: 20
-  loseTargetDistance: 25
+  detectionRadius: Infinity
+  actionRange: 10
+  loseTargetDistance: Infinity
   detectedTarget: {fileID: 0}
   flashColor: {r: 0.46666667, g: 0, b: 0.06666667, a: 1}
   flashDuration: 1
