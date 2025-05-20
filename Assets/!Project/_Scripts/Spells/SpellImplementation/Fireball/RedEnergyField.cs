@@ -19,6 +19,7 @@ public class RedEnergyField : SpellProjectile
         main.prewarm = false; // Make sure prewarm is off
 
         main.stopAction = ParticleSystemStopAction.None;
+        particleOfField.GetComponent<Renderer>().sortingLayerName = "VFX";
 
 
         // Get all particle systems in this hierarchy (including children)
@@ -29,6 +30,8 @@ public class RedEnergyField : SpellProjectile
         {
             var mainChildren = ps.main;
             mainChildren.loop = false;
+            ps.GetComponent<Renderer>().sortingLayerName = "VFX";
+
         }
 
 

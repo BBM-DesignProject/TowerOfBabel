@@ -20,6 +20,7 @@ public class WavesProjectile : SpellProjectile
         main.prewarm = false; // Make sure prewarm is off
 
         main.stopAction = ParticleSystemStopAction.None;
+        particleOfField.GetComponent<Renderer>().sortingLayerName = "VFX";
 
         main.simulationSpeed = 2;
 
@@ -31,6 +32,8 @@ public class WavesProjectile : SpellProjectile
         {
             var mainChildren = ps.main;
             mainChildren.loop = false;
+            ps.GetComponent<Renderer>().sortingLayerName = "VFX";
+
         }
 
         // Play the effect

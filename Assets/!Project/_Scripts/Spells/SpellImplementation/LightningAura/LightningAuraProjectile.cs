@@ -5,13 +5,14 @@ public class LightningAuraProjectile : SpellProjectile
     public ParticleSystem particleOfField;
     [SerializeField] private Collider2D spellCollider;
 
-    private float start
+    private float elapsedTime;
     public override void CastSpell()
     {
         // Make sure looping is turned off
         var main = particleOfField.main;
         main.loop = true;
         main.prewarm = true; // Make sure prewarm is off
+        particleOfField.GetComponent<Renderer>().sortingLayerName = "VFX";
 
         main.stopAction = ParticleSystemStopAction.None;
 
@@ -23,6 +24,8 @@ public class LightningAuraProjectile : SpellProjectile
         {
             var mainChildren = ps.main;
             mainChildren.loop = true;
+            ps.GetComponent<Renderer>().sortingLayerName = "VFX";
+
         }
         // Play the effect
         particleOfField.Play();

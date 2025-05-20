@@ -16,6 +16,8 @@ public class SnowProjectile : SpellProjectile
         main.prewarm = false; // Make sure prewarm is off
 
         main.stopAction = ParticleSystemStopAction.None;
+        particleOfField.GetComponent<Renderer>().sortingLayerName = "VFX";
+
 
         // Get all particle systems in this hierarchy (including children)
         ParticleSystem[] allParticleSystems = GetComponentsInChildren<ParticleSystem>(true);
@@ -25,10 +27,12 @@ public class SnowProjectile : SpellProjectile
         {
             var mainChildren = ps.main;
             mainChildren.loop = false;
+            ps.GetComponent<Renderer>().sortingLayerName = "VFX";
+
         }
 
 
-   
+
         // Play the effect
         particleOfField.Play();
 

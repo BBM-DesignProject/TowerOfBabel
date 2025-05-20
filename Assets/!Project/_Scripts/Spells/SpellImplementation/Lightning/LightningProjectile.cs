@@ -14,6 +14,7 @@ public class LightningProjectile : SpellProjectile
         var main = lightningEffect.main;
         main.loop = false;
         main.prewarm = false; // Make sure prewarm is off
+        lightningEffect.GetComponent<Renderer>().sortingLayerName = "VFX";
 
         main.stopAction = ParticleSystemStopAction.None;
 
@@ -26,6 +27,8 @@ public class LightningProjectile : SpellProjectile
         {
             var mainChildren = ps.main;
             mainChildren.loop = false;
+            ps.GetComponent<Renderer>().sortingLayerName = "VFX";
+
         }
 
 
