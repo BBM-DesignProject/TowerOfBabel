@@ -67,12 +67,17 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
         }
         if (!_isInitialized)
         {
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
             _isInitialized = true;
             m_Instance.Init();
         }
     }
 
+    private void OnDestroy()
+    {
+        _isInitialized = false;
+
+    }
 
     /// <summary>
     /// This function is called when the instance is used the first time
