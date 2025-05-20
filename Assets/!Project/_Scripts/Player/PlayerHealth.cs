@@ -14,8 +14,8 @@ public class PlayerHealth : MonoBehaviour
     public class HealthChangedEvent : UnityEvent<float, float> { } 
     public HealthChangedEvent onHealthChanged;
 
-    // Oyuncu öldüğünde tetiklenecek event
-    public UnityEvent onPlayerDied;
+    // Oyuncu öldüğünde tetiklenecek statik event
+    public static event System.Action onPlayerDied;
 
     void Awake()
     {
@@ -29,16 +29,10 @@ public class PlayerHealth : MonoBehaviour
         {
             onHealthChanged.Invoke(currentHealth, maxHealth);
         }
-        else
-        {
-            Debug.LogWarning("PlayerHealth: onHealthChanged event is not assigned. UI might not update.");
-        }
-
-        if (onPlayerDied == null)
-        {
-            onPlayerDied = new UnityEvent(); // Null ise initialize et
-            Debug.LogWarning("PlayerHealth: onPlayerDied event was not assigned, initialized to new UnityEvent.");
-        }
+        // else // Bu log çok sık çıkabilir, UI Manager'ın varlığına bağlı
+        // {
+        //     Debug.LogWarning("PlayerHealth: onHealthChanged event has no listeners. UI might not update initially.");
+        // }
     }
 
     public void TakeDamage(float amount)
@@ -61,39 +55,38 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void Heal(float amount)
-    {
-        if (currentHealth <= 0) return; // Ölmüşse iyileşemez
-        if (currentHealth == maxHealth) return; // Zaten canı tam ise iyileşemez
-
-        currentHealth += amount;
-        currentHealth = Mathf.Min(currentHealth, maxHealth); // Canın maksimumun üzerine çıkmasını engelle
-
-        Debug.Log(gameObject.name + " healed " + amount + ". Current health: " + currentHealth);
-        
-        if (onHealthChanged != null)
-        {
-            onHealthChanged.Invoke(currentHealth, maxHealth);
-        }
-    }
-
+    // Birleştirilmiş Die metodu
     void Die()
     {
-        Debug.Log(gameObject.name + " died.");
-        // Burada ölüm animasyonu (Assets/Sprites/Death.png kullanılabilir), oyun sonu ekranı vb. eklenebilir.
-        // Şimdilik sadece objeyi devre dışı bırakabilir veya yok edebiliriz.
-        // Örneğin, oyuncu kontrolünü devre dışı bırak:
-        // GetComponent<PlayerMovement>().enabled = false;
-        // GetComponent<SpellGestureSystem>().enabled = false;
+        Debug.Log("Player Died! (" + gameObject.name + ")");
         
-        if (onPlayerDied != null)
-        {
-            onPlayerDied.Invoke();
-        }
+        // Statik event'i tetikle
+        onPlayerDied?.Invoke();
+
+        // Oyuncu objesini deaktif et veya yok et (oyun tasarımına göre)
+        // Örneğin, oyuncuyu deaktif edip Game Over ekranının kontrolü ele almasını sağlayabiliriz.
+        gameObject.SetActive(false);
         
-        // Destroy(gameObject, 2f); // 2 saniye sonra yok et (opsiyonel)
-        // enabled = false; // Script'i devre dışı bırak
+        // Veya hemen yok et:
+        // Destroy(gameObject);
+
+        // Diğer ölümle ilgili işlemler (animasyon, ses, skor vb.) buraya eklenebilir.
     }
+
+    public void Heal(float amount)
+    {
+        if (currentHealth <= 0) return;
+        if (currentHealth >= maxHealth) return; // Canı tam veya daha fazlaysa iyileşme
+
+        currentHealth += amount;
+        currentHealth = Mathf.Min(currentHealth, maxHealth);
+
+        // Debug.Log(gameObject.name + " healed " + amount + ". Current health: " + currentHealth);
+        
+        onHealthChanged?.Invoke(currentHealth, maxHealth);
+    }
+
+    // İkinci Die() metodu kaldırıldı.
 
     // Test amaçlı hasar alma fonksiyonu (Editörden veya başka bir scriptten çağrılabilir)
     [ContextMenu("Test Take 10 Damage")]
