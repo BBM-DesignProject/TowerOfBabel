@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using FSMC.Runtime;
 using System.Runtime.InteropServices;
 
-public class PlayerMovementInputHandler : MonoSingleton<PlayerMovementInputHandler>, PlayerInputs.IPlayerActions
+public class PlayerMovementInputHandler : MonoSingleton<PlayerMovementInputHandler>, PlayerInputs.IPlayerActions, IInputActionHandler<PlayerInputs.PlayerActions>
 {
     [SerializeField]
     private FSMC_Executer playerMovementExecuter;
@@ -12,13 +12,12 @@ public class PlayerMovementInputHandler : MonoSingleton<PlayerMovementInputHandl
     [SerializeField]
     private PlayerMovement playerMovement;
 
-    PlayerInputs.PlayerActions playerActions;
 
-    public void Start()
+    public PlayerInputs.PlayerActions ActionMap { get; private set; }
+
+    private void Start()
     {
-        playerActions = PlayerInputHandler.Instance.InputActions.Player;
-        playerActions.Enable();
-        playerActions.AddCallbacks(this);
+        InitializeActionMap();
     }
 
     public void OnAttack(InputAction.CallbackContext context)
@@ -46,8 +45,18 @@ public class PlayerMovementInputHandler : MonoSingleton<PlayerMovementInputHandl
         else if(context.canceled) playerMovementExecuter.SetTrigger("MoveFinishedTrigger");
 
     }
-
+    private void OnDestroy()
+    {
+        ActionMap.RemoveCallbacks(this);
+    }
     public void OnSprint(InputAction.CallbackContext context)
     {
+    }
+
+    public void InitializeActionMap()
+    {
+        ActionMap = PlayerInputHandler.Instance.InputActions.Player;
+        ActionMap.Enable();
+        ActionMap.SetCallbacks(this);
     }
 }

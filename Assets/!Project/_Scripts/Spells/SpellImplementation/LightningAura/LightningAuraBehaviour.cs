@@ -11,6 +11,6 @@ public class LightningAuraBehaviour : SpellBehaviour
     {
         Transform player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
-        Instantiate(lightningAura, player);
+        Debug.Log(Instantiate(lightningAura, player));
     }
 }
