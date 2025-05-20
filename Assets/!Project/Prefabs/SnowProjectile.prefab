@@ -4948,7 +4948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   lifetime: 3
-  damageAmount: 1
+  damageAmount: 0.1
   enemyTag: Enemy
   particleOfField: {fileID: 9061475855361381375}
   spellCollider: {fileID: 3453722007027478835}
@@ -34527,7 +34527,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7122722826109431116}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: -0.5735764, y: 0, z: 0, w: 0.8191521}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
@@ -34540,7 +34540,7 @@ Transform:
   - {fileID: 6390407416350036893}
   - {fileID: 6601245259147430771}
   m_Father: {fileID: 6387396041178964940}
-  m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -70, y: 0, z: 0}
 --- !u!198 &9061475855361381375
 ParticleSystem:
   m_ObjectHideFlags: 0
