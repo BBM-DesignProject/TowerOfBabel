@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   lifetime: 3
-  damageAmount: 5
+  damageAmount: 10
   enemyTag: Enemy
   lightningEffect: {fileID: 4574819013998788342}
   delayBeforeDamage: 0.5
