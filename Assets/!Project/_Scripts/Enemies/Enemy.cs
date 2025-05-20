@@ -5,6 +5,8 @@ public class Enemy : MonoBehaviour
     [Header("Stats")]
     public float maxHealth = 30f;
     [HideInInspector] public float currentHealth;
+    [Tooltip("Movement speed of the enemy.")]
+    public float moveSpeed = 3f; // Hareket hızı buraya eklendi
 
     [Header("Combat Stats & Ranges")]
     public int damageOnTouch = 10;
