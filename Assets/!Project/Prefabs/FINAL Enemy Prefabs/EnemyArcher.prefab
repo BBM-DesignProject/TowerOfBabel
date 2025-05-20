@@ -256,6 +256,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasBar
       objectReference: {fileID: 0}
+    - target: {fileID: 2341110049886952708, guid: aa89aa12e183e1a4f952b732ab9da2ff, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341110049886952708, guid: aa89aa12e183e1a4f952b732ab9da2ff, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1571684151
+      objectReference: {fileID: 0}
     - target: {fileID: 4060998060058808600, guid: aa89aa12e183e1a4f952b732ab9da2ff, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

@@ -5,7 +5,7 @@ public class LightningAuraProjectile : SpellProjectile
     public ParticleSystem particleOfField;
     [SerializeField] private Collider2D spellCollider;
 
-    private float start
+    private float start;
     public override void CastSpell()
     {
         // Make sure looping is turned off
