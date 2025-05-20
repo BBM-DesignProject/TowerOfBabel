@@ -11,7 +11,6 @@ public class SnowSpellBehaviour : SpellBehaviour
     {
         LineRenderer renderer = GameObject.FindGameObjectWithTag("Drawing").GetComponent<LineRenderer>();
         var spawnPosition = renderer.GetCenterOfPoints();
-        Debug.Log(spawnPosition);
         Instantiate(snowProjectile, spawnPosition, Quaternion.Euler(new Vector3(0, 0, 0)));
     }
 }

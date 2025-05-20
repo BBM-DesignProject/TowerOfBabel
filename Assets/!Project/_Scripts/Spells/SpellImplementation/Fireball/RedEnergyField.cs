@@ -20,6 +20,7 @@ public class RedEnergyField : SpellProjectile
 
         main.stopAction = ParticleSystemStopAction.None;
 
+
         // Get all particle systems in this hierarchy (including children)
         ParticleSystem[] allParticleSystems = GetComponentsInChildren<ParticleSystem>(true);
 

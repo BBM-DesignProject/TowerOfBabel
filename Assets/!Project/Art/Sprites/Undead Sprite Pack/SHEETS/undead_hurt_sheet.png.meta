@@ -509,7 +509,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      undead_hurt_sheet_0: -7792428511064908794
+      undead_hurt_sheet_1: -4947105980194024062
+      undead_hurt_sheet_10: 1492957268081857130
+      undead_hurt_sheet_11: 2341134609870167613
+      undead_hurt_sheet_12: -4986255242322914116
+      undead_hurt_sheet_13: 61826700311521916
+      undead_hurt_sheet_14: -1937807209122555526
+      undead_hurt_sheet_15: -4326206018815034245
+      undead_hurt_sheet_2: -2817569703753241590
+      undead_hurt_sheet_3: -1810368824366793615
+      undead_hurt_sheet_4: -7706386507364294875
+      undead_hurt_sheet_5: 112210889585487429
+      undead_hurt_sheet_6: -1080851248040672027
+      undead_hurt_sheet_7: -5896373708962041715
+      undead_hurt_sheet_8: -5847796560013455852
+      undead_hurt_sheet_9: 3930565106483481986
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

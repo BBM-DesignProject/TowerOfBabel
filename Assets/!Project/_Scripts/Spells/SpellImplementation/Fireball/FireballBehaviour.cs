@@ -13,7 +13,6 @@ public class FireballBehaviour : SpellBehaviour
     {
         LineRenderer renderer = GameObject.FindGameObjectWithTag("Drawing").GetComponent<LineRenderer>();
         var spawnPosition = renderer.GetCenterOfPoints();
-        Debug.Log(spawnPosition);
         Instantiate(fireballProjectile, spawnPosition, Quaternion.Euler(new Vector3(0,0,0)));
     }
 }

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      New_Knight_standing_6_0: 3764482242569998246
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

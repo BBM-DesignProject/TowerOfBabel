@@ -559,7 +559,25 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      undead_idle_sheet_0: -6720750576547841462
+      undead_idle_sheet_1: -1705622583988151591
+      undead_idle_sheet_10: 649317946908539360
+      undead_idle_sheet_11: -1924562911981848239
+      undead_idle_sheet_12: -2933047800270073197
+      undead_idle_sheet_13: -1441248608771152951
+      undead_idle_sheet_14: -472589739839101125
+      undead_idle_sheet_15: 6053384126889441669
+      undead_idle_sheet_16: -4943674694470226903
+      undead_idle_sheet_17: 1036015185489030229
+      undead_idle_sheet_2: 5087995406035546503
+      undead_idle_sheet_3: 6607912000283461028
+      undead_idle_sheet_4: 5728727288984887317
+      undead_idle_sheet_5: -145137955343193164
+      undead_idle_sheet_6: -920892646128954238
+      undead_idle_sheet_7: -8501335329353004288
+      undead_idle_sheet_8: -5721870735353007946
+      undead_idle_sheet_9: -5035847751185962648
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

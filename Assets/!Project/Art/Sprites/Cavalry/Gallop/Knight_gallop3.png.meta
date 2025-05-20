@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Knight_gallop3_0: 1230460970905007917
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -609,7 +609,27 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      undead_walk_sheet_0: 142755465030680856
+      undead_walk_sheet_1: 2922281546914920639
+      undead_walk_sheet_10: 1037653723446600345
+      undead_walk_sheet_11: 2483570875311810246
+      undead_walk_sheet_12: 2582898011174987956
+      undead_walk_sheet_13: -2868376421552856027
+      undead_walk_sheet_14: 2353748823511112257
+      undead_walk_sheet_15: -760366921400045885
+      undead_walk_sheet_16: -4506028307750403348
+      undead_walk_sheet_17: 3830203427272197561
+      undead_walk_sheet_18: 6471831122680707735
+      undead_walk_sheet_19: -7422337845052584615
+      undead_walk_sheet_2: 7210790815662025781
+      undead_walk_sheet_3: -3212083524263893832
+      undead_walk_sheet_4: 4243932624663759180
+      undead_walk_sheet_5: -8460330874291415621
+      undead_walk_sheet_6: 1254829084117391030
+      undead_walk_sheet_7: -4342947400257777672
+      undead_walk_sheet_8: -7110228090988999519
+      undead_walk_sheet_9: 8282571027501683870
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
