@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI; // Slider ve Image gibi standart UI elemanları için
 using TMPro; // TextMeshPro kullanıyorsak
 using System.Collections.Generic; // List<T> için
+using UnityEngine.SceneManagement; // Sahne yönetimi için
 
 public class UIManager : MonoBehaviour
 {
@@ -15,22 +16,25 @@ public class UIManager : MonoBehaviour
     [Tooltip("Image component to show cooldown progress (Image Type should be Filled).")]
     public Image spellCooldownImage; 
     [Tooltip("Text component to show remaining cooldown time (optional).")]
-    public TextMeshProUGUI spellCooldownText;
+    public TextMeshProUGUI spellCooldownText; 
 
     [Header("Level Up UI Elements")]
     [Tooltip("The main panel GameObject for the level up choices.")]
-    public GameObject levelUpPanel;
+    public GameObject levelUpPanel; 
     [Tooltip("Array of UI slot configurations for displaying spell/upgrade choices.")]
-    public SpellChoiceSlotUI[] spellChoiceSlots;
+    public SpellChoiceSlotUI[] spellChoiceSlots; 
 
     [Header("Pause Menu UI Elements")]
     [Tooltip("The main panel GameObject for the pause menu.")]
     public GameObject pauseMenuPanel;
-    // ResumeButton ve ReturnToMainMenuButton için public referanslara gerek yok,
-    // metodları doğrudan butonların OnClick event'lerine bağlayacağız.
 
-    public string playerTag = "Player";
-    public string mainMenuSceneName = "MainMenu"; // Ana menü sahnesinin adı
+    [Header("Game Over/Victory UI Elements")]
+    [Tooltip("The panel GameObject to show when all waves are cleared.")]
+    public GameObject victoryPanel;
+    // public GameObject gameOverPanel; // Ölüm durumu için de benzer bir panel eklenebilir.
+
+    public string playerTag = "Player"; 
+    public string mainMenuSceneName = "MainMenu"; 
 
     private bool isPaused = false;
 
@@ -51,8 +55,7 @@ public class UIManager : MonoBehaviour
         public string spellName;
         public string description;
         public Sprite icon;
-        public int choiceIndex; // Bu seçeneğin orijinal listedeki index'i veya ID'si
-        // public System.Action onSelectAction; // Bu seçenek seçildiğinde çalışacak Action (daha gelişmiş bir yapı için)
+        public int choiceIndex; 
     }
 
     void Awake()
@@ -66,6 +69,16 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void OnEnable()
+    {
+        EnemySpawner.OnAllWavesCompletedAndCleared += HandleAllWavesCleared;
+    }
+
+    void OnDisable()
+    {
+        EnemySpawner.OnAllWavesCompletedAndCleared -= HandleAllWavesCleared;
     }
 
     void Start()
@@ -89,18 +102,23 @@ public class UIManager : MonoBehaviour
             Debug.LogError($"UIManager: Could not find GameObject with tag '{playerTag}'. Player health UI might not work.");
         }
 
-        UpdateSpellCooldownUI(0, 1);
+        UpdateSpellCooldownUI(0, 1); 
         if (levelUpPanel != null) levelUpPanel.SetActive(false);
-        if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false); // Başlangıçta pause panelini de gizle
+        if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
+        if (victoryPanel != null) victoryPanel.SetActive(false);
     }
 
     void Update()
     {
-        // Sadece UIManager'ın Instance'ı bu ise input dinle (sahne başına tek UIManager için)
         if (Instance != this) return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if ((levelUpPanel != null && levelUpPanel.activeSelf) || 
+                (victoryPanel != null && victoryPanel.activeSelf))
+            {
+                return;
+            }
             TogglePauseMenu();
         }
     }
@@ -157,7 +175,7 @@ public class UIManager : MonoBehaviour
         }
 
         levelUpPanel.SetActive(true);
-        Time.timeScale = 0f; // Oyunu duraklat
+        Time.timeScale = 0f; 
 
         for (int i = 0; i < spellChoiceSlots.Length; i++)
         {
@@ -200,16 +218,13 @@ public class UIManager : MonoBehaviour
         {
             levelUpPanel.SetActive(false);
         }
-        Time.timeScale = 1f; // Oyunu devam ettir
+        Time.timeScale = 1f; 
     }
 
     private void OnSpellUpgradeSelected(int choiceIndex)
     {
         Debug.Log($"Player selected spell/upgrade choice with original index: {choiceIndex}");
-        // Burada seçilen büyüyü/yükseltmeyi oyuncuya uygulama mantığı olacak.
-        // Bu, PlayerLevelSystem veya PlayerSpellManager gibi bir script'e delege edilebilir.
-        // Örneğin: PlayerManager.Instance.ApplyUpgrade(choiceIndex);
-        
+        // PlayerManager.Instance.ApplyUpgrade(choiceIndex); 
         HideLevelUpPanel();
     }
 
@@ -226,36 +241,71 @@ public class UIManager : MonoBehaviour
 
         if (isPaused)
         {
-            Time.timeScale = 0f; // Oyunu durdur
+            Time.timeScale = 0f; 
             Debug.Log("Game Paused");
         }
         else
         {
-            Time.timeScale = 1f; // Oyunu devam ettir
+            Time.timeScale = 1f; 
             Debug.Log("Game Resumed");
         }
     }
 
-    public void ResumeGame() // Bu metod ResumeButton tarafından çağrılacak
+    public void ResumeGame() 
     {
         if (isPaused)
         {
-            TogglePauseMenu(); // Pause menüsünü kapatır ve oyunu devam ettirir
+            TogglePauseMenu(); 
         }
     }
 
-    public void ReturnToMainMenu() // Bu metod ReturnToMainMenuButton tarafından çağrılacak
+    public void ReturnToMainMenu() // Bu metod PausePanel'deki butona bağlı
     {
-        Time.timeScale = 1f; // Oyunu devam ettirmeden önce zamanı normale döndür
+        Time.timeScale = 1f; 
         Debug.Log($"Returning to Main Menu: {mainMenuSceneName}");
         if (!string.IsNullOrEmpty(mainMenuSceneName))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(mainMenuSceneName);
+            SceneManager.LoadScene(mainMenuSceneName);
         }
         else
         {
             Debug.LogError("MainMenuSceneName is not set in UIManager!");
         }
+    }
+
+    private void HandleAllWavesCleared() 
+    {
+        ShowVictoryPanel();
+    }
+
+    public void ShowVictoryPanel()
+    {
+        if (victoryPanel != null)
+        {
+            Debug.Log("All waves cleared! Showing Victory Panel.");
+            victoryPanel.SetActive(true);
+            Time.timeScale = 0f; 
+            
+            if (levelUpPanel != null) levelUpPanel.SetActive(false);
+            if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("UIManager: VictoryPanel is not assigned in the Inspector!");
+        }
+    }
+
+    // ReturnToMainMenuFromVictory metodu kaldırıldı.
+    // Sadece QuitGameFromVictory kalacak.
+
+    public void QuitGameFromVictory() 
+    {
+        Time.timeScale = 1f; 
+        Debug.Log("Victory - Quitting game...");
+        Application.Quit();
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
 
     void OnDestroy()
