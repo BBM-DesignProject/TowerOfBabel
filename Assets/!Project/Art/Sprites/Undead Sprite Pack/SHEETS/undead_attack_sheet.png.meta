@@ -609,7 +609,27 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      undead_attack_sheet_0: 4461119755764788210
+      undead_attack_sheet_1: -7107637729975276077
+      undead_attack_sheet_10: 7085219111132134450
+      undead_attack_sheet_11: -384218107231596311
+      undead_attack_sheet_12: -5153128266201876505
+      undead_attack_sheet_13: 2022126624698996617
+      undead_attack_sheet_14: -4103843489660439642
+      undead_attack_sheet_15: 4115960677262708875
+      undead_attack_sheet_16: 4781212433474325021
+      undead_attack_sheet_17: 6644371352906908286
+      undead_attack_sheet_18: 8340646539014879595
+      undead_attack_sheet_19: -2379811496301505041
+      undead_attack_sheet_2: -267568735432667451
+      undead_attack_sheet_3: 1436518828159539673
+      undead_attack_sheet_4: 5688236929447210046
+      undead_attack_sheet_5: 3296148925881349337
+      undead_attack_sheet_6: -4790219378972418632
+      undead_attack_sheet_7: -379134035731712225
+      undead_attack_sheet_8: -5300546343163017644
+      undead_attack_sheet_9: 4778751430600651912
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

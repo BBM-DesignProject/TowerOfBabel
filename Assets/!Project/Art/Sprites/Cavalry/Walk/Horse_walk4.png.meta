@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Horse_walk4_0: -2005956548375441521
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

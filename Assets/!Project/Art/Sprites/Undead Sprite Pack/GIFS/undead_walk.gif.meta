@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      undead_walk_0: -3441147980039994797
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

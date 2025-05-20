@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Horse_gallop5_0: 6825434002598776614
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
