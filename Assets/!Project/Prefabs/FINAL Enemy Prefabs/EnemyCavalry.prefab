@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3656782999523728453}
   - component: {fileID: 5825445731483987845}
   - component: {fileID: 8438630470126472673}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyCavalry
   m_TagString: Enemy
   m_Icon: {fileID: 0}

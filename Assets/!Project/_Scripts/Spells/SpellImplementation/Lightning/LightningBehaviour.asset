@@ -15,7 +15,7 @@ MonoBehaviour:
   minimumRecognisionScore: 0.8
   gestureClass: lightning
   timeToCharge: 1
-  radius: 10
+  radius: 15
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128

@@ -12,7 +12,6 @@ public class LightningBehaviour : SpellBehaviour
 
     public GameObject lightningPrefab;
 
-
     public override void Consume()
     {
 
