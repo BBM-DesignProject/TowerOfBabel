@@ -43,6 +43,11 @@ public class PlayerDrawInputHandler : MonoSingleton<PlayerDrawInputHandler>, Pla
         ActionMap.SetCallbacks(this);
     }
 
+    private void OnDestroy()
+    {
+        ActionMap.RemoveCallbacks(this);
+    }
+
     public void OnMousePosition(InputAction.CallbackContext context)
     {
         

@@ -9,13 +9,9 @@ public class LightningAuraProjectile : SpellProjectile
     private float elapsedTime;
     public override void CastSpell()
     {
-        // Make sure looping is turned off
-        var main = particleOfField.main;
-        main.loop = true;
-        main.prewarm = true; // Make sure prewarm is off
+
         particleOfField.GetComponent<Renderer>().sortingLayerName = "VFX";
 
-        main.stopAction = ParticleSystemStopAction.None;
 
         // Get all particle systems in this hierarchy (including children)
         ParticleSystem[] allParticleSystems = GetComponentsInChildren<ParticleSystem>(true);
@@ -23,8 +19,7 @@ public class LightningAuraProjectile : SpellProjectile
         // Disable looping on ALL of them
         foreach (ParticleSystem ps in allParticleSystems)
         {
-            var mainChildren = ps.main;
-            mainChildren.loop = true;
+
             ps.GetComponent<Renderer>().sortingLayerName = "VFX";
 
         }
@@ -36,12 +31,14 @@ public class LightningAuraProjectile : SpellProjectile
 
     private void Start()
     {
+        elapsedTime = 0f;
         CastSpell();
     }
 
     private void Update()
     {
-
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime >= lifetime) particleOfField.Stop(true);
         if (particleOfField.isStopped) Destroy(gameObject);
 
     }
