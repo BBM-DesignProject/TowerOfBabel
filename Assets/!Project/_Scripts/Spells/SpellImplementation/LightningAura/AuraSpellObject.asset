@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8546d22d21cb1443a305ac953e35dc8, type: 3}
   m_Name: AuraSpellObject
   m_EditorClassIdentifier: 
-  spellBehaviour: {fileID: 0}
+  spellBehaviour: {fileID: 11400000, guid: 8eb794a61ea999943a8a0c1ea68ccfef, type: 2}

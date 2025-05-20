@@ -15,4 +15,4 @@ MonoBehaviour:
   minimumRecognisionScore: 0.8
   gestureClass: Laura
   timeToCharge: 0
-  lightningAura: {fileID: 0}
+  lightningAura: {fileID: 6788888410444951696, guid: e9f7d5e66ce43fb4ab082ca21f3be75b, type: 3}
