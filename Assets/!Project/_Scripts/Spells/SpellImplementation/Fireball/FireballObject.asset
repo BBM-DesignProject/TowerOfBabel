@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8546d22d21cb1443a305ac953e35dc8, type: 3}
   m_Name: FireballObject
   m_EditorClassIdentifier: 
-  spellBehaviour: {fileID: 11400000, guid: a90e19ccf9c867f44a5ba058afbab1cb, type: 2}
+  spellBehaviour: {fileID: 11400000, guid: af64e69207f182f49a2fc05fb8630326, type: 2}

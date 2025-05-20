@@ -6,11 +6,9 @@ using System;
 // [CreateAssetMenu(fileName = "EnemyFollowStateBehaviour", menuName = "FSMC/Enemy Behaviours/Follow")]
 public class EnemyFollow : FSMC_Behaviour
 {
-    [Header("Movement")]
-    public float moveSpeed = 3f;
-    // stoppingDistance ve loseTargetDistance artık Enemy.cs'den okunacak. Bu public alanlar kaldırılıyor.
-    // public float stoppingDistance = 1.5f;
-    // public float loseTargetDistance = 12f;
+    // [Header("Movement")] // Bu başlık ve altındaki moveSpeed kaldırılıyor.
+    // public float moveSpeed = 3f; // Bu alan artık Enemy.cs'den okunacak.
+    // stoppingDistance ve loseTargetDistance artık Enemy.cs'den okunacak.
 
     [Header("Animation")]
     [Tooltip("Name of the Boolean parameter in the Animator Controller that triggers movement animation (e.g., IsMoving).")]
@@ -164,11 +162,25 @@ public class EnemyFollow : FSMC_Behaviour
         
         if (rb != null)
         {
-            rb.linearVelocity = direction * moveSpeed;
+            if (enemyScript != null) // enemyScript null değilse onun hızını kullan
+            {
+                rb.linearVelocity = direction * enemyScript.moveSpeed;
+            }
+            // else // enemyScript null ise bir varsayılan hız kullanılabilir veya hata verilebilir. Şimdilik bir şey yapma.
+            // {
+            //     rb.linearVelocity = direction * 3f; // Fallback speed
+            // }
         }
-        else 
+        else
         {
-            fsmcExecuterComponent.transform.position = Vector2.MoveTowards(fsmcExecuterComponent.transform.position, currentTargetTransform.position, moveSpeed * Time.deltaTime);
+            if (enemyScript != null)
+            {
+                fsmcExecuterComponent.transform.position = Vector2.MoveTowards(fsmcExecuterComponent.transform.position, currentTargetTransform.position, enemyScript.moveSpeed * Time.deltaTime);
+            }
+            // else
+            // {
+            //     fsmcExecuterComponent.transform.position = Vector2.MoveTowards(fsmcExecuterComponent.transform.position, currentTargetTransform.position, 3f * Time.deltaTime); // Fallback speed
+            // }
         }
 
         // Yönü Enemy.cs'deki FaceTarget metodu ile ayarla
