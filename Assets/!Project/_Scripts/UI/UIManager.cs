@@ -15,15 +15,24 @@ public class UIManager : MonoBehaviour
     [Tooltip("Image component to show cooldown progress (Image Type should be Filled).")]
     public Image spellCooldownImage; 
     [Tooltip("Text component to show remaining cooldown time (optional).")]
-    public TextMeshProUGUI spellCooldownText; 
+    public TextMeshProUGUI spellCooldownText;
 
     [Header("Level Up UI Elements")]
     [Tooltip("The main panel GameObject for the level up choices.")]
-    public GameObject levelUpPanel; 
+    public GameObject levelUpPanel;
     [Tooltip("Array of UI slot configurations for displaying spell/upgrade choices.")]
-    public SpellChoiceSlotUI[] spellChoiceSlots; 
+    public SpellChoiceSlotUI[] spellChoiceSlots;
 
-    public string playerTag = "Player"; 
+    [Header("Pause Menu UI Elements")]
+    [Tooltip("The main panel GameObject for the pause menu.")]
+    public GameObject pauseMenuPanel;
+    // ResumeButton ve ReturnToMainMenuButton için public referanslara gerek yok,
+    // metodları doğrudan butonların OnClick event'lerine bağlayacağız.
+
+    public string playerTag = "Player";
+    public string mainMenuSceneName = "MainMenu"; // Ana menü sahnesinin adı
+
+    private bool isPaused = false;
 
     // Level Up UI için yardımcı class
     [System.Serializable]
@@ -80,8 +89,20 @@ public class UIManager : MonoBehaviour
             Debug.LogError($"UIManager: Could not find GameObject with tag '{playerTag}'. Player health UI might not work.");
         }
 
-        UpdateSpellCooldownUI(0, 1); 
-        if(levelUpPanel != null) levelUpPanel.SetActive(false); // Başlangıçta level up panelini gizle
+        UpdateSpellCooldownUI(0, 1);
+        if (levelUpPanel != null) levelUpPanel.SetActive(false);
+        if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false); // Başlangıçta pause panelini de gizle
+    }
+
+    void Update()
+    {
+        // Sadece UIManager'ın Instance'ı bu ise input dinle (sahne başına tek UIManager için)
+        if (Instance != this) return;
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePauseMenu();
+        }
     }
 
     public void UpdatePlayerHealthUI(float currentHealth, float maxHealth)
@@ -187,9 +208,54 @@ public class UIManager : MonoBehaviour
         Debug.Log($"Player selected spell/upgrade choice with original index: {choiceIndex}");
         // Burada seçilen büyüyü/yükseltmeyi oyuncuya uygulama mantığı olacak.
         // Bu, PlayerLevelSystem veya PlayerSpellManager gibi bir script'e delege edilebilir.
-        // Örneğin: PlayerManager.Instance.ApplyUpgrade(choiceIndex); 
+        // Örneğin: PlayerManager.Instance.ApplyUpgrade(choiceIndex);
         
         HideLevelUpPanel();
+    }
+
+    public void TogglePauseMenu()
+    {
+        if (pauseMenuPanel == null)
+        {
+            Debug.LogError("UIManager: PauseMenuPanel is not assigned in the Inspector!");
+            return;
+        }
+
+        isPaused = !isPaused;
+        pauseMenuPanel.SetActive(isPaused);
+
+        if (isPaused)
+        {
+            Time.timeScale = 0f; // Oyunu durdur
+            Debug.Log("Game Paused");
+        }
+        else
+        {
+            Time.timeScale = 1f; // Oyunu devam ettir
+            Debug.Log("Game Resumed");
+        }
+    }
+
+    public void ResumeGame() // Bu metod ResumeButton tarafından çağrılacak
+    {
+        if (isPaused)
+        {
+            TogglePauseMenu(); // Pause menüsünü kapatır ve oyunu devam ettirir
+        }
+    }
+
+    public void ReturnToMainMenu() // Bu metod ReturnToMainMenuButton tarafından çağrılacak
+    {
+        Time.timeScale = 1f; // Oyunu devam ettirmeden önce zamanı normale döndür
+        Debug.Log($"Returning to Main Menu: {mainMenuSceneName}");
+        if (!string.IsNullOrEmpty(mainMenuSceneName))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(mainMenuSceneName);
+        }
+        else
+        {
+            Debug.LogError("MainMenuSceneName is not set in UIManager!");
+        }
     }
 
     void OnDestroy()
