@@ -44,5 +44,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 2827088017
+    locked: 0
+  - name: Entities
+    uniqueID: 2723283145
+    locked: 0
+  - name: VFX
+    uniqueID: 1981739217
+    locked: 0
   m_RenderingLayers:
   - Default
