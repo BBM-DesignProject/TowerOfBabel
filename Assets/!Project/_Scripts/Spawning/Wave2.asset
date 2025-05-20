@@ -13,11 +13,17 @@ MonoBehaviour:
   m_Name: Wave2
   m_EditorClassIdentifier: 
   enemiesInWave:
-  - enemyPrefab: {fileID: 2441505816539351881, guid: e09303d33258efe498dd9e50c1ea8c30, type: 3}
-    spawnWeight: 0
+  - enemyPrefab: {fileID: 5691085175245996906, guid: 5158ed77acd029a4d8cacf3eb63669c9, type: 3}
+    spawnWeight: 3
     specificCount: 0
-  - enemyPrefab: {fileID: 5355780649675668660, guid: 7950672474a2ad54fa0aa322044f391a, type: 3}
-    spawnWeight: 0
+  - enemyPrefab: {fileID: 9061212018902454396, guid: 93c4c4935c922d24e96f1588f1ebe1e7, type: 3}
+    spawnWeight: 1
+    specificCount: 0
+  - enemyPrefab: {fileID: 3665304059116203829, guid: 2e72b67c9d2489b45a2df81c3ac414d4, type: 3}
+    spawnWeight: 5
+    specificCount: 0
+  - enemyPrefab: {fileID: 2441505816539351881, guid: e09303d33258efe498dd9e50c1ea8c30, type: 3}
+    spawnWeight: 4
     specificCount: 0
   totalEnemiesToSpawnInWave: 10
   waveDuration: 20

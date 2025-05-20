@@ -1235,6 +1235,8 @@ MonoBehaviour:
   waves:
   - {fileID: 11400000, guid: d854ae34c73005f47a6bed08f217f70d, type: 2}
   - {fileID: 11400000, guid: c99959ea875178448b1ebdbef9bfc726, type: 2}
+  - {fileID: 11400000, guid: fca52d2c669c9b644b4329e7bef8d78a, type: 2}
+  - {fileID: 11400000, guid: 0d77b5cee39c85c4cb2c734e3b2b4db9, type: 2}
   - {fileID: 11400000, guid: 758ad3c8fdc74bd48b10a9131e1955ac, type: 2}
   initialWaveDelay: 5
   spawnPoints:
