@@ -284,7 +284,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mino_health_over_0: 1438755305413346770
+      mino_health_over_1: -197510934222682978
+      mino_health_over_2: -8927368691740555503
+      mino_health_over_3: -8291049849576874829
+      mino_health_over_4: -2590490306657120044
+      mino_health_over_5: 5350636426598983386
+      mino_health_over_6: -4288333122812988961
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

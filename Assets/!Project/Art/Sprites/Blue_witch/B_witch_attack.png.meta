@@ -1234,7 +1234,52 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      B_witch_attack_0: 3720027238716470269
+      B_witch_attack_1: 405459079377162245
+      B_witch_attack_10: -1478904698373721156
+      B_witch_attack_11: -5136050562926778722
+      B_witch_attack_12: -7009505295048958446
+      B_witch_attack_13: 7093756410438245365
+      B_witch_attack_14: -8747208223099951059
+      B_witch_attack_15: 1003284802600415276
+      B_witch_attack_16: -900516432405290693
+      B_witch_attack_17: -4559384495813935797
+      B_witch_attack_18: 2388284531056812761
+      B_witch_attack_19: 1665188046106079045
+      B_witch_attack_2: 4820443832167995502
+      B_witch_attack_20: -6523892437755066966
+      B_witch_attack_21: 6170887478840631719
+      B_witch_attack_22: 2416441020950176810
+      B_witch_attack_23: 2012583600469607853
+      B_witch_attack_24: 888718245914689855
+      B_witch_attack_25: -8704674610364673473
+      B_witch_attack_26: -4123746730562234754
+      B_witch_attack_27: -6625724918235785330
+      B_witch_attack_28: -60952122980715136
+      B_witch_attack_29: 6384416971010500484
+      B_witch_attack_3: -3745133258062746767
+      B_witch_attack_30: 7952523918598000944
+      B_witch_attack_31: -722714757960268515
+      B_witch_attack_32: 2559687467777769613
+      B_witch_attack_33: -2783947913732718393
+      B_witch_attack_34: 1240772753176908043
+      B_witch_attack_35: 5652425658469169713
+      B_witch_attack_36: -3116166027300482416
+      B_witch_attack_37: 2101929915047226117
+      B_witch_attack_38: -4669071870714013543
+      B_witch_attack_39: 3032640299034034623
+      B_witch_attack_4: -1935218149462985408
+      B_witch_attack_40: -4565271417593883918
+      B_witch_attack_41: 5332880554073746378
+      B_witch_attack_42: -2550711844386629139
+      B_witch_attack_43: 7517025363867017687
+      B_witch_attack_44: -5160786767650388833
+      B_witch_attack_5: 6608907807531779424
+      B_witch_attack_6: -946951416356859792
+      B_witch_attack_7: 6387630239463510649
+      B_witch_attack_8: -4915643326697842454
+      B_witch_attack_9: 5174884801640949129
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

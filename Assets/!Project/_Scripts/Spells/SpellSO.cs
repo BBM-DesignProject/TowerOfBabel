@@ -15,4 +15,9 @@ public class SpellSO : ScriptableObject
     {
         return spellBehaviour.IsGestureAccomplished(result);
     }
+
+    public void InitGesture()
+    {
+        spellBehaviour.InitGesture();
+    }
 }

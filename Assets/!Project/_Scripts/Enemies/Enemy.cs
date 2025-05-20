@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     [Tooltip("This will be set by FSM Behaviours (e.g., EnemyIdle) when a target is detected.")]
     public Transform detectedTarget;
 
+    public float xp = 5f;
+
     // FSMC_Executer referansı (opsiyonel)
     // private FSMC.Runtime.FSMC_Executer fsmcExecuter;
 
@@ -33,12 +35,14 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        currentHealth -= amount;
-        Debug.Log(gameObject.name + " took " + amount + " damage. Current health: " + currentHealth);
-
-        if (currentHealth <= 0)
+        if(currentHealth > 0)
         {
-            Die();
+            currentHealth -= amount;
+            Debug.Log(gameObject.name + " took " + amount + " damage. Current health: " + currentHealth);
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
         }
     }
 
@@ -46,7 +50,13 @@ public class Enemy : MonoBehaviour
     {
         Debug.Log(gameObject.name + " died.");
         // Burada ölüm efekti (Assets/Sprites/Death.png kullanılabilir), skor artışı vb. eklenebilir.
+        PlayerExperienceHandler.Instance.GainXP(xp);
         Destroy(gameObject); 
+    }
+
+    private void OnDestroy()
+    {
+        
     }
 
     // Oyuncuya temas ettiğinde hasar verme (Bu mantık kalabilir)

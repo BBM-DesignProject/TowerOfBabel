@@ -184,7 +184,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      B_witch_take_damage_0: 2806060530409525734
+      B_witch_take_damage_1: -6812477826016509834
+      B_witch_take_damage_2: -3410013055211595750
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

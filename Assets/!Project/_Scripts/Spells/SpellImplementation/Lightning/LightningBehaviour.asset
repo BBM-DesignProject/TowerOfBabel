@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83d4e890bd3b3824f9735d45a6b627ab, type: 3}
+  m_Name: LightningBehaviour
+  m_EditorClassIdentifier: 
+  minimumRecognisionScore: 0.8
+  gestureClass: lightning
+  timeToCharge: 1
+  radius: 10
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  maxTargets: 10
+  lightningPrefab: {fileID: 161362227061013977, guid: 572fe10abcd11374fa23dcb950c3d383, type: 3}

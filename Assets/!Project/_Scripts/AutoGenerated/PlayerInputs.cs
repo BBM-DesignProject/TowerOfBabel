@@ -935,9 +935,9 @@ namespace TowerOfBabel.Input
                     ""name"": """",
                     ""id"": ""1603e5d3-c69b-447a-9cf5-d862501303f8"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""MultiTap"",
+                    ""interactions"": ""MultiTap(tapDelay=0.1)"",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

@@ -509,7 +509,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      B_witch_run_0: -2046224440018478782
+      B_witch_run_1: 4778435431166032403
+      B_witch_run_10: 1740710401670711524
+      B_witch_run_11: 794568614785265602
+      B_witch_run_12: -826727225741009297
+      B_witch_run_13: -5869691088141089737
+      B_witch_run_14: 8747533302491015978
+      B_witch_run_15: 3547447656683120301
+      B_witch_run_2: 3761661594572891811
+      B_witch_run_3: 2062496141747925325
+      B_witch_run_4: -131542839818987403
+      B_witch_run_5: 4405556257091063568
+      B_witch_run_6: 8929359122848452044
+      B_witch_run_7: 8074339611783953397
+      B_witch_run_8: -5083049690761616985
+      B_witch_run_9: -8374200789166643408
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

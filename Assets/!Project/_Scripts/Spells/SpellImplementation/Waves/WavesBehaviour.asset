@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 209585598aee96947b97512923d1e2d4, type: 3}
+  m_Name: WavesBehaviour
+  m_EditorClassIdentifier: 
+  minimumRecognisionScore: 0.8
+  gestureClass: wave
+  timeToCharge: 0
+  wavesProjectile: {fileID: 3193717167384706595, guid: 6ac248eaa5c464b49b49b7baf9d53bc3, type: 3}
