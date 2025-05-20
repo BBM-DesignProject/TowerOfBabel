@@ -80,9 +80,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: -1571684151
+  m_SortingLayer: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 5296944262663640658, guid: 1387e71c8d19a5f4491c75d7da45ba8d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -255,6 +255,14 @@ PrefabInstance:
     - target: {fileID: 2137396821311896359, guid: aa89aa12e183e1a4f952b732ab9da2ff, type: 3}
       propertyPath: m_Name
       value: CanvasBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341110049886952708, guid: aa89aa12e183e1a4f952b732ab9da2ff, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341110049886952708, guid: aa89aa12e183e1a4f952b732ab9da2ff, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1571684151
       objectReference: {fileID: 0}
     - target: {fileID: 4060998060058808600, guid: aa89aa12e183e1a4f952b732ab9da2ff, type: 3}
       propertyPath: m_AnchorMax.x

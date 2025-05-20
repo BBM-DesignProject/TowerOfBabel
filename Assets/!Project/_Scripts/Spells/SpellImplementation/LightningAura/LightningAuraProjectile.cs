@@ -5,6 +5,7 @@ public class LightningAuraProjectile : SpellProjectile
     public ParticleSystem particleOfField;
     [SerializeField] private Collider2D spellCollider;
 
+
     private float elapsedTime;
     public override void CastSpell()
     {
@@ -54,7 +55,7 @@ public class LightningAuraProjectile : SpellProjectile
     void DealDamage(Collider2D other)
     {
 
-        // Düþmana çarpýp çarpmadýðýný kontrol et
+        // DÃ¼Ã¾mana Ã§arpÃ½p Ã§arpmadÃ½Ã°Ã½nÃ½ kontrol et
         if (other.CompareTag(enemyTag))
         {
             Enemy enemy = other.GetComponent<Enemy>();
