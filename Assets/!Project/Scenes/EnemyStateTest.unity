@@ -1244,7 +1244,7 @@ MonoBehaviour:
   - {fileID: 1374635165}
   - {fileID: 694192016}
   - {fileID: 1745793833}
-  maxEnemiesOnScreen: 4
+  maxEnemiesOnScreen: 20
   enemyTag: Enemy
 --- !u!4 &703052180
 Transform:
@@ -2151,7 +2151,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cd2e2e18932282240ae6660d9980d0b6, type: 2}
   - {fileID: 11400000, guid: 586de079c5fb24f4e80590940f60e8d9, type: 2}
   - {fileID: 11400000, guid: 649f64c79bf8dff4fbde8f17608a0899, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 585a9f5c65c130644ba5ac601df228e1, type: 2}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!4 &998708227
