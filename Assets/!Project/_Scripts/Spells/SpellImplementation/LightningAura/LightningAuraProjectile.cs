@@ -5,13 +5,15 @@ public class LightningAuraProjectile : SpellProjectile
     public ParticleSystem particleOfField;
     [SerializeField] private Collider2D spellCollider;
 
-    private float start;
+
+    private float elapsedTime;
     public override void CastSpell()
     {
         // Make sure looping is turned off
         var main = particleOfField.main;
         main.loop = true;
         main.prewarm = true; // Make sure prewarm is off
+        particleOfField.GetComponent<Renderer>().sortingLayerName = "VFX";
 
         main.stopAction = ParticleSystemStopAction.None;
 
@@ -23,6 +25,8 @@ public class LightningAuraProjectile : SpellProjectile
         {
             var mainChildren = ps.main;
             mainChildren.loop = true;
+            ps.GetComponent<Renderer>().sortingLayerName = "VFX";
+
         }
         // Play the effect
         particleOfField.Play();
@@ -51,7 +55,7 @@ public class LightningAuraProjectile : SpellProjectile
     void DealDamage(Collider2D other)
     {
 
-        // Düþmana çarpýp çarpmadýðýný kontrol et
+        // DÃ¼Ã¾mana Ã§arpÃ½p Ã§arpmadÃ½Ã°Ã½nÃ½ kontrol et
         if (other.CompareTag(enemyTag))
         {
             Enemy enemy = other.GetComponent<Enemy>();
