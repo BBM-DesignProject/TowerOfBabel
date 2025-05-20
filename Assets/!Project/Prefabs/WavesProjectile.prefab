@@ -126,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   lifetime: 3
-  damageAmount: 8
+  damageAmount: 20
   enemyTag: Enemy
   particleOfField: {fileID: 8681265401563936119}
   spellCollider: {fileID: 6106279446204225561}

@@ -93,13 +93,11 @@ public class RedEnergyField : SpellProjectile
 
 
 }
-
 public abstract class SpellProjectile: MonoBehaviour
 {
     public float speed = 10f;
     public float lifetime = 3f;
     public float damageAmount = 15f;
     public string enemyTag = "Enemy";
-
     public abstract void CastSpell();
 }
