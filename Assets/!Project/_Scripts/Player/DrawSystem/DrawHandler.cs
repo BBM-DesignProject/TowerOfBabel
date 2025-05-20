@@ -37,12 +37,12 @@ public class DrawHandler : MonoBehaviour
     void Start()
     {
 
-        TextAsset[] gesturesXml = Resources.LoadAll<TextAsset>("GestureSet/10-stylus-MEDIUM/");
-        foreach (TextAsset gestureXml in gesturesXml)
-            trainingSet.Add(GestureIO.ReadGestureFromXML(gestureXml.text));
+        //TextAsset[] gesturesXml = Resources.LoadAll<TextAsset>("GestureSet/10-stylus-MEDIUM/");
+        //foreach (TextAsset gestureXml in gesturesXml)
+        //    trainingSet.Add(GestureIO.ReadGestureFromXML(gestureXml.text));
 
         //Load user custom gestures
-        string[] filePaths = Directory.GetFiles(Application.persistentDataPath, "*.xml");
+        string[] filePaths = Directory.GetFiles("Assets/!Project/Settings/DrawTemplates", "*.xml");
         foreach (string filePath in filePaths)
             trainingSet.Add(GestureIO.ReadGestureFromFile(filePath));
 

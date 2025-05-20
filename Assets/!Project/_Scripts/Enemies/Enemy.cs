@@ -75,6 +75,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+
         if (currentHealth <= 0) return; // Zaten ölmüşse tekrar hasar almasın
 
         currentHealth -= amount;
@@ -106,13 +107,19 @@ public class Enemy : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Die();
+            currentHealth -= amount;
+            Debug.Log(gameObject.name + " took " + amount + " damage. Current health: " + currentHealth);
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
         }
     }
 
     void Die()
     {
         Debug.Log(gameObject.name + " died.");
+
         
         // Spawner'a ölümünü bildir
         if (spawnerReference != null)

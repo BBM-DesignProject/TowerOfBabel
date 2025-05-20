@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mino_health_UI_sample_100_0: 4944664994909747992
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

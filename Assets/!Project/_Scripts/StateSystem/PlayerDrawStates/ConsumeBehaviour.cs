@@ -16,9 +16,17 @@ public class ConsumeBehaviour : FSMC_Behaviour
     }
     public override void OnStateEnter(FSMC_Controller stateMachine, FSMC_Executer executer)
     {
-        result = drawHandler.RecognizePointCloud(drawHandler.DrawedPoints);
-        bool isSuccesfull = SpellHandler.Instance.ConsumeIfResultMatch(result);
-        drawHandler.playerAttack.Attack(isSuccesfull);
+        if(drawHandler.DrawedPoints.Count > 0)
+        {
+            result = drawHandler.RecognizePointCloud(drawHandler.DrawedPoints);
+            bool isSuccesfull = SpellHandler.Instance.ConsumeIfResultMatch(result);
+            drawHandler.playerAttack.Attack(isSuccesfull);
+        }
+        else
+        {
+            result = new Result() {GestureClass = "null", Score = 0f };
+        }
+        
         stateMachine.SetTrigger("Consumed");
     }
     public override void OnStateUpdate(FSMC_Controller stateMachine, FSMC_Executer executer)

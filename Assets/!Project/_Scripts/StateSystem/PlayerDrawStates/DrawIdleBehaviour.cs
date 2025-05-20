@@ -15,7 +15,6 @@ public class DrawIdleBehaviour : FSMC_Behaviour
     public override void OnStateEnter(FSMC_Controller stateMachine, FSMC_Executer executer)
     {
         executer.GetComponent<DrawHandler>().CleanseData();
-        Debug.Log("Idle");
     }
 
     public override void OnStateUpdate(FSMC_Controller stateMachine, FSMC_Executer executer)

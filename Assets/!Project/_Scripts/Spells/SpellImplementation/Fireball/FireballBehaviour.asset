@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: FireballBehaviour
   m_EditorClassIdentifier: 
   minimumRecognisionScore: 0.8
-  gestureClass: line
+  gestureClass: X
   timeToCharge: 1
   fireballProjectile: {fileID: 7518098580590812317, guid: bc67cde43ec17ce42a5df57745531ef3, type: 3}
-  direction: {x: 0.36507738, y: -0.9309772, z: 0}
-  spawnPosition: {x: 28.194065, y: 16.172049, z: 0}

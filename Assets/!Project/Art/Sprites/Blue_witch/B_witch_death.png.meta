@@ -509,7 +509,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      B_witch_death_0: 4545668489846933406
+      B_witch_death_1: -1838697749395032867
+      B_witch_death_10: -9221954988569201913
+      B_witch_death_11: -2366958028293365849
+      B_witch_death_12: -2710578488253582394
+      B_witch_death_13: -329793286456903573
+      B_witch_death_14: -2895147877577544860
+      B_witch_death_15: 4166737117223001909
+      B_witch_death_2: -6064796078805686643
+      B_witch_death_3: -5773514330907110222
+      B_witch_death_4: -3313637003902175589
+      B_witch_death_5: -7483011833674210154
+      B_witch_death_6: 1977721871307911937
+      B_witch_death_7: -6624602416153922895
+      B_witch_death_8: 5099326649774967584
+      B_witch_death_9: -427197810452132958
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

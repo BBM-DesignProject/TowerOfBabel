@@ -4917,7 +4917,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2548617640896295548}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalRotation: {x: -0.5, y: 0, z: 0, w: 0.8660254}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
@@ -4933,7 +4933,7 @@ Transform:
   - {fileID: 2020313893834447594}
   - {fileID: 309593838728183434}
   m_Father: {fileID: 4768696897639102426}
-  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -60, y: 0, z: 0}
 --- !u!198 &1760508946784830213
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -34326,7 +34326,8 @@ MonoBehaviour:
   damageAmount: 15
   enemyTag: Enemy
   particleOfField: {fileID: 1760508946784830213}
-  timeElapsed: 0
+  spellCollider: {fileID: 7636937778175531702}
+  delayBeforeDamage: 0.5
 --- !u!61 &7636937778175531702
 BoxCollider2D:
   m_ObjectHideFlags: 0

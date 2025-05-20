@@ -1,12 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class RedEnergyField : SpellProjectile
 {
     public ParticleSystem particleOfField;
-    public float timeElapsed;
+    [SerializeField] private Collider2D spellCollider;
+    [SerializeField] private float delayBeforeDamage = 0.5f; // Adjust based on your animation
 
     private List<Transform> allreadyCollidedObjects = new();
+
 
     public override void CastSpell()
     {
@@ -28,17 +31,23 @@ public class RedEnergyField : SpellProjectile
         }
 
 
-        // Also disable continuous emission
-        var emission = particleOfField.emission;
-        emission.enabled = false; // Or set rates to 0
-
         // Play the effect
         particleOfField.Play();
+
+        // Calculate when to enable the collider (e.g., at 50% of the effect duration)
+        float enableTime = main.duration * delayBeforeDamage;
+
+        // Start the timing coroutine
+        StartCoroutine(SynchronizeColliderWithEffect(enableTime));
 
     }
 
     private void Start()
     {
+
+        // Disable collider initially
+        spellCollider.enabled = false;
+
         CastSpell();
     }
 
@@ -50,7 +59,7 @@ public class RedEnergyField : SpellProjectile
     void OnTriggerEnter2D(Collider2D other)
     {
         // Düþmana çarpýp çarpmadýðýný kontrol et
-        if (other.CompareTag(enemyTag) && allreadyCollidedObjects.Exists(p => p.Equals(other.transform)))
+        if (other.CompareTag(enemyTag) && !allreadyCollidedObjects.Contains(other.transform))
         {
             allreadyCollidedObjects.Add((other.transform));
             Enemy enemy = other.GetComponent<Enemy>();
@@ -62,6 +71,21 @@ public class RedEnergyField : SpellProjectile
         }
     }
 
+    private System.Collections.IEnumerator SynchronizeColliderWithEffect(float enableTime)
+    {
+        // Wait until the specified time in the effect's animation
+        yield return new WaitForSeconds(enableTime);
+
+        // Enable the collider at the appropriate moment in the animation
+        spellCollider.enabled = true;
+
+        // Wait for the remaining duration of the effect
+        float remainingTime = particleOfField.main.duration - enableTime;
+        yield return new WaitForSeconds(remainingTime);
+
+        // Disable the collider when the effect finishes
+        spellCollider.enabled = false;
+    }
 
 
 }
