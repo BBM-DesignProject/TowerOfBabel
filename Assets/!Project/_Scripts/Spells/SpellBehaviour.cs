@@ -18,6 +18,7 @@ public abstract class SpellBehaviour: ScriptableObject
 
     public bool IsGestureAccomplished(Result gestureResult)
     {
+
         var test = gestureResult.GestureClass.Equals(compareResult.GestureClass) && gestureResult.Score >= compareResult.Score;
         return test;
     }
