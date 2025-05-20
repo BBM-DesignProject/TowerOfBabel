@@ -31,14 +31,24 @@ public class UIManager : MonoBehaviour
     [Header("Game Over/Victory UI Elements")]
     [Tooltip("The panel GameObject to show when all waves are cleared.")]
     public GameObject victoryPanel;
-    // public GameObject gameOverPanel; // Ölüm durumu için de benzer bir panel eklenebilir.
+    [Tooltip("Text component on Victory Panel to display elapsed time.")]
+    public TextMeshProUGUI victoryPanelTimeText; 
+    [Tooltip("The panel GameObject to show when the player dies.")]
+    public GameObject gameOverPanel; 
+    [Tooltip("Text component on Game Over Panel to display elapsed time.")]
+    public TextMeshProUGUI gameOverPanelTimeText; 
+
+    [Header("In-Game Timer UI (Opsiyonel)")]
+    [Tooltip("Text component to display the elapsed time during gameplay (optional).")]
+    public TextMeshProUGUI inGameTimerText;
 
     public string playerTag = "Player"; 
     public string mainMenuSceneName = "MainMenu"; 
 
     private bool isPaused = false;
+    private float sessionElapsedTime = 0f;
+    private bool timerIsRunning = false;
 
-    // Level Up UI için yardımcı class
     [System.Serializable]
     public class SpellChoiceSlotUI
     {
@@ -49,7 +59,6 @@ public class UIManager : MonoBehaviour
         public Button selectButton;
     }
 
-    // Level Up seçenekleri için veri yapısı
     public struct SpellUpgradeChoice 
     {
         public string spellName;
@@ -63,7 +72,6 @@ public class UIManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            // DontDestroyOnLoad(gameObject); 
         }
         else
         {
@@ -74,11 +82,13 @@ public class UIManager : MonoBehaviour
     void OnEnable()
     {
         EnemySpawner.OnAllWavesCompletedAndCleared += HandleAllWavesCleared;
+        PlayerHealth.onPlayerDied += HandlePlayerDied; 
     }
 
     void OnDisable()
     {
         EnemySpawner.OnAllWavesCompletedAndCleared -= HandleAllWavesCleared;
+        PlayerHealth.onPlayerDied -= HandlePlayerDied; 
     }
 
     void Start()
@@ -106,6 +116,9 @@ public class UIManager : MonoBehaviour
         if (levelUpPanel != null) levelUpPanel.SetActive(false);
         if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
         if (victoryPanel != null) victoryPanel.SetActive(false);
+        if (gameOverPanel != null) gameOverPanel.SetActive(false);
+        
+        StartSessionTimer(); 
     }
 
     void Update()
@@ -115,12 +128,49 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if ((levelUpPanel != null && levelUpPanel.activeSelf) || 
-                (victoryPanel != null && victoryPanel.activeSelf))
+                (victoryPanel != null && victoryPanel.activeSelf) || 
+                (gameOverPanel != null && gameOverPanel.activeSelf))
             {
                 return;
             }
             TogglePauseMenu();
         }
+
+        if (timerIsRunning)
+        {
+            sessionElapsedTime += Time.deltaTime; 
+            if (inGameTimerText != null && inGameTimerText.gameObject.activeInHierarchy)
+            {
+                inGameTimerText.text = FormatTime(sessionElapsedTime);
+            }
+        }
+    }
+
+    public void StartSessionTimer()
+    {
+        sessionElapsedTime = 0f;
+        timerIsRunning = true;
+        Debug.Log("Session Timer Started.");
+        if (inGameTimerText != null) inGameTimerText.gameObject.SetActive(true); 
+    }
+
+    public void StopSessionTimer()
+    {
+        timerIsRunning = false;
+        Debug.Log($"Session Timer Stopped. Elapsed Time: {GetFormattedElapsedTime()}");
+        if (inGameTimerText != null) inGameTimerText.gameObject.SetActive(false); 
+    }
+
+    public string GetFormattedElapsedTime()
+    {
+        return FormatTime(sessionElapsedTime);
+    }
+
+    private string FormatTime(float timeInSeconds)
+    {
+        int minutes = Mathf.FloorToInt(timeInSeconds / 60F);
+        int seconds = Mathf.FloorToInt(timeInSeconds - minutes * 60);
+        return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     public void UpdatePlayerHealthUI(float currentHealth, float maxHealth)
@@ -173,10 +223,9 @@ public class UIManager : MonoBehaviour
             Debug.LogError("UIManager: LevelUpPanel or SpellChoiceSlots are not assigned in the Inspector!");
             return;
         }
-
+        if (timerIsRunning) Time.timeScale = 0f; 
         levelUpPanel.SetActive(true);
-        Time.timeScale = 0f; 
-
+        
         for (int i = 0; i < spellChoiceSlots.Length; i++)
         {
             if (i < choices.Count && spellChoiceSlots[i].slotRoot != null)
@@ -218,13 +267,12 @@ public class UIManager : MonoBehaviour
         {
             levelUpPanel.SetActive(false);
         }
-        Time.timeScale = 1f; 
+        if (timerIsRunning) Time.timeScale = 1f; 
     }
 
     private void OnSpellUpgradeSelected(int choiceIndex)
     {
         Debug.Log($"Player selected spell/upgrade choice with original index: {choiceIndex}");
-        // PlayerManager.Instance.ApplyUpgrade(choiceIndex); 
         HideLevelUpPanel();
     }
 
@@ -241,12 +289,12 @@ public class UIManager : MonoBehaviour
 
         if (isPaused)
         {
-            Time.timeScale = 0f; 
+            if (timerIsRunning) Time.timeScale = 0f;
             Debug.Log("Game Paused");
         }
         else
         {
-            Time.timeScale = 1f; 
+            if (timerIsRunning) Time.timeScale = 1f;
             Debug.Log("Game Resumed");
         }
     }
@@ -259,7 +307,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ReturnToMainMenu() // Bu metod PausePanel'deki butona bağlı
+    public void ReturnToMainMenu() 
     {
         Time.timeScale = 1f; 
         Debug.Log($"Returning to Main Menu: {mainMenuSceneName}");
@@ -282,9 +330,20 @@ public class UIManager : MonoBehaviour
     {
         if (victoryPanel != null)
         {
+            if (gameOverPanel != null && gameOverPanel.activeSelf)
+            {
+                Debug.Log("Game Over panel is active, not showing Victory panel.");
+                return;
+            }
             Debug.Log("All waves cleared! Showing Victory Panel.");
+            StopSessionTimer(); 
             victoryPanel.SetActive(true);
             Time.timeScale = 0f; 
+            
+            if (victoryPanelTimeText != null)
+            {
+                victoryPanelTimeText.text = "Süre: " + GetFormattedElapsedTime();
+            }
             
             if (levelUpPanel != null) levelUpPanel.SetActive(false);
             if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
@@ -295,8 +354,68 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // ReturnToMainMenuFromVictory metodu kaldırıldı.
-    // Sadece QuitGameFromVictory kalacak.
+    private void HandlePlayerDied() 
+    {
+        ShowGameOverPanel();
+    }
+
+    public void ShowGameOverPanel()
+    {
+        if (gameOverPanel != null)
+        {
+            if (victoryPanel != null && victoryPanel.activeSelf)
+            {
+                Debug.Log("Victory panel is active, not showing Game Over panel.");
+                return;
+            }
+            Debug.Log("Player died! Showing Game Over Panel.");
+            StopSessionTimer(); 
+            gameOverPanel.SetActive(true);
+            Time.timeScale = 0f; 
+            
+            if (gameOverPanelTimeText != null)
+            {
+                gameOverPanelTimeText.text = "Hayatta Kalma Süresi: " + GetFormattedElapsedTime();
+            }
+            
+            if (levelUpPanel != null) levelUpPanel.SetActive(false);
+            if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("UIManager: GameOverPanel is not assigned in the Inspector!");
+        }
+    }
+
+    public void RestartGame() // Artık bu da ana menüye dönecek
+    {
+        Time.timeScale = 1f;
+        Debug.Log("Restarting game by returning to Main Menu...");
+        if (!string.IsNullOrEmpty(mainMenuSceneName))
+        {
+            SceneManager.LoadScene(mainMenuSceneName);
+        }
+        else
+        {
+            Debug.LogError("MainMenuSceneName is not set in UIManager! Cannot restart via main menu.");
+            // Fallback olarak mevcut sahneyi yeniden yükleyebilir veya hata verebilir.
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Eski davranış
+        }
+    }
+
+    public void ReturnToMainMenuFromGameOver() 
+    {
+        Time.timeScale = 1f; 
+        Debug.Log($"Game Over - Returning to Main Menu: {mainMenuSceneName}");
+        if (!string.IsNullOrEmpty(mainMenuSceneName))
+        {
+            SceneManager.LoadScene(mainMenuSceneName);
+        }
+        else
+        {
+            Debug.LogError("MainMenuSceneName is not set in UIManager!");
+        }
+    }
 
     public void QuitGameFromVictory() 
     {
@@ -312,15 +431,7 @@ public class UIManager : MonoBehaviour
     {
         if (Instance == this) 
         {
-            GameObject playerObject = GameObject.FindGameObjectWithTag(playerTag);
-            if (playerObject != null)
-            {
-                PlayerHealth playerHealth = playerObject.GetComponent<PlayerHealth>();
-                if (playerHealth != null)
-                {
-                    playerHealth.onHealthChanged.RemoveListener(UpdatePlayerHealthUI);
-                }
-            }
+            // Statik event abonelikleri OnDisable'da kaldırılıyor.
         }
     }
 }
