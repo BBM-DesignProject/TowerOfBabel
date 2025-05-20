@@ -130,7 +130,7 @@ MonoBehaviour:
   enemyTag: Enemy
   particleOfField: {fileID: 8681265401563936119}
   spellCollider: {fileID: 6106279446204225561}
-  delayBeforeDamage: 0.5
+  delayBeforeDamage: 0
   RightPosition: {fileID: 2935234174496123874}
   numberOfTimes: 0
   clone: {fileID: 3193717167384706595}
