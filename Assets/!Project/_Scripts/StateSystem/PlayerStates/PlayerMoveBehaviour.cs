@@ -19,7 +19,6 @@ public class PlayerMoveBehaviour : FSMC_Behaviour
     public override void OnStateUpdate(FSMC_Controller stateMachine, FSMC_Executer executer)
     {   
         playerMovement.MoveToDirection();
-        playerMovement.LookToDireciton();
     }
 
 

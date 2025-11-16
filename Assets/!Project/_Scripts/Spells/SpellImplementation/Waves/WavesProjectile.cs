@@ -8,6 +8,7 @@ public class WavesProjectile : SpellProjectile
     [SerializeField] private float delayBeforeDamage = 0.5f; // Adjust based on your animation
 
 
+    [SerializeField] private AudioSource startAudioSource;
     public Transform RightPosition;
     private List<Transform> allreadyCollidedObjects = new();
     public int numberOfTimes;
@@ -51,7 +52,10 @@ public class WavesProjectile : SpellProjectile
 
         // Disable collider initially
         spellCollider.enabled = false;
-
+        if (numberOfTimes < 5)
+        {
+            startAudioSource.Play();
+        }
         CastSpell();
     }
 
@@ -70,7 +74,7 @@ public class WavesProjectile : SpellProjectile
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Düþmana çarpýp çarpmadýðýný kontrol et
+        // DÃ¼Ã¾mana Ã§arpÄ±p Ã§arpmadÄ±ÄŸÄ±nÄ± kontrol et
         if (other.CompareTag(enemyTag) && !allreadyCollidedObjects.Contains(other.transform))
         {
             allreadyCollidedObjects.Add((other.transform));

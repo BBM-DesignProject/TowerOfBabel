@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 5274839056021445019}
   - component: {fileID: 6106279446204225561}
   - component: {fileID: 7508898125875976042}
+  - component: {fileID: 4450554951498202331}
   m_Layer: 0
   m_Name: WavesProjectile
   m_TagString: Untagged
@@ -131,9 +132,107 @@ MonoBehaviour:
   particleOfField: {fileID: 8681265401563936119}
   spellCollider: {fileID: 6106279446204225561}
   delayBeforeDamage: 0
+  startAudioSource: {fileID: 4450554951498202331}
   RightPosition: {fileID: 2935234174496123874}
   numberOfTimes: 0
   clone: {fileID: 3193717167384706595}
+--- !u!82 &4450554951498202331
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3193717167384706595}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: b6f0dd2574b7c10449a4a91d6c060375, type: 3}
+  m_Resource: {fileID: 8300000, guid: b6f0dd2574b7c10449a4a91d6c060375, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &3101180347162448252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267,16 +366,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7801005321576631662, guid: 645ebd7cef59b7b40b27c29bf3e99cf2, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 0.3764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801005321576631662, guid: 645ebd7cef59b7b40b27c29bf3e99cf2, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 7.23e-43
+      value: 4.5677e-41
       objectReference: {fileID: 0}
     - target: {fileID: 7801005321576631662, guid: 645ebd7cef59b7b40b27c29bf3e99cf2, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 3.6e-44
+      value: 7.687999e+24
       objectReference: {fileID: 0}
     - target: {fileID: 7801005321576631662, guid: 645ebd7cef59b7b40b27c29bf3e99cf2, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 0
+      value: 4.5677e-41
       objectReference: {fileID: 0}
     - target: {fileID: 8414054989553394082, guid: 645ebd7cef59b7b40b27c29bf3e99cf2, type: 3}
       propertyPath: m_SortingLayer
@@ -302,7 +405,8 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 1981739217
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2349483295832876704, guid: 645ebd7cef59b7b40b27c29bf3e99cf2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

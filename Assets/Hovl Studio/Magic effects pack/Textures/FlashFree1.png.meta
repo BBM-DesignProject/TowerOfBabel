@@ -7,7 +7,7 @@ TextureImporter:
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
-    sRGBTexture: 1
+    sRGBTexture: 0
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -129,6 +129,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 247933
   packageName: Magic Effects FREE
-  packageVersion: 1.4
+  packageVersion: 1.6
   assetPath: Assets/Hovl Studio/Magic effects pack/Textures/FlashFree1.png
-  uploadId: 755569
+  uploadId: 762116

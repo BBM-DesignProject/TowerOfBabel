@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 using static UnityEngine.ParticleSystem;
 
 public class RedEnergyField : SpellProjectile
@@ -8,6 +10,8 @@ public class RedEnergyField : SpellProjectile
     [SerializeField] private Collider2D spellCollider;
     [SerializeField] private float delayBeforeDamage = 0.5f; // Adjust based on your animation
 
+    [SerializeField] private AudioSource startAudioSource;
+    [SerializeField] private AudioSource impactAudioSource;
     private List<Transform> allreadyCollidedObjects = new();
 
 
@@ -52,7 +56,9 @@ public class RedEnergyField : SpellProjectile
         // Disable collider initially
         spellCollider.enabled = false;
 
+        startAudioSource.Play();
         CastSpell();
+        
     }
 
     private void Update()
@@ -62,7 +68,7 @@ public class RedEnergyField : SpellProjectile
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Düþmana çarpýp çarpmadýðýný kontrol et
+        // Dï¿½ï¿½mana ï¿½arpï¿½p ï¿½arpmadï¿½ï¿½ï¿½nï¿½ kontrol et
         if (other.CompareTag(enemyTag) && !allreadyCollidedObjects.Contains(other.transform))
         {
             allreadyCollidedObjects.Add((other.transform));
@@ -82,6 +88,8 @@ public class RedEnergyField : SpellProjectile
 
         // Enable the collider at the appropriate moment in the animation
         spellCollider.enabled = true;
+        startAudioSource.Stop();
+        impactAudioSource.Play(); 
 
         // Wait for the remaining duration of the effect
         float remainingTime = particleOfField.main.duration - enableTime;
@@ -91,7 +99,9 @@ public class RedEnergyField : SpellProjectile
         spellCollider.enabled = false;
     }
 
-
+    private void OnDestroy()
+    {
+    }
 }
 public abstract class SpellProjectile: MonoBehaviour
 {

@@ -68,7 +68,7 @@ public class SnowProjectile : SpellProjectile
     void DealDamage(Collider2D other)
     {
         
-        // Düþmana çarpýp çarpmadýðýný kontrol et
+        // Dï¿½ï¿½mana ï¿½arpï¿½p ï¿½arpmadï¿½ï¿½ï¿½nï¿½ kontrol et
         if (other.CompareTag(enemyTag))
         {
             Enemy enemy = other.GetComponent<Enemy>();

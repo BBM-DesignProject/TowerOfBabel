@@ -5,6 +5,7 @@ public class LightningProjectile : SpellProjectile
     public ParticleSystem lightningEffect;
     [SerializeField] private float delayBeforeDamage = 0.5f; // Adjust based on your animation
 
+    [SerializeField] private AudioSource startAudioSource;
     public Enemy enemy;
 
     private bool CanDamage = false;
@@ -13,10 +14,10 @@ public class LightningProjectile : SpellProjectile
         // Make sure looping is turned off
         var main = lightningEffect.main;
         main.loop = false;
-        main.prewarm = false; // Make sure prewarm is off
-        lightningEffect.GetComponent<Renderer>().sortingLayerName = "VFX";
-
-        main.stopAction = ParticleSystemStopAction.None;
+        // main.prewarm = false; // Make sure prewarm is off
+        // lightningEffect.GetComponent<Renderer>().sortingLayerName = "VFX";
+        //
+        // main.stopAction = ParticleSystemStopAction.None;
 
 
         // Get all particle systems in this hierarchy (including children)
@@ -28,19 +29,19 @@ public class LightningProjectile : SpellProjectile
             var mainChildren = ps.main;
             mainChildren.loop = false;
             ps.GetComponent<Renderer>().sortingLayerName = "VFX";
-
+        
         }
 
 
-        // Also disable continuous emission
-        var emission = lightningEffect.emission;
-        emission.enabled = false; // Or set rates to 0
+        // // Also disable continuous emission
+        // var emission = lightningEffect.emission;
+        // emission.enabled = false; // Or set rates to 0
 
         // Play the effect
         lightningEffect.Play();
 
         // Calculate when to enable the collider (e.g., at 50% of the effect duration)
-        float enableTime = main.duration * delayBeforeDamage;
+        float enableTime = lightningEffect.main.duration * delayBeforeDamage;
 
         // Start the timing coroutine
         StartCoroutine(SynchronizeColliderWithEffect(enableTime));
@@ -49,6 +50,7 @@ public class LightningProjectile : SpellProjectile
 
     private void Start()
     {
+        startAudioSource.PlayDelayed(Random.Range(0.0f, 0.3f));
         CastSpell();
     }
 

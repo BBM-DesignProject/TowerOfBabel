@@ -36,7 +36,10 @@ public class UIManager : MonoBehaviour
     [Tooltip("The panel GameObject to show when the player dies.")]
     public GameObject gameOverPanel; 
     [Tooltip("Text component on Game Over Panel to display elapsed time.")]
-    public TextMeshProUGUI gameOverPanelTimeText; 
+    public TextMeshProUGUI gameOverPanelTimeText;
+
+    [Tooltip("The panel GameObject to show when tutorial is requested")]
+    public GameObject tutorialPanel;
 
     [Header("In-Game Timer UI (Opsiyonel)")]
     [Tooltip("Text component to display the elapsed time during gameplay (optional).")]
@@ -425,6 +428,16 @@ public class UIManager : MonoBehaviour
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
         #endif
+    }
+
+    public void ShowTutorial()
+    {
+        Debug.Log("Showing Tutorial...");
+    }
+
+    public void ReturnToMenuFromTutorial()
+    {
+        
     }
 
     void OnDestroy()
