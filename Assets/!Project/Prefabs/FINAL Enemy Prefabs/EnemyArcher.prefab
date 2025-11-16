@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5459606452957546477}
   - component: {fileID: 2222770163816449362}
   - component: {fileID: 569721631695546801}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyArcher
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -252,9 +252,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3720892142267960939}
     m_Modifications:
+    - target: {fileID: 1443706584875652665, guid: aa89aa12e183e1a4f952b732ab9da2ff, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1611590503366580214, guid: aa89aa12e183e1a4f952b732ab9da2ff, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2137396821311896359, guid: aa89aa12e183e1a4f952b732ab9da2ff, type: 3}
       propertyPath: m_Name
       value: CanvasBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2137396821311896359, guid: aa89aa12e183e1a4f952b732ab9da2ff, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2341110049886952708, guid: aa89aa12e183e1a4f952b732ab9da2ff, type: 3}
       propertyPath: m_SortingOrder
@@ -359,6 +371,14 @@ PrefabInstance:
     - target: {fileID: 5147477551976983862, guid: aa89aa12e183e1a4f952b732ab9da2ff, type: 3}
       propertyPath: gradient.key0.g
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6055290979110677919, guid: aa89aa12e183e1a4f952b732ab9da2ff, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6492240199959119918, guid: aa89aa12e183e1a4f952b732ab9da2ff, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,0 +1,5 @@
+﻿<Solution>
+  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="FSMC.Runtime.csproj" />
+  <Project Path="FSMC.Editor.csproj" />
+</Solution>

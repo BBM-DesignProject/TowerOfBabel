@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   lifetime: 5
-  damageAmount: 0.1
+  damageAmount: 0.5
   enemyTag: Enemy
   particleOfField: {fileID: 3585607924591604971}
   spellCollider: {fileID: 0}
@@ -87,7 +87,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.2038995, y: 0.07740617}
+  m_Offset: {x: 0.15792274, y: 0.13487828}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -97,7 +97,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 4.108486, y: 4.469236}
+  m_Size: {x: 5.9935255, y: 5.733589}
   m_EdgeRadius: 0
 --- !u!82 &3609012676848562156
 AudioSource:

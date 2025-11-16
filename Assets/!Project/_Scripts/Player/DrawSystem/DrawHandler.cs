@@ -10,6 +10,7 @@ public class DrawHandler : MonoBehaviour
     private Vector2 currMousePosition;
 
     private List<Gesture> trainingSet = new List<Gesture>();
+    const string ResourcesPath = "DrawTemplates";
     public Vector2 CurrMousePosition{ 
         get
         {
@@ -42,9 +43,10 @@ public class DrawHandler : MonoBehaviour
         //    trainingSet.Add(GestureIO.ReadGestureFromXML(gestureXml.text));
 
         //Load user custom gestures
-        string[] filePaths = Directory.GetFiles("Assets/!Project/Settings/DrawTemplates", "*.xml");
-        foreach (string filePath in filePaths)
-            trainingSet.Add(GestureIO.ReadGestureFromFile(filePath));
+        TextAsset[] xmlFiles = Resources.LoadAll<TextAsset>(ResourcesPath);
+
+        foreach (var textAsset in xmlFiles)
+            trainingSet.Add(GestureIO.ReadGestureFromXML(textAsset.text));
 
 
     }

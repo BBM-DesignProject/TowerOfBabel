@@ -125,9 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17817113c2c3a7e43927711cfb9b10d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 12
   lifetime: 3
-  damageAmount: 20
+  damageAmount: 100
   enemyTag: Enemy
   particleOfField: {fileID: 8681265401563936119}
   spellCollider: {fileID: 6106279446204225561}
